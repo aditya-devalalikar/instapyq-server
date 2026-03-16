@@ -1,0 +1,6 @@
+@pqy_server_HostAddress = http://localhost:5233
+
+GET {{pqy_server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

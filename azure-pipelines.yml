@@ -1,0 +1,52 @@
+﻿trigger:
+  branches:
+    include:
+      - develop
+
+variables:
+  buildConfiguration: 'Release'
+
+stages:
+- stage: Build
+  displayName: 'Build & Publish'
+  jobs:
+  - job: Build
+    pool:
+      vmImage: 'windows-latest'
+    steps:
+    - task: UseDotNet@2
+      displayName: 'Use .NET SDK'
+      inputs:
+        packageType: 'sdk'
+        version: '9.x'
+    - script: dotnet restore
+      displayName: 'Restore packages'
+    - script: dotnet build --configuration $(buildConfiguration) --no-restore
+      displayName: 'Build solution'
+    - script: dotnet publish --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)
+      displayName: 'Publish to artifact staging'
+    - publish: $(Build.ArtifactStagingDirectory)
+      artifact: drop
+
+- stage: Deploy
+  displayName: 'Deploy to Azure Web App'
+  dependsOn: Build
+  jobs:
+  - deployment: DeployWeb
+    displayName: 'Deploy job'
+    environment: 'development'
+    pool:
+      vmImage: 'windows-latest'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            artifact: drop
+          - task: AzureWebApp@1
+            displayName: 'Azure Web App Deploy'
+            inputs:
+              azureSubscription: '6ca27e7f-b56d-4df9-a83c-2e8a142d7be7'
+              appType: 'webApp'
+              appName: 'pyq-dev-app.azurewebsites.net'
+              package: $(Pipeline.Workspace)/drop/**/*.zip

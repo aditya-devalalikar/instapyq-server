@@ -1,0 +1,13 @@
+namespace pqy_server.Models.Otp
+{
+    public class EmailOtp
+    {
+        public int Id { get; set; }
+        public string Email { get; set; } = string.Empty;
+        public string Code { get; set; } = string.Empty;
+        public DateTime ExpiresAt { get; set; }
+        public bool IsUsed { get; set; } = false;
+        public int FailedAttempts { get; set; } = 0;
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    }
+}

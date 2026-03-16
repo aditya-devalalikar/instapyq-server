@@ -1,0 +1,2125 @@
+2025-09-09 00:56:53.329 +05:30 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.TryParseModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider"]
+2025-09-09 00:56:54.331 +05:30 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-09-09 00:56:55.089 +05:30 [DBG] The index {'UserId'} was not created on entity type 'UserActivity' as the properties are already covered by the index {'UserId', 'ActivityTime'}.
+2025-09-09 00:56:55.093 +05:30 [DBG] The index {'UserId'} was not created on entity type 'BookmarkQuestion' as the properties are already covered by the index {'UserId', 'QuestionId'}.
+2025-09-09 00:56:55.207 +05:30 [WRN] Entity 'Question' has a global query filter defined and is the required end of a relationship with the entity 'QuestionReport'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-09-09 00:56:55.211 +05:30 [WRN] Entity 'Question' has a global query filter defined and is the required end of a relationship with the entity 'UserActivity'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-09-09 00:56:55.216 +05:30 [WRN] Entity 'Question' has a global query filter defined and is the required end of a relationship with the entity 'BookmarkQuestion'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-09-09 00:56:55.218 +05:30 [WRN] Entity 'Question' has a global query filter defined and is the required end of a relationship with the entity 'QuestionNote'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-09-09 00:56:55.322 +05:30 [WRN] The property 'User.SelectedExamIds' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-09-09 00:56:55.467 +05:30 [DBG] Entity Framework Core 9.0.4 initialized 'AppDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-09-09 00:56:55.500 +05:30 [DBG] Creating DbConnection.
+2025-09-09 00:56:55.507 +05:30 [DBG] Created DbConnection. (8ms).
+2025-09-09 00:56:55.512 +05:30 [DBG] Opening connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:56:55.516 +05:30 [DBG] Opened connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:56:55.520 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-09-09 00:56:55.525 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (2ms).
+2025-09-09 00:56:55.530 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (8ms).
+2025-09-09 00:56:55.537 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-09-09 00:56:55.566 +05:30 [INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-09-09 00:56:55.578 +05:30 [DBG] Closing data reader to 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:56:55.587 +05:30 [DBG] A data reader for 'PYQ_Dev' on server 'tcp://localhost:5432' is being disposed after spending 13ms reading results.
+2025-09-09 00:56:55.591 +05:30 [DBG] Closing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:56:55.595 +05:30 [DBG] Closed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (3ms).
+2025-09-09 00:56:55.790 +05:30 [DBG] Migrating using database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:56:55.796 +05:30 [DBG] Opening connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:56:55.802 +05:30 [DBG] Opening connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:56:55.888 +05:30 [DBG] Opened connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:56:55.891 +05:30 [DBG] Closing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:56:55.900 +05:30 [DBG] Closed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (8ms).
+2025-09-09 00:56:55.903 +05:30 [DBG] Opening connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:56:55.906 +05:30 [DBG] Opened connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:56:55.972 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-09-09 00:56:55.975 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (2ms).
+2025-09-09 00:56:55.977 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (5ms).
+2025-09-09 00:56:55.983 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2025-09-09 00:56:55.989 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2025-09-09 00:56:56.000 +05:30 [DBG] Beginning transaction with isolation level 'Unspecified'.
+2025-09-09 00:56:56.005 +05:30 [DBG] Began transaction with isolation level 'ReadCommitted'.
+2025-09-09 00:56:56.011 +05:30 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2025-09-09 00:56:56.015 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-09-09 00:56:56.017 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (2ms).
+2025-09-09 00:56:56.021 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (6ms).
+2025-09-09 00:56:56.024 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2025-09-09 00:56:56.030 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2025-09-09 00:56:56.037 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-09-09 00:56:56.039 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (2ms).
+2025-09-09 00:56:56.042 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (5ms).
+2025-09-09 00:56:56.048 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-09-09 00:56:56.057 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-09-09 00:56:56.063 +05:30 [DBG] Closing data reader to 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:56:56.068 +05:30 [DBG] A data reader for 'PYQ_Dev' on server 'tcp://localhost:5432' is being disposed after spending 4ms reading results.
+2025-09-09 00:56:56.078 +05:30 [INF] No migrations were applied. The database is already up to date.
+2025-09-09 00:56:56.083 +05:30 [DBG] Committing transaction.
+2025-09-09 00:56:56.088 +05:30 [DBG] Committed transaction.
+2025-09-09 00:56:56.092 +05:30 [DBG] Disposing transaction.
+2025-09-09 00:56:56.094 +05:30 [DBG] Closing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:56:56.097 +05:30 [DBG] Closed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (3ms).
+2025-09-09 00:56:56.144 +05:30 [DBG] Compiling query expression: 
+'DbSet<EnumLabel>()
+    .Any()'
+2025-09-09 00:56:56.336 +05:30 [DBG] Generated query execution expression: 
+'queryContext => SingleQueryingEnumerable.Create<bool>(
+    relationalQueryContext: (RelationalQueryContext)queryContext, 
+    relationalCommandResolver: parameters => [LIFTABLE Constant: RelationalCommandCache.QueryExpression(
+        Projection Mapping:
+            EmptyProjectionMember -> 0
+        SELECT EXISTS (
+            SELECT 1
+            FROM EnumLabels AS e)) | Resolver: c => new RelationalCommandCache(
+        c.Dependencies.MemoryCache, 
+        c.RelationalDependencies.QuerySqlGeneratorFactory, 
+        c.RelationalDependencies.RelationalParameterBasedSqlProcessorFactory, 
+        Projection Mapping:
+            EmptyProjectionMember -> 0
+        SELECT EXISTS (
+            SELECT 1
+            FROM EnumLabels AS e), 
+        False, 
+        new HashSet<string>(
+            new string[]{ }, 
+            StringComparer.Ordinal
+        )
+    )].GetRelationalCommandTemplate(parameters), 
+    readerColumns: null, 
+    shaper: (queryContext, dataReader, resultContext, resultCoordinator) => 
+    {
+        bool? value1;
+        value1 = dataReader.IsDBNull(0) ? default(bool?) : (bool?)dataReader.GetBoolean(0);
+        return (bool)value1;
+    }, 
+    contextType: pqy_server.Data.AppDbContext, 
+    standAloneStateManager: False, 
+    detailedErrorsEnabled: False, 
+    threadSafetyChecksEnabled: True)
+    .Single()'
+2025-09-09 00:56:56.366 +05:30 [DBG] Opening connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:56:56.369 +05:30 [DBG] Opened connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:56:56.373 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-09-09 00:56:56.376 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (2ms).
+2025-09-09 00:56:56.379 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (5ms).
+2025-09-09 00:56:56.381 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "EnumLabels" AS e)
+2025-09-09 00:56:56.387 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "EnumLabels" AS e)
+2025-09-09 00:56:56.392 +05:30 [DBG] Closing data reader to 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:56:56.394 +05:30 [DBG] A data reader for 'PYQ_Dev' on server 'tcp://localhost:5432' is being disposed after spending 4ms reading results.
+2025-09-09 00:56:56.398 +05:30 [DBG] Closing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:56:56.401 +05:30 [DBG] Closed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (2ms).
+2025-09-09 00:56:56.405 +05:30 [DBG] 'AppDbContext' disposed.
+2025-09-09 00:56:56.412 +05:30 [DBG] Disposing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:56:56.419 +05:30 [DBG] Disposed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (6ms).
+2025-09-09 00:56:56.428 +05:30 [DBG] Hosting starting
+2025-09-09 00:56:56.485 +05:30 [INF] User profile is available. Using 'C:\Users\rupes\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-09-09 00:56:56.510 +05:30 [DBG] Reading data from file 'C:\Users\rupes\AppData\Local\ASP.NET\DataProtection-Keys\key-2331b0d5-c7bb-4b17-a6a4-16be21312e25.xml'.
+2025-09-09 00:56:56.573 +05:30 [DBG] Reading data from file 'C:\Users\rupes\AppData\Local\ASP.NET\DataProtection-Keys\key-b85f5081-1eee-4ce7-963a-3bc488349a89.xml'.
+2025-09-09 00:56:56.619 +05:30 [DBG] Reading data from file 'C:\Users\rupes\AppData\Local\ASP.NET\DataProtection-Keys\key-cd61738b-efe2-446c-a2ab-8a6fc5cdd353.xml'.
+2025-09-09 00:56:56.659 +05:30 [DBG] Found key {2331b0d5-c7bb-4b17-a6a4-16be21312e25}.
+2025-09-09 00:56:56.673 +05:30 [DBG] Found key {b85f5081-1eee-4ce7-963a-3bc488349a89}.
+2025-09-09 00:56:56.676 +05:30 [DBG] Found key {cd61738b-efe2-446c-a2ab-8a6fc5cdd353}.
+2025-09-09 00:56:56.687 +05:30 [DBG] Considering key {2331b0d5-c7bb-4b17-a6a4-16be21312e25} with expiration date 2025-10-10 05:56:38Z as default key.
+2025-09-09 00:56:56.694 +05:30 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Version=9.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2025-09-09 00:56:56.700 +05:30 [DBG] Decrypting secret element using Windows DPAPI.
+2025-09-09 00:56:56.704 +05:30 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Version=9.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2025-09-09 00:56:56.708 +05:30 [DBG] Opening CNG algorithm 'AES' from provider 'null' with chaining mode CBC.
+2025-09-09 00:56:56.711 +05:30 [DBG] Opening CNG algorithm 'SHA256' from provider 'null' with HMAC.
+2025-09-09 00:56:56.717 +05:30 [DBG] Using key {2331b0d5-c7bb-4b17-a6a4-16be21312e25} as the default key.
+2025-09-09 00:56:56.720 +05:30 [DBG] Key ring with default key {2331b0d5-c7bb-4b17-a6a4-16be21312e25} was loaded during application startup.
+2025-09-09 00:56:56.734 +05:30 [DBG] Middleware loaded
+2025-09-09 00:56:56.738 +05:30 [DBG] Middleware loaded. Script /_framework/aspnetcore-browser-refresh.js (16505 B).
+2025-09-09 00:56:56.742 +05:30 [DBG] Middleware loaded. Script /_framework/blazor-hotreload.js (799 B).
+2025-09-09 00:56:56.871 +05:30 [DBG] Middleware configuration started with options: {AllowedHosts = *, AllowEmptyHosts = True, IncludeFailureMessage = True}
+2025-09-09 00:56:56.877 +05:30 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2025-09-09 00:56:56.883 +05:30 [DBG] Middleware loaded: DOTNET_MODIFIABLE_ASSEMBLIES=debug, __ASPNETCORE_BROWSER_TOOLS=true
+2025-09-09 00:56:56.921 +05:30 [INF] Now listening on: http://0.0.0.0:80
+2025-09-09 00:56:56.923 +05:30 [DBG] Loaded hosting startup assembly pqy-server
+2025-09-09 00:56:56.925 +05:30 [DBG] Loaded hosting startup assembly Microsoft.WebTools.ApiEndpointDiscovery
+2025-09-09 00:56:56.926 +05:30 [DBG] Loaded hosting startup assembly Microsoft.AspNetCore.Watch.BrowserRefresh
+2025-09-09 00:56:56.927 +05:30 [DBG] Loaded hosting startup assembly Microsoft.WebTools.BrowserLink.Net
+2025-09-09 00:56:56.935 +05:30 [DBG] Executing API description provider 'EndpointMetadataApiDescriptionProvider' from assembly Microsoft.AspNetCore.Mvc.ApiExplorer v9.0.0.0.
+2025-09-09 00:56:56.942 +05:30 [DBG] Executing API description provider 'DefaultApiDescriptionProvider' from assembly Microsoft.AspNetCore.Mvc.ApiExplorer v9.0.0.0.
+2025-09-09 00:56:56.987 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-09 00:56:56.990 +05:30 [INF] Hosting environment: Development
+2025-09-09 00:56:56.992 +05:30 [INF] Content root path: E:\Aditya\New folder\PYQ APP\pqy-server
+2025-09-09 00:56:56.994 +05:30 [DBG] Hosting started
+2025-09-09 00:56:57.143 +05:30 [DBG] Connection id "0HNFF1MMETLDV" accepted.
+2025-09-09 00:56:57.148 +05:30 [DBG] Connection id "0HNFF1MMETLDV" started.
+2025-09-09 00:57:01.922 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost/scalar/v1 - null null
+2025-09-09 00:57:02.108 +05:30 [DBG] 1 candidate(s) found for the request path '/scalar/v1'
+2025-09-09 00:57:02.116 +05:30 [DBG] Endpoint 'HTTP: GET /scalar/{documentName?}' with route pattern '/scalar/{documentName?}' is valid for the request path '/scalar/v1'
+2025-09-09 00:57:02.121 +05:30 [DBG] Request matched endpoint 'HTTP: GET /scalar/{documentName?}'
+2025-09-09 00:57:02.196 +05:30 [DBG] Connection id "0HNFF1MMETLE0" accepted.
+2025-09-09 00:57:02.204 +05:30 [DBG] Connection id "0HNFF1MMETLE0" started.
+2025-09-09 00:57:04.037 +05:30 [DBG] AuthenticationScheme: Bearer was not authenticated.
+2025-09-09 00:57:04.044 +05:30 [INF] Executing endpoint 'HTTP: GET /scalar/{documentName?}'
+2025-09-09 00:57:04.090 +05:30 [INF] Write content with HTTP Response ContentType of text/html
+2025-09-09 00:57:04.101 +05:30 [DBG] The response will be compressed with 'br'.
+2025-09-09 00:57:04.117 +05:30 [DBG] Response markup is scheduled to include Browser Link script injection.
+2025-09-09 00:57:04.119 +05:30 [DBG] Response markup is scheduled to include browser refresh script injection.
+2025-09-09 00:57:04.142 +05:30 [INF] Executed endpoint 'HTTP: GET /scalar/{documentName?}'
+2025-09-09 00:57:04.149 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost/scalar/scalar.aspnetcore.js - null null
+2025-09-09 00:57:04.154 +05:30 [WRN] Unable to configure Browser Link script injection on the response. This may have been caused by the response's Content-Encoding: '["br"]'. Consider disabling response compression.
+2025-09-09 00:57:04.158 +05:30 [DBG] 2 candidate(s) found for the request path '/scalar/scalar.aspnetcore.js'
+2025-09-09 00:57:04.161 +05:30 [WRN] Unable to configure browser refresh script injection on the response. This may have been caused by the response's Content-Encoding: '["br"]'. Consider disabling response compression.
+2025-09-09 00:57:04.165 +05:30 [DBG] Endpoint 'HTTP: GET /scalar/scalar.aspnetcore.js' with route pattern '/scalar/scalar.aspnetcore.js' is valid for the request path '/scalar/scalar.aspnetcore.js'
+2025-09-09 00:57:04.170 +05:30 [DBG] Connection id "0HNFF1MMETLDV" completed keep alive response.
+2025-09-09 00:57:04.172 +05:30 [DBG] Endpoint 'HTTP: GET /scalar/{documentName?}' with route pattern '/scalar/{documentName?}' is valid for the request path '/scalar/scalar.aspnetcore.js'
+2025-09-09 00:57:04.179 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost/scalar/v1 - 200 null text/html 2262.0411ms
+2025-09-09 00:57:04.180 +05:30 [DBG] Request matched endpoint 'HTTP: GET /scalar/scalar.aspnetcore.js'
+2025-09-09 00:57:04.189 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost/scalar/scalar.js - null null
+2025-09-09 00:57:04.200 +05:30 [DBG] The request has an origin header: 'http://localhost'.
+2025-09-09 00:57:04.203 +05:30 [DBG] 2 candidate(s) found for the request path '/scalar/scalar.js'
+2025-09-09 00:57:04.205 +05:30 [INF] CORS policy execution successful.
+2025-09-09 00:57:04.206 +05:30 [DBG] Endpoint 'HTTP: GET /scalar/scalar.js' with route pattern '/scalar/scalar.js' is valid for the request path '/scalar/scalar.js'
+2025-09-09 00:57:04.208 +05:30 [DBG] AuthenticationScheme: Bearer was not authenticated.
+2025-09-09 00:57:04.210 +05:30 [DBG] Endpoint 'HTTP: GET /scalar/{documentName?}' with route pattern '/scalar/{documentName?}' is valid for the request path '/scalar/scalar.js'
+2025-09-09 00:57:04.214 +05:30 [INF] Executing endpoint 'HTTP: GET /scalar/scalar.aspnetcore.js'
+2025-09-09 00:57:04.216 +05:30 [DBG] Request matched endpoint 'HTTP: GET /scalar/scalar.js'
+2025-09-09 00:57:04.230 +05:30 [DBG] The request has an origin header: 'http://localhost'.
+2025-09-09 00:57:04.238 +05:30 [INF] CORS policy execution successful.
+2025-09-09 00:57:04.238 +05:30 [INF] Setting HTTP status code 304.
+2025-09-09 00:57:04.243 +05:30 [DBG] AuthenticationScheme: Bearer was not authenticated.
+2025-09-09 00:57:04.245 +05:30 [INF] Executed endpoint 'HTTP: GET /scalar/scalar.aspnetcore.js'
+2025-09-09 00:57:04.248 +05:30 [INF] Executing endpoint 'HTTP: GET /scalar/scalar.js'
+2025-09-09 00:57:04.252 +05:30 [DBG] Connection id "0HNFF1MMETLE0" completed keep alive response.
+2025-09-09 00:57:04.253 +05:30 [INF] Setting HTTP status code 304.
+2025-09-09 00:57:04.254 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost/scalar/scalar.aspnetcore.js - 304 null null 105.1449ms
+2025-09-09 00:57:04.256 +05:30 [INF] Executed endpoint 'HTTP: GET /scalar/scalar.js'
+2025-09-09 00:57:04.265 +05:30 [DBG] Connection id "0HNFF1MMETLDV" completed keep alive response.
+2025-09-09 00:57:04.267 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost/scalar/scalar.js - 304 null null 77.9469ms
+2025-09-09 00:57:04.460 +05:30 [DBG] Connection id "0HNFF1MMETLE1" accepted.
+2025-09-09 00:57:04.461 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost/openapi/v1.json - null null
+2025-09-09 00:57:04.464 +05:30 [DBG] Connection id "0HNFF1MMETLE1" started.
+2025-09-09 00:57:04.472 +05:30 [DBG] 1 candidate(s) found for the request path '/openapi/v1.json'
+2025-09-09 00:57:04.481 +05:30 [DBG] Endpoint 'HTTP: GET /openapi/{documentName}.json' with route pattern '/openapi/{documentName}.json' is valid for the request path '/openapi/v1.json'
+2025-09-09 00:57:04.489 +05:30 [DBG] Request matched endpoint 'HTTP: GET /openapi/{documentName}.json'
+2025-09-09 00:57:04.491 +05:30 [DBG] AuthenticationScheme: Bearer was not authenticated.
+2025-09-09 00:57:04.493 +05:30 [INF] Executing endpoint 'HTTP: GET /openapi/{documentName}.json'
+2025-09-09 00:57:04.647 +05:30 [DBG] The response will be compressed with 'br'.
+2025-09-09 00:57:04.656 +05:30 [INF] Executed endpoint 'HTTP: GET /openapi/{documentName}.json'
+2025-09-09 00:57:04.658 +05:30 [DBG] Connection id "0HNFF1MMETLDV" completed keep alive response.
+2025-09-09 00:57:04.660 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost/openapi/v1.json - 200 null application/json;charset=utf-8 199.6555ms
+2025-09-09 00:57:27.222 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost/api/Auth/login - application/json 65
+2025-09-09 00:57:27.233 +05:30 [DBG] 1 candidate(s) found for the request path '/api/Auth/login'
+2025-09-09 00:57:27.238 +05:30 [DBG] Endpoint 'pqy_server.Controllers.AuthController.Login (pqy-server)' with route pattern 'api/Auth/login' is valid for the request path '/api/Auth/login'
+2025-09-09 00:57:27.240 +05:30 [DBG] Request matched endpoint 'pqy_server.Controllers.AuthController.Login (pqy-server)'
+2025-09-09 00:57:27.242 +05:30 [DBG] The request has an origin header: 'http://localhost'.
+2025-09-09 00:57:27.243 +05:30 [INF] CORS policy execution successful.
+2025-09-09 00:57:27.245 +05:30 [DBG] AuthenticationScheme: Bearer was not authenticated.
+2025-09-09 00:57:27.246 +05:30 [INF] Executing endpoint 'pqy_server.Controllers.AuthController.Login (pqy-server)'
+2025-09-09 00:57:27.266 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(pqy_server.Models.Auth.LoginRequest) on controller pqy_server.Controllers.AuthController (pqy-server).
+2025-09-09 00:57:27.270 +05:30 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2025-09-09 00:57:27.272 +05:30 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2025-09-09 00:57:27.274 +05:30 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2025-09-09 00:57:27.275 +05:30 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2025-09-09 00:57:27.277 +05:30 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2025-09-09 00:57:27.282 +05:30 [DBG] Executing controller factory for controller pqy_server.Controllers.AuthController (pqy-server)
+2025-09-09 00:57:27.286 +05:30 [DBG] Executed controller factory for controller pqy_server.Controllers.AuthController (pqy-server)
+2025-09-09 00:57:27.291 +05:30 [DBG] Attempting to bind parameter 'request' of type 'pqy_server.Models.Auth.LoginRequest' ...
+2025-09-09 00:57:27.294 +05:30 [DBG] Attempting to bind parameter 'request' of type 'pqy_server.Models.Auth.LoginRequest' using the name '' in request data ...
+2025-09-09 00:57:27.299 +05:30 [DBG] Selected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonInputFormatter' for content type 'application/json'.
+2025-09-09 00:57:27.305 +05:30 [DBG] Connection id "0HNFF1MMETLDV", Request id "0HNFF1MMETLDV:00000004": started reading request body.
+2025-09-09 00:57:27.307 +05:30 [DBG] Connection id "0HNFF1MMETLDV", Request id "0HNFF1MMETLDV:00000004": done reading request body.
+2025-09-09 00:57:27.314 +05:30 [DBG] JSON input formatter succeeded, deserializing to type 'pqy_server.Models.Auth.LoginRequest'
+2025-09-09 00:57:27.316 +05:30 [DBG] Done attempting to bind parameter 'request' of type 'pqy_server.Models.Auth.LoginRequest'.
+2025-09-09 00:57:27.319 +05:30 [DBG] Done attempting to bind parameter 'request' of type 'pqy_server.Models.Auth.LoginRequest'.
+2025-09-09 00:57:27.320 +05:30 [DBG] Attempting to validate the bound parameter 'request' of type 'pqy_server.Models.Auth.LoginRequest' ...
+2025-09-09 00:57:27.327 +05:30 [DBG] Done attempting to validate the bound parameter 'request' of type 'pqy_server.Models.Auth.LoginRequest'.
+2025-09-09 00:57:27.347 +05:30 [DBG] Entity Framework Core 9.0.4 initialized 'AppDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-09-09 00:57:27.357 +05:30 [DBG] Compiling query expression: 
+'DbSet<User>()
+    .FirstOrDefault(u => u.UserEmail == __request_Email_0)'
+2025-09-09 00:57:27.412 +05:30 [DBG] Generated query execution expression: 
+'queryContext => ShapedQueryCompilingExpressionVisitor.SingleOrDefaultAsync<User>(
+    asyncEnumerable: SingleQueryingEnumerable.Create<User>(
+        relationalQueryContext: (RelationalQueryContext)queryContext, 
+        relationalCommandResolver: parameters => [LIFTABLE Constant: RelationalCommandCache.QueryExpression(
+            Projection Mapping:
+                EmptyProjectionMember -> Dictionary<IProperty, int> { [Property: User.UserId (int) Required PK AfterSave:Throw ValueGenerated.OnAdd, 0], [Property: User.CreatedAt (DateTime) Required ValueGenerated.OnAdd, 1], [Property: User.FcmToken (string), 2], [Property: User.IsDeleted (bool) Required, 3], [Property: User.IsPremium (bool) Required, 4], [Property: User.PasswordHash (byte[]), 5], [Property: User.PasswordSalt (byte[]), 6], [Property: User.RefreshToken (string), 7], [Property: User.RefreshTokenExpiryTime (DateTime?), 8], [Property: User.RoleId (int) Required FK Index, 9], [Property: User.SelectedExamIds (List<int>) Required, 10], [Property: User.UpdatedAt (DateTime) Required, 11], [Property: User.UserEmail (string) Index, 12], [Property: User.Username (string) Index, 13] }
+            SELECT TOP(1) u.UserId, u.CreatedAt, u.FcmToken, u.IsDeleted, u.IsPremium, u.PasswordHash, u.PasswordSalt, u.RefreshToken, u.RefreshTokenExpiryTime, u.RoleId, u.SelectedExamIds, u.UpdatedAt, u.UserEmail, u.Username
+            FROM Users AS u
+            WHERE u.UserEmail == @__request_Email_0) | Resolver: c => new RelationalCommandCache(
+            c.Dependencies.MemoryCache, 
+            c.RelationalDependencies.QuerySqlGeneratorFactory, 
+            c.RelationalDependencies.RelationalParameterBasedSqlProcessorFactory, 
+            Projection Mapping:
+                EmptyProjectionMember -> Dictionary<IProperty, int> { [Property: User.UserId (int) Required PK AfterSave:Throw ValueGenerated.OnAdd, 0], [Property: User.CreatedAt (DateTime) Required ValueGenerated.OnAdd, 1], [Property: User.FcmToken (string), 2], [Property: User.IsDeleted (bool) Required, 3], [Property: User.IsPremium (bool) Required, 4], [Property: User.PasswordHash (byte[]), 5], [Property: User.PasswordSalt (byte[]), 6], [Property: User.RefreshToken (string), 7], [Property: User.RefreshTokenExpiryTime (DateTime?), 8], [Property: User.RoleId (int) Required FK Index, 9], [Property: User.SelectedExamIds (List<int>) Required, 10], [Property: User.UpdatedAt (DateTime) Required, 11], [Property: User.UserEmail (string) Index, 12], [Property: User.Username (string) Index, 13] }
+            SELECT TOP(1) u.UserId, u.CreatedAt, u.FcmToken, u.IsDeleted, u.IsPremium, u.PasswordHash, u.PasswordSalt, u.RefreshToken, u.RefreshTokenExpiryTime, u.RoleId, u.SelectedExamIds, u.UpdatedAt, u.UserEmail, u.Username
+            FROM Users AS u
+            WHERE u.UserEmail == @__request_Email_0, 
+            False, 
+            new HashSet<string>(
+                new string[]{ }, 
+                StringComparer.Ordinal
+            )
+        )].GetRelationalCommandTemplate(parameters), 
+        readerColumns: null, 
+        shaper: (queryContext, dataReader, resultContext, resultCoordinator) => 
+        {
+            User entity;
+            entity = 
+            {
+                MaterializationContext materializationContext1;
+                IEntityType entityType1;
+                User instance1;
+                InternalEntityEntry entry1;
+                bool hasNullKey1;
+                materializationContext1 = new MaterializationContext(
+                    [LIFTABLE Constant: ValueBuffer | Resolver: _ => (object)ValueBuffer.Empty], 
+                    queryContext.Context
+                );
+                instance1 = default(User);
+                entry1 = queryContext.TryGetEntry(
+                    key: [LIFTABLE Constant: Key: User.UserId PK | Resolver: c => c.Dependencies.Model.FindEntityType("pqy_server.Models.Users.User").FindPrimaryKey()], 
+                    keyValues: new object[]{ (object)dataReader.GetInt32(0) }, 
+                    throwOnNullKey: True, 
+                    hasNullKey: hasNullKey1);
+                !(hasNullKey1) ? entry1 != default(InternalEntityEntry) ? 
+                {
+                    entityType1 = entry1.EntityType;
+                    return instance1 = (User)entry1.Entity;
+                } : 
+                {
+                    ISnapshot shadowSnapshot1;
+                    shadowSnapshot1 = [LIFTABLE Constant: Snapshot | Resolver: _ => Snapshot.Empty];
+                    entityType1 = [LIFTABLE Constant: EntityType: User | Resolver: namelessParameter{0} => namelessParameter{0}.Dependencies.Model.FindEntityType("pqy_server.Models.Users.User")];
+                    instance1 = switch (entityType1)
+                    {
+                        case [LIFTABLE Constant: EntityType: User | Resolver: namelessParameter{1} => namelessParameter{1}.Dependencies.Model.FindEntityType("pqy_server.Models.Users.User")]: 
+                            {
+                                return 
+                                {
+                                    User instance;
+                                    instance = new User();
+                                    instance.<UserId>k__BackingField = dataReader.GetInt32(0);
+                                    instance.<CreatedAt>k__BackingField = dataReader.GetDateTime(1);
+                                    instance.<FcmToken>k__BackingField = dataReader.IsDBNull(2) ? default(string) : dataReader.GetString(2);
+                                    instance.<IsDeleted>k__BackingField = dataReader.GetBoolean(3);
+                                    instance.<IsPremium>k__BackingField = dataReader.GetBoolean(4);
+                                    instance.<PasswordHash>k__BackingField = dataReader.IsDBNull(5) ? default(byte[]) : dataReader.GetFieldValue<byte[]>(5);
+                                    instance.<PasswordSalt>k__BackingField = dataReader.IsDBNull(6) ? default(byte[]) : dataReader.GetFieldValue<byte[]>(6);
+                                    instance.<RefreshToken>k__BackingField = dataReader.IsDBNull(7) ? default(string) : dataReader.GetString(7);
+                                    instance.<RefreshTokenExpiryTime>k__BackingField = dataReader.IsDBNull(8) ? default(DateTime?) : (DateTime?)dataReader.GetDateTime(8);
+                                    instance.<RoleId>k__BackingField = dataReader.GetInt32(9);
+                                    instance.<SelectedExamIds>k__BackingField = Invoke(((ValueConverter<List<int>, string>)((IReadOnlyProperty)[LIFTABLE Constant: Property: User.SelectedExamIds (List<int>) Required | Resolver: namelessParameter{2} => namelessParameter{2}.Dependencies.Model.FindEntityType("pqy_server.Models.Users.User").FindProperty("SelectedExamIds")]).GetTypeMapping().Converter).ConvertFromProviderTyped, dataReader.GetString(10));
+                                    instance.<UpdatedAt>k__BackingField = dataReader.GetDateTime(11);
+                                    instance.<UserEmail>k__BackingField = dataReader.IsDBNull(12) ? default(string) : dataReader.GetString(12);
+                                    instance.<Username>k__BackingField = dataReader.IsDBNull(13) ? default(string) : dataReader.GetString(13);
+                                    (instance is IInjectableService) ? ((IInjectableService)instance).Injected(
+                                        context: materializationContext1.Context, 
+                                        entity: instance, 
+                                        queryTrackingBehavior: TrackAll, 
+                                        structuralType: [LIFTABLE Constant: EntityType: User | Resolver: namelessParameter{3} => namelessParameter{3}.Dependencies.Model.FindEntityType("pqy_server.Models.Users.User")]) : default(void);
+                                    return instance;
+                                }}
+                        default: 
+                            default(User)
+                    }
+                    ;
+                    entry1 = entityType1 == default(IEntityType) ? default(InternalEntityEntry) : queryContext.StartTracking(
+                        entityType: entityType1, 
+                        entity: instance1, 
+                        snapshot: shadowSnapshot1);
+                    return instance1;
+                } : default(void);
+                return instance1;
+            };
+            return entity;
+        }, 
+        contextType: pqy_server.Data.AppDbContext, 
+        standAloneStateManager: False, 
+        detailedErrorsEnabled: False, 
+        threadSafetyChecksEnabled: True), 
+    cancellationToken: queryContext.CancellationToken)'
+2025-09-09 00:57:27.440 +05:30 [DBG] Creating DbConnection.
+2025-09-09 00:57:27.442 +05:30 [DBG] Created DbConnection. (2ms).
+2025-09-09 00:57:27.447 +05:30 [DBG] Opening connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:27.450 +05:30 [DBG] Opened connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:27.451 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-09-09 00:57:27.453 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (1ms).
+2025-09-09 00:57:27.455 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (3ms).
+2025-09-09 00:57:27.458 +05:30 [DBG] Executing DbCommand [Parameters=[@__request_Email_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."UserId", u."CreatedAt", u."FcmToken", u."IsDeleted", u."IsPremium", u."PasswordHash", u."PasswordSalt", u."RefreshToken", u."RefreshTokenExpiryTime", u."RoleId", u."SelectedExamIds", u."UpdatedAt", u."UserEmail", u."Username"
+FROM "Users" AS u
+WHERE u."UserEmail" = @__request_Email_0
+LIMIT 1
+2025-09-09 00:57:27.476 +05:30 [INF] Executed DbCommand (18ms) [Parameters=[@__request_Email_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."UserId", u."CreatedAt", u."FcmToken", u."IsDeleted", u."IsPremium", u."PasswordHash", u."PasswordSalt", u."RefreshToken", u."RefreshTokenExpiryTime", u."RoleId", u."SelectedExamIds", u."UpdatedAt", u."UserEmail", u."Username"
+FROM "Users" AS u
+WHERE u."UserEmail" = @__request_Email_0
+LIMIT 1
+2025-09-09 00:57:27.502 +05:30 [DBG] Context 'AppDbContext' started tracking 'User' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-09-09 00:57:27.534 +05:30 [DBG] Closing data reader to 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:27.537 +05:30 [DBG] A data reader for 'PYQ_Dev' on server 'tcp://localhost:5432' is being disposed after spending 57ms reading results.
+2025-09-09 00:57:27.540 +05:30 [DBG] Closing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:27.543 +05:30 [DBG] Closed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (2ms).
+2025-09-09 00:57:27.556 +05:30 [DBG] Compiling query expression: 
+'DbSet<Order>()
+    .Where(o => o.UserId == __user_UserId_0 && o.Status == "Paid")
+    .Any(o => o.ExpiresAt.HasValue && o.ExpiresAt > (DateTime?)DateTime.UtcNow)'
+2025-09-09 00:57:27.567 +05:30 [DBG] Generated query execution expression: 
+'queryContext => SingleQueryingEnumerable.Create<bool>(
+    relationalQueryContext: (RelationalQueryContext)queryContext, 
+    relationalCommandResolver: parameters => [LIFTABLE Constant: RelationalCommandCache.QueryExpression(
+        Projection Mapping:
+            EmptyProjectionMember -> 0
+        SELECT EXISTS (
+            SELECT 1
+            FROM Orders AS o
+            WHERE ((o.UserId == @__user_UserId_0) && (o.Status == 'Paid')) && (o.ExpiresAt IS NOT NULL && (o.ExpiresAt > now())))) | Resolver: c => new RelationalCommandCache(
+        c.Dependencies.MemoryCache, 
+        c.RelationalDependencies.QuerySqlGeneratorFactory, 
+        c.RelationalDependencies.RelationalParameterBasedSqlProcessorFactory, 
+        Projection Mapping:
+            EmptyProjectionMember -> 0
+        SELECT EXISTS (
+            SELECT 1
+            FROM Orders AS o
+            WHERE ((o.UserId == @__user_UserId_0) && (o.Status == 'Paid')) && (o.ExpiresAt IS NOT NULL && (o.ExpiresAt > now()))), 
+        False, 
+        new HashSet<string>(
+            new string[]{ }, 
+            StringComparer.Ordinal
+        )
+    )].GetRelationalCommandTemplate(parameters), 
+    readerColumns: null, 
+    shaper: (queryContext, dataReader, resultContext, resultCoordinator) => 
+    {
+        bool? value1;
+        value1 = dataReader.IsDBNull(0) ? default(bool?) : (bool?)dataReader.GetBoolean(0);
+        return (bool)value1;
+    }, 
+    contextType: pqy_server.Data.AppDbContext, 
+    standAloneStateManager: False, 
+    detailedErrorsEnabled: False, 
+    threadSafetyChecksEnabled: True)
+    .Single()'
+2025-09-09 00:57:27.572 +05:30 [DBG] Opening connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:27.574 +05:30 [DBG] Opened connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:27.577 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-09-09 00:57:27.578 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (1ms).
+2025-09-09 00:57:27.582 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (5ms).
+2025-09-09 00:57:27.584 +05:30 [DBG] Executing DbCommand [Parameters=[@__user_UserId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Orders" AS o
+    WHERE o."UserId" = @__user_UserId_0 AND o."Status" = 'Paid' AND o."ExpiresAt" IS NOT NULL AND o."ExpiresAt" > now())
+2025-09-09 00:57:27.592 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@__user_UserId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Orders" AS o
+    WHERE o."UserId" = @__user_UserId_0 AND o."Status" = 'Paid' AND o."ExpiresAt" IS NOT NULL AND o."ExpiresAt" > now())
+2025-09-09 00:57:27.596 +05:30 [DBG] Closing data reader to 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:27.598 +05:30 [DBG] A data reader for 'PYQ_Dev' on server 'tcp://localhost:5432' is being disposed after spending 2ms reading results.
+2025-09-09 00:57:27.599 +05:30 [DBG] Closing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:27.601 +05:30 [DBG] Closed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (1ms).
+2025-09-09 00:57:27.605 +05:30 [DBG] Compiling query expression: 
+'DbSet<Order>()
+    .Where(o => o.UserId == __user_UserId_0)
+    .OrderByDescending(o => o.CreatedAt)
+    .FirstOrDefault()'
+2025-09-09 00:57:27.611 +05:30 [DBG] Generated query execution expression: 
+'queryContext => SingleQueryingEnumerable.Create<Order>(
+    relationalQueryContext: (RelationalQueryContext)queryContext, 
+    relationalCommandResolver: parameters => [LIFTABLE Constant: RelationalCommandCache.QueryExpression(
+        Projection Mapping:
+            EmptyProjectionMember -> Dictionary<IProperty, int> { [Property: Order.Id (int) Required PK AfterSave:Throw ValueGenerated.OnAdd, 0], [Property: Order.Amount (int) Required, 1], [Property: Order.AmountPaid (int?), 2], [Property: Order.CompletedAt (DateTime?), 3], [Property: Order.CreatedAt (DateTime) Required ValueGenerated.OnAdd, 4], [Property: Order.Currency (string) Required, 5], [Property: Order.ExpiresAt (DateTime?), 6], [Property: Order.PaymentId (string), 7], [Property: Order.RazorpayOrderId (string) Required Index, 8], [Property: Order.Status (string) Required, 9], [Property: Order.UpdatedAt (DateTime) Required ValueGenerated.OnAdd, 10], [Property: Order.UserId (int) Required FK Index, 11] }
+        SELECT TOP(1) o.Id, o.Amount, o.AmountPaid, o.CompletedAt, o.CreatedAt, o.Currency, o.ExpiresAt, o.PaymentId, o.RazorpayOrderId, o.Status, o.UpdatedAt, o.UserId
+        FROM Orders AS o
+        WHERE o.UserId == @__user_UserId_0
+        ORDER BY o.CreatedAt DESC) | Resolver: c => new RelationalCommandCache(
+        c.Dependencies.MemoryCache, 
+        c.RelationalDependencies.QuerySqlGeneratorFactory, 
+        c.RelationalDependencies.RelationalParameterBasedSqlProcessorFactory, 
+        Projection Mapping:
+            EmptyProjectionMember -> Dictionary<IProperty, int> { [Property: Order.Id (int) Required PK AfterSave:Throw ValueGenerated.OnAdd, 0], [Property: Order.Amount (int) Required, 1], [Property: Order.AmountPaid (int?), 2], [Property: Order.CompletedAt (DateTime?), 3], [Property: Order.CreatedAt (DateTime) Required ValueGenerated.OnAdd, 4], [Property: Order.Currency (string) Required, 5], [Property: Order.ExpiresAt (DateTime?), 6], [Property: Order.PaymentId (string), 7], [Property: Order.RazorpayOrderId (string) Required Index, 8], [Property: Order.Status (string) Required, 9], [Property: Order.UpdatedAt (DateTime) Required ValueGenerated.OnAdd, 10], [Property: Order.UserId (int) Required FK Index, 11] }
+        SELECT TOP(1) o.Id, o.Amount, o.AmountPaid, o.CompletedAt, o.CreatedAt, o.Currency, o.ExpiresAt, o.PaymentId, o.RazorpayOrderId, o.Status, o.UpdatedAt, o.UserId
+        FROM Orders AS o
+        WHERE o.UserId == @__user_UserId_0
+        ORDER BY o.CreatedAt DESC, 
+        False, 
+        new HashSet<string>(
+            new string[]{ }, 
+            StringComparer.Ordinal
+        )
+    )].GetRelationalCommandTemplate(parameters), 
+    readerColumns: null, 
+    shaper: (queryContext, dataReader, resultContext, resultCoordinator) => 
+    {
+        Order entity;
+        entity = 
+        {
+            MaterializationContext materializationContext1;
+            IEntityType entityType1;
+            Order instance1;
+            InternalEntityEntry entry1;
+            bool hasNullKey1;
+            materializationContext1 = new MaterializationContext(
+                [LIFTABLE Constant: ValueBuffer | Resolver: _ => (object)ValueBuffer.Empty], 
+                queryContext.Context
+            );
+            instance1 = default(Order);
+            entry1 = queryContext.TryGetEntry(
+                key: [LIFTABLE Constant: Key: Order.Id PK | Resolver: c => c.Dependencies.Model.FindEntityType("pqy_server.Models.Orders.Order").FindPrimaryKey()], 
+                keyValues: new object[]{ (object)dataReader.GetInt32(0) }, 
+                throwOnNullKey: True, 
+                hasNullKey: hasNullKey1);
+            !(hasNullKey1) ? entry1 != default(InternalEntityEntry) ? 
+            {
+                entityType1 = entry1.EntityType;
+                return instance1 = (Order)entry1.Entity;
+            } : 
+            {
+                ISnapshot shadowSnapshot1;
+                shadowSnapshot1 = [LIFTABLE Constant: Snapshot | Resolver: _ => Snapshot.Empty];
+                entityType1 = [LIFTABLE Constant: EntityType: Order | Resolver: namelessParameter{0} => namelessParameter{0}.Dependencies.Model.FindEntityType("pqy_server.Models.Orders.Order")];
+                instance1 = switch (entityType1)
+                {
+                    case [LIFTABLE Constant: EntityType: Order | Resolver: namelessParameter{1} => namelessParameter{1}.Dependencies.Model.FindEntityType("pqy_server.Models.Orders.Order")]: 
+                        {
+                            return 
+                            {
+                                Order instance;
+                                instance = new Order();
+                                instance.<Id>k__BackingField = dataReader.GetInt32(0);
+                                instance.<Amount>k__BackingField = dataReader.GetInt32(1);
+                                instance.<AmountPaid>k__BackingField = dataReader.IsDBNull(2) ? default(int?) : (int?)dataReader.GetInt32(2);
+                                instance.<CompletedAt>k__BackingField = dataReader.IsDBNull(3) ? default(DateTime?) : (DateTime?)dataReader.GetDateTime(3);
+                                instance.<CreatedAt>k__BackingField = dataReader.GetDateTime(4);
+                                instance.<Currency>k__BackingField = dataReader.GetString(5);
+                                instance.<ExpiresAt>k__BackingField = dataReader.IsDBNull(6) ? default(DateTime?) : (DateTime?)dataReader.GetDateTime(6);
+                                instance.<PaymentId>k__BackingField = dataReader.IsDBNull(7) ? default(string) : dataReader.GetString(7);
+                                instance.<RazorpayOrderId>k__BackingField = dataReader.GetString(8);
+                                instance.<Status>k__BackingField = dataReader.GetString(9);
+                                instance.<UpdatedAt>k__BackingField = dataReader.GetDateTime(10);
+                                instance.<UserId>k__BackingField = dataReader.GetInt32(11);
+                                (instance is IInjectableService) ? ((IInjectableService)instance).Injected(
+                                    context: materializationContext1.Context, 
+                                    entity: instance, 
+                                    queryTrackingBehavior: TrackAll, 
+                                    structuralType: [LIFTABLE Constant: EntityType: Order | Resolver: namelessParameter{2} => namelessParameter{2}.Dependencies.Model.FindEntityType("pqy_server.Models.Orders.Order")]) : default(void);
+                                return instance;
+                            }}
+                    default: 
+                        default(Order)
+                }
+                ;
+                entry1 = entityType1 == default(IEntityType) ? default(InternalEntityEntry) : queryContext.StartTracking(
+                    entityType: entityType1, 
+                    entity: instance1, 
+                    snapshot: shadowSnapshot1);
+                return instance1;
+            } : default(void);
+            return instance1;
+        };
+        return entity;
+    }, 
+    contextType: pqy_server.Data.AppDbContext, 
+    standAloneStateManager: False, 
+    detailedErrorsEnabled: False, 
+    threadSafetyChecksEnabled: True)
+    .SingleOrDefault()'
+2025-09-09 00:57:27.618 +05:30 [DBG] Opening connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:27.621 +05:30 [DBG] Opened connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:27.623 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-09-09 00:57:27.625 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (1ms).
+2025-09-09 00:57:27.627 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (4ms).
+2025-09-09 00:57:27.631 +05:30 [DBG] Executing DbCommand [Parameters=[@__user_UserId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT o."Id", o."Amount", o."AmountPaid", o."CompletedAt", o."CreatedAt", o."Currency", o."ExpiresAt", o."PaymentId", o."RazorpayOrderId", o."Status", o."UpdatedAt", o."UserId"
+FROM "Orders" AS o
+WHERE o."UserId" = @__user_UserId_0
+ORDER BY o."CreatedAt" DESC
+LIMIT 1
+2025-09-09 00:57:27.639 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@__user_UserId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT o."Id", o."Amount", o."AmountPaid", o."CompletedAt", o."CreatedAt", o."Currency", o."ExpiresAt", o."PaymentId", o."RazorpayOrderId", o."Status", o."UpdatedAt", o."UserId"
+FROM "Orders" AS o
+WHERE o."UserId" = @__user_UserId_0
+ORDER BY o."CreatedAt" DESC
+LIMIT 1
+2025-09-09 00:57:27.642 +05:30 [DBG] Closing data reader to 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:27.644 +05:30 [DBG] A data reader for 'PYQ_Dev' on server 'tcp://localhost:5432' is being disposed after spending 2ms reading results.
+2025-09-09 00:57:27.649 +05:30 [DBG] Closing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:27.651 +05:30 [DBG] Closed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (2ms).
+2025-09-09 00:57:27.707 +05:30 [DBG] SaveChanges starting for 'AppDbContext'.
+2025-09-09 00:57:27.710 +05:30 [DBG] DetectChanges starting for 'AppDbContext'.
+2025-09-09 00:57:27.724 +05:30 [DBG] The unchanged property 'User.RefreshToken' was detected as changed and will be marked as modified. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see property values.
+2025-09-09 00:57:27.733 +05:30 [DBG] An entity of type 'User' tracked by 'AppDbContext' changed state from '"Unchanged"' to '"Modified"'. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-09-09 00:57:27.738 +05:30 [DBG] The unchanged property 'User.RefreshTokenExpiryTime' was detected as changed and will be marked as modified. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see property values.
+2025-09-09 00:57:27.743 +05:30 [DBG] DetectChanges completed for 'AppDbContext'.
+2025-09-09 00:57:27.772 +05:30 [DBG] Opening connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:27.773 +05:30 [DBG] Opened connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:27.775 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-09-09 00:57:27.777 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (1ms).
+2025-09-09 00:57:27.780 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (4ms).
+2025-09-09 00:57:27.782 +05:30 [DBG] Executing DbCommand [Parameters=[@p2='?' (DbType = Int32), @p0='?', @p1='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Users" SET "RefreshToken" = @p0, "RefreshTokenExpiryTime" = @p1
+WHERE "UserId" = @p2;
+2025-09-09 00:57:27.790 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@p2='?' (DbType = Int32), @p0='?', @p1='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Users" SET "RefreshToken" = @p0, "RefreshTokenExpiryTime" = @p1
+WHERE "UserId" = @p2;
+2025-09-09 00:57:27.794 +05:30 [DBG] Closing data reader to 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:27.796 +05:30 [DBG] A data reader for 'PYQ_Dev' on server 'tcp://localhost:5432' is being disposed after spending 4ms reading results.
+2025-09-09 00:57:27.801 +05:30 [DBG] Closing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:27.803 +05:30 [DBG] Closed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (2ms).
+2025-09-09 00:57:27.808 +05:30 [DBG] An entity of type 'User' tracked by 'AppDbContext' changed state from '"Modified"' to '"Unchanged"'. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-09-09 00:57:27.811 +05:30 [DBG] SaveChanges completed for 'AppDbContext' with 1 entities written to the database.
+2025-09-09 00:57:27.815 +05:30 [INF] User logged in successfully. UserId=1, Email=admin@instapyq.com
+2025-09-09 00:57:27.821 +05:30 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2025-09-09 00:57:27.824 +05:30 [DBG] No information found on request to perform content negotiation.
+2025-09-09 00:57:27.825 +05:30 [DBG] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2025-09-09 00:57:27.826 +05:30 [DBG] Attempting to select the first formatter in the output formatters list which can write the result.
+2025-09-09 00:57:27.828 +05:30 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter' and content type 'application/json' to write the response.
+2025-09-09 00:57:27.832 +05:30 [INF] Executing OkObjectResult, writing value of type 'pqy_server.Shared.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-09-09 00:57:27.853 +05:30 [DBG] The response will be compressed with 'br'.
+2025-09-09 00:57:27.858 +05:30 [INF] Executed action pqy_server.Controllers.AuthController.Login (pqy-server) in 575.9559ms
+2025-09-09 00:57:27.860 +05:30 [INF] Executed endpoint 'pqy_server.Controllers.AuthController.Login (pqy-server)'
+2025-09-09 00:57:27.863 +05:30 [DBG] Connection id "0HNFF1MMETLDV" completed keep alive response.
+2025-09-09 00:57:27.867 +05:30 [DBG] 'AppDbContext' disposed.
+2025-09-09 00:57:27.872 +05:30 [DBG] Disposing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:27.874 +05:30 [DBG] Disposed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (2ms).
+2025-09-09 00:57:27.877 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost/api/Auth/login - 200 null application/json; charset=utf-8 655.8833ms
+2025-09-09 00:57:56.759 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost/api/Admin/stats - null null
+2025-09-09 00:57:56.820 +05:30 [DBG] 1 candidate(s) found for the request path '/api/Admin/stats'
+2025-09-09 00:57:56.823 +05:30 [DBG] Endpoint 'pqy_server.Controllers.AdminController.GetAdminStats (pqy-server)' with route pattern 'api/Admin/stats' is valid for the request path '/api/Admin/stats'
+2025-09-09 00:57:56.827 +05:30 [DBG] Request matched endpoint 'pqy_server.Controllers.AdminController.GetAdminStats (pqy-server)'
+2025-09-09 00:57:56.865 +05:30 [DBG] Successfully validated the token.
+2025-09-09 00:57:56.870 +05:30 [DBG] AuthenticationScheme: Bearer was successfully authenticated.
+2025-09-09 00:57:56.875 +05:30 [DBG] Authorization was successful.
+2025-09-09 00:57:56.876 +05:30 [INF] Executing endpoint 'pqy_server.Controllers.AdminController.GetAdminStats (pqy-server)'
+2025-09-09 00:57:56.883 +05:30 [INF] Route matched with {action = "GetAdminStats", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAdminStats() on controller pqy_server.Controllers.AdminController (pqy-server).
+2025-09-09 00:57:56.886 +05:30 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2025-09-09 00:57:56.888 +05:30 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2025-09-09 00:57:56.891 +05:30 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2025-09-09 00:57:56.894 +05:30 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2025-09-09 00:57:56.899 +05:30 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2025-09-09 00:57:56.901 +05:30 [DBG] Executing controller factory for controller pqy_server.Controllers.AdminController (pqy-server)
+2025-09-09 00:57:56.905 +05:30 [DBG] Executed controller factory for controller pqy_server.Controllers.AdminController (pqy-server)
+2025-09-09 00:57:56.945 +05:30 [DBG] Entity Framework Core 9.0.4 initialized 'AppDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-09-09 00:57:56.952 +05:30 [DBG] Compiling query expression: 
+'DbSet<User>()
+    .Count()'
+2025-09-09 00:57:56.966 +05:30 [DBG] Generated query execution expression: 
+'queryContext => ShapedQueryCompilingExpressionVisitor.SingleAsync<int>(
+    asyncEnumerable: SingleQueryingEnumerable.Create<int>(
+        relationalQueryContext: (RelationalQueryContext)queryContext, 
+        relationalCommandResolver: parameters => [LIFTABLE Constant: RelationalCommandCache.QueryExpression(
+            Projection Mapping:
+                EmptyProjectionMember -> 0
+            SELECT CAST(count(*) AS integer)
+            FROM Users AS u) | Resolver: c => new RelationalCommandCache(
+            c.Dependencies.MemoryCache, 
+            c.RelationalDependencies.QuerySqlGeneratorFactory, 
+            c.RelationalDependencies.RelationalParameterBasedSqlProcessorFactory, 
+            Projection Mapping:
+                EmptyProjectionMember -> 0
+            SELECT CAST(count(*) AS integer)
+            FROM Users AS u, 
+            False, 
+            new HashSet<string>(
+                new string[]{ }, 
+                StringComparer.Ordinal
+            )
+        )].GetRelationalCommandTemplate(parameters), 
+        readerColumns: null, 
+        shaper: (queryContext, dataReader, resultContext, resultCoordinator) => 
+        {
+            int? value1;
+            value1 = dataReader.IsDBNull(0) ? default(int?) : (int?)dataReader.GetInt32(0);
+            return (int)value1;
+        }, 
+        contextType: pqy_server.Data.AppDbContext, 
+        standAloneStateManager: False, 
+        detailedErrorsEnabled: False, 
+        threadSafetyChecksEnabled: True), 
+    cancellationToken: queryContext.CancellationToken)'
+2025-09-09 00:57:56.974 +05:30 [DBG] Creating DbConnection.
+2025-09-09 00:57:56.975 +05:30 [DBG] Created DbConnection. (1ms).
+2025-09-09 00:57:56.977 +05:30 [DBG] Opening connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:56.979 +05:30 [DBG] Opened connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:56.982 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-09-09 00:57:56.983 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (1ms).
+2025-09-09 00:57:56.985 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (3ms).
+2025-09-09 00:57:56.987 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "Users" AS u
+2025-09-09 00:57:56.991 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "Users" AS u
+2025-09-09 00:57:56.994 +05:30 [DBG] Closing data reader to 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:56.996 +05:30 [DBG] A data reader for 'PYQ_Dev' on server 'tcp://localhost:5432' is being disposed after spending 2ms reading results.
+2025-09-09 00:57:56.999 +05:30 [DBG] Closing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:57.000 +05:30 [DBG] Closed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (1ms).
+2025-09-09 00:57:57.003 +05:30 [DBG] Compiling query expression: 
+'DbSet<Exam>()
+    .Count()'
+2025-09-09 00:57:57.006 +05:30 [DBG] Generated query execution expression: 
+'queryContext => ShapedQueryCompilingExpressionVisitor.SingleAsync<int>(
+    asyncEnumerable: SingleQueryingEnumerable.Create<int>(
+        relationalQueryContext: (RelationalQueryContext)queryContext, 
+        relationalCommandResolver: parameters => [LIFTABLE Constant: RelationalCommandCache.QueryExpression(
+            Projection Mapping:
+                EmptyProjectionMember -> 0
+            SELECT CAST(count(*) AS integer)
+            FROM Exams AS e) | Resolver: c => new RelationalCommandCache(
+            c.Dependencies.MemoryCache, 
+            c.RelationalDependencies.QuerySqlGeneratorFactory, 
+            c.RelationalDependencies.RelationalParameterBasedSqlProcessorFactory, 
+            Projection Mapping:
+                EmptyProjectionMember -> 0
+            SELECT CAST(count(*) AS integer)
+            FROM Exams AS e, 
+            False, 
+            new HashSet<string>(
+                new string[]{ }, 
+                StringComparer.Ordinal
+            )
+        )].GetRelationalCommandTemplate(parameters), 
+        readerColumns: null, 
+        shaper: (queryContext, dataReader, resultContext, resultCoordinator) => 
+        {
+            int? value1;
+            value1 = dataReader.IsDBNull(0) ? default(int?) : (int?)dataReader.GetInt32(0);
+            return (int)value1;
+        }, 
+        contextType: pqy_server.Data.AppDbContext, 
+        standAloneStateManager: False, 
+        detailedErrorsEnabled: False, 
+        threadSafetyChecksEnabled: True), 
+    cancellationToken: queryContext.CancellationToken)'
+2025-09-09 00:57:57.009 +05:30 [DBG] Opening connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:57.010 +05:30 [DBG] Opened connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:57.012 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-09-09 00:57:57.014 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (1ms).
+2025-09-09 00:57:57.016 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (4ms).
+2025-09-09 00:57:57.018 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "Exams" AS e
+2025-09-09 00:57:57.022 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "Exams" AS e
+2025-09-09 00:57:57.025 +05:30 [DBG] Closing data reader to 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:57.026 +05:30 [DBG] A data reader for 'PYQ_Dev' on server 'tcp://localhost:5432' is being disposed after spending 1ms reading results.
+2025-09-09 00:57:57.028 +05:30 [DBG] Closing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:57.029 +05:30 [DBG] Closed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (1ms).
+2025-09-09 00:57:57.034 +05:30 [DBG] Compiling query expression: 
+'DbSet<Question>()
+    .Count()'
+2025-09-09 00:57:57.039 +05:30 [DBG] Generated query execution expression: 
+'queryContext => ShapedQueryCompilingExpressionVisitor.SingleAsync<int>(
+    asyncEnumerable: SingleQueryingEnumerable.Create<int>(
+        relationalQueryContext: (RelationalQueryContext)queryContext, 
+        relationalCommandResolver: parameters => [LIFTABLE Constant: RelationalCommandCache.QueryExpression(
+            Projection Mapping:
+                EmptyProjectionMember -> 0
+            SELECT CAST(count(*) AS integer)
+            FROM Questions AS q
+            WHERE Not(q.IsDeleted)) | Resolver: c => new RelationalCommandCache(
+            c.Dependencies.MemoryCache, 
+            c.RelationalDependencies.QuerySqlGeneratorFactory, 
+            c.RelationalDependencies.RelationalParameterBasedSqlProcessorFactory, 
+            Projection Mapping:
+                EmptyProjectionMember -> 0
+            SELECT CAST(count(*) AS integer)
+            FROM Questions AS q
+            WHERE Not(q.IsDeleted), 
+            False, 
+            new HashSet<string>(
+                new string[]{ }, 
+                StringComparer.Ordinal
+            )
+        )].GetRelationalCommandTemplate(parameters), 
+        readerColumns: null, 
+        shaper: (queryContext, dataReader, resultContext, resultCoordinator) => 
+        {
+            int? value1;
+            value1 = dataReader.IsDBNull(0) ? default(int?) : (int?)dataReader.GetInt32(0);
+            return (int)value1;
+        }, 
+        contextType: pqy_server.Data.AppDbContext, 
+        standAloneStateManager: False, 
+        detailedErrorsEnabled: False, 
+        threadSafetyChecksEnabled: True), 
+    cancellationToken: queryContext.CancellationToken)'
+2025-09-09 00:57:57.042 +05:30 [DBG] Opening connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:57.044 +05:30 [DBG] Opened connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:57.048 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-09-09 00:57:57.050 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (2ms).
+2025-09-09 00:57:57.052 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (3ms).
+2025-09-09 00:57:57.053 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "Questions" AS q
+WHERE NOT (q."IsDeleted")
+2025-09-09 00:57:57.072 +05:30 [INF] Executed DbCommand (18ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "Questions" AS q
+WHERE NOT (q."IsDeleted")
+2025-09-09 00:57:57.074 +05:30 [DBG] Closing data reader to 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:57.076 +05:30 [DBG] A data reader for 'PYQ_Dev' on server 'tcp://localhost:5432' is being disposed after spending 1ms reading results.
+2025-09-09 00:57:57.078 +05:30 [DBG] Closing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:57.080 +05:30 [DBG] Closed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (2ms).
+2025-09-09 00:57:57.085 +05:30 [DBG] Compiling query expression: 
+'DbSet<Subject>()
+    .Count()'
+2025-09-09 00:57:57.088 +05:30 [DBG] Generated query execution expression: 
+'queryContext => ShapedQueryCompilingExpressionVisitor.SingleAsync<int>(
+    asyncEnumerable: SingleQueryingEnumerable.Create<int>(
+        relationalQueryContext: (RelationalQueryContext)queryContext, 
+        relationalCommandResolver: parameters => [LIFTABLE Constant: RelationalCommandCache.QueryExpression(
+            Projection Mapping:
+                EmptyProjectionMember -> 0
+            SELECT CAST(count(*) AS integer)
+            FROM Subjects AS s) | Resolver: c => new RelationalCommandCache(
+            c.Dependencies.MemoryCache, 
+            c.RelationalDependencies.QuerySqlGeneratorFactory, 
+            c.RelationalDependencies.RelationalParameterBasedSqlProcessorFactory, 
+            Projection Mapping:
+                EmptyProjectionMember -> 0
+            SELECT CAST(count(*) AS integer)
+            FROM Subjects AS s, 
+            False, 
+            new HashSet<string>(
+                new string[]{ }, 
+                StringComparer.Ordinal
+            )
+        )].GetRelationalCommandTemplate(parameters), 
+        readerColumns: null, 
+        shaper: (queryContext, dataReader, resultContext, resultCoordinator) => 
+        {
+            int? value1;
+            value1 = dataReader.IsDBNull(0) ? default(int?) : (int?)dataReader.GetInt32(0);
+            return (int)value1;
+        }, 
+        contextType: pqy_server.Data.AppDbContext, 
+        standAloneStateManager: False, 
+        detailedErrorsEnabled: False, 
+        threadSafetyChecksEnabled: True), 
+    cancellationToken: queryContext.CancellationToken)'
+2025-09-09 00:57:57.090 +05:30 [DBG] Opening connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:57.091 +05:30 [DBG] Opened connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:57.093 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-09-09 00:57:57.094 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (1ms).
+2025-09-09 00:57:57.096 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (3ms).
+2025-09-09 00:57:57.099 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "Subjects" AS s
+2025-09-09 00:57:57.103 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "Subjects" AS s
+2025-09-09 00:57:57.106 +05:30 [DBG] Closing data reader to 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:57.107 +05:30 [DBG] A data reader for 'PYQ_Dev' on server 'tcp://localhost:5432' is being disposed after spending 1ms reading results.
+2025-09-09 00:57:57.109 +05:30 [DBG] Closing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:57.110 +05:30 [DBG] Closed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (1ms).
+2025-09-09 00:57:57.113 +05:30 [DBG] Compiling query expression: 
+'DbSet<Topic>()
+    .Count()'
+2025-09-09 00:57:57.119 +05:30 [DBG] Generated query execution expression: 
+'queryContext => ShapedQueryCompilingExpressionVisitor.SingleAsync<int>(
+    asyncEnumerable: SingleQueryingEnumerable.Create<int>(
+        relationalQueryContext: (RelationalQueryContext)queryContext, 
+        relationalCommandResolver: parameters => [LIFTABLE Constant: RelationalCommandCache.QueryExpression(
+            Projection Mapping:
+                EmptyProjectionMember -> 0
+            SELECT CAST(count(*) AS integer)
+            FROM Topics AS t) | Resolver: c => new RelationalCommandCache(
+            c.Dependencies.MemoryCache, 
+            c.RelationalDependencies.QuerySqlGeneratorFactory, 
+            c.RelationalDependencies.RelationalParameterBasedSqlProcessorFactory, 
+            Projection Mapping:
+                EmptyProjectionMember -> 0
+            SELECT CAST(count(*) AS integer)
+            FROM Topics AS t, 
+            False, 
+            new HashSet<string>(
+                new string[]{ }, 
+                StringComparer.Ordinal
+            )
+        )].GetRelationalCommandTemplate(parameters), 
+        readerColumns: null, 
+        shaper: (queryContext, dataReader, resultContext, resultCoordinator) => 
+        {
+            int? value1;
+            value1 = dataReader.IsDBNull(0) ? default(int?) : (int?)dataReader.GetInt32(0);
+            return (int)value1;
+        }, 
+        contextType: pqy_server.Data.AppDbContext, 
+        standAloneStateManager: False, 
+        detailedErrorsEnabled: False, 
+        threadSafetyChecksEnabled: True), 
+    cancellationToken: queryContext.CancellationToken)'
+2025-09-09 00:57:57.122 +05:30 [DBG] Opening connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:57.123 +05:30 [DBG] Opened connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:57.124 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-09-09 00:57:57.125 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (1ms).
+2025-09-09 00:57:57.127 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (2ms).
+2025-09-09 00:57:57.129 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "Topics" AS t
+2025-09-09 00:57:57.136 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "Topics" AS t
+2025-09-09 00:57:57.140 +05:30 [DBG] Closing data reader to 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:57.142 +05:30 [DBG] A data reader for 'PYQ_Dev' on server 'tcp://localhost:5432' is being disposed after spending 1ms reading results.
+2025-09-09 00:57:57.143 +05:30 [DBG] Closing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:57.145 +05:30 [DBG] Closed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (1ms).
+2025-09-09 00:57:57.149 +05:30 [DBG] Compiling query expression: 
+'DbSet<Year>()
+    .Count()'
+2025-09-09 00:57:57.153 +05:30 [DBG] Generated query execution expression: 
+'queryContext => ShapedQueryCompilingExpressionVisitor.SingleAsync<int>(
+    asyncEnumerable: SingleQueryingEnumerable.Create<int>(
+        relationalQueryContext: (RelationalQueryContext)queryContext, 
+        relationalCommandResolver: parameters => [LIFTABLE Constant: RelationalCommandCache.QueryExpression(
+            Projection Mapping:
+                EmptyProjectionMember -> 0
+            SELECT CAST(count(*) AS integer)
+            FROM Years AS y) | Resolver: c => new RelationalCommandCache(
+            c.Dependencies.MemoryCache, 
+            c.RelationalDependencies.QuerySqlGeneratorFactory, 
+            c.RelationalDependencies.RelationalParameterBasedSqlProcessorFactory, 
+            Projection Mapping:
+                EmptyProjectionMember -> 0
+            SELECT CAST(count(*) AS integer)
+            FROM Years AS y, 
+            False, 
+            new HashSet<string>(
+                new string[]{ }, 
+                StringComparer.Ordinal
+            )
+        )].GetRelationalCommandTemplate(parameters), 
+        readerColumns: null, 
+        shaper: (queryContext, dataReader, resultContext, resultCoordinator) => 
+        {
+            int? value1;
+            value1 = dataReader.IsDBNull(0) ? default(int?) : (int?)dataReader.GetInt32(0);
+            return (int)value1;
+        }, 
+        contextType: pqy_server.Data.AppDbContext, 
+        standAloneStateManager: False, 
+        detailedErrorsEnabled: False, 
+        threadSafetyChecksEnabled: True), 
+    cancellationToken: queryContext.CancellationToken)'
+2025-09-09 00:57:57.156 +05:30 [DBG] Opening connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:57.157 +05:30 [DBG] Opened connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:57.159 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-09-09 00:57:57.160 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (1ms).
+2025-09-09 00:57:57.162 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (2ms).
+2025-09-09 00:57:57.166 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "Years" AS y
+2025-09-09 00:57:57.172 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "Years" AS y
+2025-09-09 00:57:57.174 +05:30 [DBG] Closing data reader to 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:57.176 +05:30 [DBG] A data reader for 'PYQ_Dev' on server 'tcp://localhost:5432' is being disposed after spending 1ms reading results.
+2025-09-09 00:57:57.179 +05:30 [DBG] Closing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:57.182 +05:30 [DBG] Closed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (2ms).
+2025-09-09 00:57:57.186 +05:30 [DBG] Compiling query expression: 
+'DbSet<Order>()
+    .Where(o => o.Status == "Paid")
+    .Select(o => o.UserId)
+    .Distinct()
+    .Count()'
+2025-09-09 00:57:57.198 +05:30 [DBG] Generated query execution expression: 
+'queryContext => ShapedQueryCompilingExpressionVisitor.SingleAsync<int>(
+    asyncEnumerable: SingleQueryingEnumerable.Create<int>(
+        relationalQueryContext: (RelationalQueryContext)queryContext, 
+        relationalCommandResolver: parameters => [LIFTABLE Constant: RelationalCommandCache.QueryExpression(
+            Projection Mapping:
+                EmptyProjectionMember -> 0
+            SELECT CAST(count(*) AS integer)
+            FROM 
+            (
+                SELECT DISTINCT o.UserId
+                FROM Orders AS o
+                WHERE o.Status == 'Paid'
+            ) AS o0) | Resolver: c => new RelationalCommandCache(
+            c.Dependencies.MemoryCache, 
+            c.RelationalDependencies.QuerySqlGeneratorFactory, 
+            c.RelationalDependencies.RelationalParameterBasedSqlProcessorFactory, 
+            Projection Mapping:
+                EmptyProjectionMember -> 0
+            SELECT CAST(count(*) AS integer)
+            FROM 
+            (
+                SELECT DISTINCT o.UserId
+                FROM Orders AS o
+                WHERE o.Status == 'Paid'
+            ) AS o0, 
+            False, 
+            new HashSet<string>(
+                new string[]{ }, 
+                StringComparer.Ordinal
+            )
+        )].GetRelationalCommandTemplate(parameters), 
+        readerColumns: null, 
+        shaper: (queryContext, dataReader, resultContext, resultCoordinator) => 
+        {
+            int? value1;
+            value1 = dataReader.IsDBNull(0) ? default(int?) : (int?)dataReader.GetInt32(0);
+            return (int)value1;
+        }, 
+        contextType: pqy_server.Data.AppDbContext, 
+        standAloneStateManager: False, 
+        detailedErrorsEnabled: False, 
+        threadSafetyChecksEnabled: True), 
+    cancellationToken: queryContext.CancellationToken)'
+2025-09-09 00:57:57.202 +05:30 [DBG] Opening connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:57.204 +05:30 [DBG] Opened connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:57.205 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-09-09 00:57:57.207 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (2ms).
+2025-09-09 00:57:57.209 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (4ms).
+2025-09-09 00:57:57.211 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM (
+    SELECT DISTINCT o."UserId"
+    FROM "Orders" AS o
+    WHERE o."Status" = 'Paid'
+) AS o0
+2025-09-09 00:57:57.217 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM (
+    SELECT DISTINCT o."UserId"
+    FROM "Orders" AS o
+    WHERE o."Status" = 'Paid'
+) AS o0
+2025-09-09 00:57:57.220 +05:30 [DBG] Closing data reader to 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:57.221 +05:30 [DBG] A data reader for 'PYQ_Dev' on server 'tcp://localhost:5432' is being disposed after spending 1ms reading results.
+2025-09-09 00:57:57.222 +05:30 [DBG] Closing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:57.224 +05:30 [DBG] Closed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (1ms).
+2025-09-09 00:57:57.229 +05:30 [DBG] Compiling query expression: 
+'DbSet<User>()
+    .GroupBy(u => u.RoleId)
+    .Select(g => new { 
+        RoleId = g.Key, 
+        Count = g
+            .Count()
+     })'
+2025-09-09 00:57:57.246 +05:30 [DBG] Generated query execution expression: 
+'queryContext => SingleQueryingEnumerable.Create<<>f__AnonymousType2<int, int>>(
+    relationalQueryContext: (RelationalQueryContext)queryContext, 
+    relationalCommandResolver: parameters => [LIFTABLE Constant: RelationalCommandCache.QueryExpression(
+        Projection Mapping:
+            RoleId -> 0
+            Count -> 1
+        SELECT u.RoleId, CAST(count(*) AS integer) AS Count
+        FROM Users AS u
+        GROUP BY u.RoleId) | Resolver: c => new RelationalCommandCache(
+        c.Dependencies.MemoryCache, 
+        c.RelationalDependencies.QuerySqlGeneratorFactory, 
+        c.RelationalDependencies.RelationalParameterBasedSqlProcessorFactory, 
+        Projection Mapping:
+            RoleId -> 0
+            Count -> 1
+        SELECT u.RoleId, CAST(count(*) AS integer) AS Count
+        FROM Users AS u
+        GROUP BY u.RoleId, 
+        False, 
+        new HashSet<string>(
+            new string[]{ }, 
+            StringComparer.Ordinal
+        )
+    )].GetRelationalCommandTemplate(parameters), 
+    readerColumns: null, 
+    shaper: (queryContext, dataReader, resultContext, resultCoordinator) => 
+    {
+        int? value1;
+        int? value2;
+        value1 = (int?)dataReader.GetInt32(0);
+        value2 = dataReader.IsDBNull(1) ? default(int?) : (int?)dataReader.GetInt32(1);
+        return new { 
+            RoleId = (int)value1, 
+            Count = (int)value2
+         };
+    }, 
+    contextType: pqy_server.Data.AppDbContext, 
+    standAloneStateManager: False, 
+    detailedErrorsEnabled: False, 
+    threadSafetyChecksEnabled: True)'
+2025-09-09 00:57:57.251 +05:30 [DBG] Opening connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:57.253 +05:30 [DBG] Opened connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:57.255 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-09-09 00:57:57.256 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (1ms).
+2025-09-09 00:57:57.258 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (3ms).
+2025-09-09 00:57:57.260 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT u."RoleId", count(*)::int AS "Count"
+FROM "Users" AS u
+GROUP BY u."RoleId"
+2025-09-09 00:57:57.263 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT u."RoleId", count(*)::int AS "Count"
+FROM "Users" AS u
+GROUP BY u."RoleId"
+2025-09-09 00:57:57.267 +05:30 [DBG] Closing data reader to 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:57.268 +05:30 [DBG] A data reader for 'PYQ_Dev' on server 'tcp://localhost:5432' is being disposed after spending 2ms reading results.
+2025-09-09 00:57:57.270 +05:30 [DBG] Closing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:57.271 +05:30 [DBG] Closed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (1ms).
+2025-09-09 00:57:57.274 +05:30 [DBG] Compiling query expression: 
+'DbSet<Role>()'
+2025-09-09 00:57:57.278 +05:30 [DBG] Generated query execution expression: 
+'queryContext => SingleQueryingEnumerable.Create<Role>(
+    relationalQueryContext: (RelationalQueryContext)queryContext, 
+    relationalCommandResolver: parameters => [LIFTABLE Constant: RelationalCommandCache.QueryExpression(
+        Projection Mapping:
+            EmptyProjectionMember -> Dictionary<IProperty, int> { [Property: Role.RoleId (int) Required PK AfterSave:Throw ValueGenerated.OnAdd, 0], [Property: Role.RoleName (string) Index, 1] }
+        SELECT r.RoleId, r.RoleName
+        FROM Roles AS r) | Resolver: c => new RelationalCommandCache(
+        c.Dependencies.MemoryCache, 
+        c.RelationalDependencies.QuerySqlGeneratorFactory, 
+        c.RelationalDependencies.RelationalParameterBasedSqlProcessorFactory, 
+        Projection Mapping:
+            EmptyProjectionMember -> Dictionary<IProperty, int> { [Property: Role.RoleId (int) Required PK AfterSave:Throw ValueGenerated.OnAdd, 0], [Property: Role.RoleName (string) Index, 1] }
+        SELECT r.RoleId, r.RoleName
+        FROM Roles AS r, 
+        False, 
+        new HashSet<string>(
+            new string[]{ }, 
+            StringComparer.Ordinal
+        )
+    )].GetRelationalCommandTemplate(parameters), 
+    readerColumns: null, 
+    shaper: (queryContext, dataReader, resultContext, resultCoordinator) => 
+    {
+        Role entity;
+        entity = 
+        {
+            MaterializationContext materializationContext1;
+            IEntityType entityType1;
+            Role instance1;
+            InternalEntityEntry entry1;
+            bool hasNullKey1;
+            materializationContext1 = new MaterializationContext(
+                [LIFTABLE Constant: ValueBuffer | Resolver: _ => (object)ValueBuffer.Empty], 
+                queryContext.Context
+            );
+            instance1 = default(Role);
+            entry1 = queryContext.TryGetEntry(
+                key: [LIFTABLE Constant: Key: Role.RoleId PK | Resolver: c => c.Dependencies.Model.FindEntityType("pqy_server.Models.Roles.Role").FindPrimaryKey()], 
+                keyValues: new object[]{ (object)dataReader.GetInt32(0) }, 
+                throwOnNullKey: True, 
+                hasNullKey: hasNullKey1);
+            !(hasNullKey1) ? entry1 != default(InternalEntityEntry) ? 
+            {
+                entityType1 = entry1.EntityType;
+                return instance1 = (Role)entry1.Entity;
+            } : 
+            {
+                ISnapshot shadowSnapshot1;
+                shadowSnapshot1 = [LIFTABLE Constant: Snapshot | Resolver: _ => Snapshot.Empty];
+                entityType1 = [LIFTABLE Constant: EntityType: Role | Resolver: namelessParameter{0} => namelessParameter{0}.Dependencies.Model.FindEntityType("pqy_server.Models.Roles.Role")];
+                instance1 = switch (entityType1)
+                {
+                    case [LIFTABLE Constant: EntityType: Role | Resolver: namelessParameter{1} => namelessParameter{1}.Dependencies.Model.FindEntityType("pqy_server.Models.Roles.Role")]: 
+                        {
+                            return 
+                            {
+                                Role instance;
+                                instance = new Role();
+                                instance.<RoleId>k__BackingField = dataReader.GetInt32(0);
+                                instance.<RoleName>k__BackingField = dataReader.IsDBNull(1) ? default(string) : dataReader.GetString(1);
+                                (instance is IInjectableService) ? ((IInjectableService)instance).Injected(
+                                    context: materializationContext1.Context, 
+                                    entity: instance, 
+                                    queryTrackingBehavior: TrackAll, 
+                                    structuralType: [LIFTABLE Constant: EntityType: Role | Resolver: namelessParameter{2} => namelessParameter{2}.Dependencies.Model.FindEntityType("pqy_server.Models.Roles.Role")]) : default(void);
+                                return instance;
+                            }}
+                    default: 
+                        default(Role)
+                }
+                ;
+                entry1 = entityType1 == default(IEntityType) ? default(InternalEntityEntry) : queryContext.StartTracking(
+                    entityType: entityType1, 
+                    entity: instance1, 
+                    snapshot: shadowSnapshot1);
+                return instance1;
+            } : default(void);
+            return instance1;
+        };
+        return entity;
+    }, 
+    contextType: pqy_server.Data.AppDbContext, 
+    standAloneStateManager: False, 
+    detailedErrorsEnabled: False, 
+    threadSafetyChecksEnabled: True)'
+2025-09-09 00:57:57.285 +05:30 [DBG] Opening connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:57.286 +05:30 [DBG] Opened connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:57.287 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-09-09 00:57:57.288 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (0ms).
+2025-09-09 00:57:57.289 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (2ms).
+2025-09-09 00:57:57.291 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT r."RoleId", r."RoleName"
+FROM "Roles" AS r
+2025-09-09 00:57:57.297 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT r."RoleId", r."RoleName"
+FROM "Roles" AS r
+2025-09-09 00:57:57.303 +05:30 [DBG] Context 'AppDbContext' started tracking 'Role' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-09-09 00:57:57.306 +05:30 [DBG] Context 'AppDbContext' started tracking 'Role' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-09-09 00:57:57.308 +05:30 [DBG] Closing data reader to 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:57.310 +05:30 [DBG] A data reader for 'PYQ_Dev' on server 'tcp://localhost:5432' is being disposed after spending 8ms reading results.
+2025-09-09 00:57:57.312 +05:30 [DBG] Closing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:57:57.314 +05:30 [DBG] Closed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (2ms).
+2025-09-09 00:58:15.609 +05:30 [DBG] Connection id "0HNFF1MMETLE1" received FIN.
+2025-09-09 00:58:15.610 +05:30 [INF] Executed action pqy_server.Controllers.AdminController.GetAdminStats (pqy-server) in 18708.3599ms
+2025-09-09 00:58:15.658 +05:30 [DBG] Connection id "0HNFF1MMETLE1" sending FIN because: "The Socket transport's send loop completed gracefully."
+2025-09-09 00:58:15.687 +05:30 [INF] Executed endpoint 'pqy_server.Controllers.AdminController.GetAdminStats (pqy-server)'
+2025-09-09 00:58:15.690 +05:30 [DBG] Connection id "0HNFF1MMETLE1" disconnecting.
+2025-09-09 00:58:15.815 +05:30 [ERR] Unhandled exception occurred.
+System.InvalidOperationException: Cannot create a DbSet for 'Log' because this type is not included in the model for the context.
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.get_EntityType()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.CheckState()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.get_EntityQueryable()
+   at Microsoft.EntityFrameworkCore.Internal.InternalDbSet`1.System.Linq.IQueryable.get_Provider()
+   at Microsoft.EntityFrameworkCore.RelationalQueryableExtensions.FromSqlRaw[TEntity](DbSet`1 source, String sql, Object[] parameters)
+   at pqy_server.Controllers.AdminController.GetAdminStats() in E:\Aditya\New folder\PYQ APP\pqy-server\Controllers\AdminController.cs:line 205
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.ResponseCompression.ResponseCompressionMiddleware.InvokeCore(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at pqy_server.Middlewares.GlobalExceptionMiddleware.Invoke(HttpContext context, ILogService logService) in E:\Aditya\New folder\PYQ APP\pqy-server\Middlewares\Middlewares.cs:line 28
+2025-09-09 00:58:15.818 +05:30 [DBG] Connection id "0HNFF1MMETLE1" stopped.
+2025-09-09 00:58:15.840 +05:30 [ERR] Cannot create a DbSet for 'Log' because this type is not included in the model for the context. | Exception: System.InvalidOperationException
+2025-09-09 00:58:15.843 +05:30 [DBG] Connection id "0HNFF1MMETLDV" completed keep alive response.
+2025-09-09 00:58:15.845 +05:30 [DBG] 'AppDbContext' disposed.
+2025-09-09 00:58:15.846 +05:30 [DBG] Disposing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:58:15.849 +05:30 [DBG] Disposed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (2ms).
+2025-09-09 00:58:15.851 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost/api/Admin/stats - 500 null application/json 19092.2072ms
+2025-09-09 00:59:47.167 +05:30 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.TryParseModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider"]
+2025-09-09 00:59:47.462 +05:30 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-09-09 00:59:47.843 +05:30 [DBG] The index {'UserId'} was not created on entity type 'UserActivity' as the properties are already covered by the index {'UserId', 'ActivityTime'}.
+2025-09-09 00:59:47.849 +05:30 [DBG] The index {'UserId'} was not created on entity type 'BookmarkQuestion' as the properties are already covered by the index {'UserId', 'QuestionId'}.
+2025-09-09 00:59:47.917 +05:30 [WRN] Entity 'Question' has a global query filter defined and is the required end of a relationship with the entity 'QuestionReport'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-09-09 00:59:47.921 +05:30 [WRN] Entity 'Question' has a global query filter defined and is the required end of a relationship with the entity 'UserActivity'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-09-09 00:59:47.923 +05:30 [WRN] Entity 'Question' has a global query filter defined and is the required end of a relationship with the entity 'BookmarkQuestion'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-09-09 00:59:47.925 +05:30 [WRN] Entity 'Question' has a global query filter defined and is the required end of a relationship with the entity 'QuestionNote'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-09-09 00:59:47.982 +05:30 [WRN] The property 'User.SelectedExamIds' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-09-09 00:59:48.070 +05:30 [DBG] Entity Framework Core 9.0.4 initialized 'AppDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-09-09 00:59:48.091 +05:30 [DBG] Creating DbConnection.
+2025-09-09 00:59:48.096 +05:30 [DBG] Created DbConnection. (4ms).
+2025-09-09 00:59:48.101 +05:30 [DBG] Opening connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:48.104 +05:30 [DBG] Opened connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:48.107 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-09-09 00:59:48.111 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (2ms).
+2025-09-09 00:59:48.114 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (7ms).
+2025-09-09 00:59:48.120 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-09-09 00:59:48.135 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-09-09 00:59:48.143 +05:30 [DBG] Closing data reader to 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:48.150 +05:30 [DBG] A data reader for 'PYQ_Dev' on server 'tcp://localhost:5432' is being disposed after spending 7ms reading results.
+2025-09-09 00:59:48.154 +05:30 [DBG] Closing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:48.158 +05:30 [DBG] Closed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (3ms).
+2025-09-09 00:59:48.275 +05:30 [DBG] Migrating using database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:48.278 +05:30 [DBG] Opening connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:48.287 +05:30 [DBG] Opening connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:48.343 +05:30 [DBG] Opened connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:48.346 +05:30 [DBG] Closing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:48.352 +05:30 [DBG] Closed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (5ms).
+2025-09-09 00:59:48.356 +05:30 [DBG] Opening connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:48.358 +05:30 [DBG] Opened connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:48.400 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-09-09 00:59:48.403 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (2ms).
+2025-09-09 00:59:48.405 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (4ms).
+2025-09-09 00:59:48.408 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2025-09-09 00:59:48.413 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2025-09-09 00:59:48.420 +05:30 [DBG] Beginning transaction with isolation level 'Unspecified'.
+2025-09-09 00:59:48.424 +05:30 [DBG] Began transaction with isolation level 'ReadCommitted'.
+2025-09-09 00:59:48.427 +05:30 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2025-09-09 00:59:48.428 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-09-09 00:59:48.431 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (2ms).
+2025-09-09 00:59:48.434 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (5ms).
+2025-09-09 00:59:48.435 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2025-09-09 00:59:48.438 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2025-09-09 00:59:48.442 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-09-09 00:59:48.443 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (1ms).
+2025-09-09 00:59:48.445 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (2ms).
+2025-09-09 00:59:48.449 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-09-09 00:59:48.452 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-09-09 00:59:48.455 +05:30 [DBG] Closing data reader to 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:48.457 +05:30 [DBG] A data reader for 'PYQ_Dev' on server 'tcp://localhost:5432' is being disposed after spending 2ms reading results.
+2025-09-09 00:59:48.463 +05:30 [INF] No migrations were applied. The database is already up to date.
+2025-09-09 00:59:48.467 +05:30 [DBG] Committing transaction.
+2025-09-09 00:59:48.470 +05:30 [DBG] Committed transaction.
+2025-09-09 00:59:48.473 +05:30 [DBG] Disposing transaction.
+2025-09-09 00:59:48.474 +05:30 [DBG] Closing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:48.476 +05:30 [DBG] Closed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (2ms).
+2025-09-09 00:59:48.509 +05:30 [DBG] Compiling query expression: 
+'DbSet<EnumLabel>()
+    .Any()'
+2025-09-09 00:59:48.622 +05:30 [DBG] Generated query execution expression: 
+'queryContext => SingleQueryingEnumerable.Create<bool>(
+    relationalQueryContext: (RelationalQueryContext)queryContext, 
+    relationalCommandResolver: parameters => [LIFTABLE Constant: RelationalCommandCache.QueryExpression(
+        Projection Mapping:
+            EmptyProjectionMember -> 0
+        SELECT EXISTS (
+            SELECT 1
+            FROM EnumLabels AS e)) | Resolver: c => new RelationalCommandCache(
+        c.Dependencies.MemoryCache, 
+        c.RelationalDependencies.QuerySqlGeneratorFactory, 
+        c.RelationalDependencies.RelationalParameterBasedSqlProcessorFactory, 
+        Projection Mapping:
+            EmptyProjectionMember -> 0
+        SELECT EXISTS (
+            SELECT 1
+            FROM EnumLabels AS e), 
+        False, 
+        new HashSet<string>(
+            new string[]{ }, 
+            StringComparer.Ordinal
+        )
+    )].GetRelationalCommandTemplate(parameters), 
+    readerColumns: null, 
+    shaper: (queryContext, dataReader, resultContext, resultCoordinator) => 
+    {
+        bool? value1;
+        value1 = dataReader.IsDBNull(0) ? default(bool?) : (bool?)dataReader.GetBoolean(0);
+        return (bool)value1;
+    }, 
+    contextType: pqy_server.Data.AppDbContext, 
+    standAloneStateManager: False, 
+    detailedErrorsEnabled: False, 
+    threadSafetyChecksEnabled: True)
+    .Single()'
+2025-09-09 00:59:48.637 +05:30 [DBG] Opening connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:48.639 +05:30 [DBG] Opened connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:48.641 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-09-09 00:59:48.643 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (1ms).
+2025-09-09 00:59:48.645 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (3ms).
+2025-09-09 00:59:48.651 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "EnumLabels" AS e)
+2025-09-09 00:59:48.654 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "EnumLabels" AS e)
+2025-09-09 00:59:48.661 +05:30 [DBG] Closing data reader to 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:48.665 +05:30 [DBG] A data reader for 'PYQ_Dev' on server 'tcp://localhost:5432' is being disposed after spending 5ms reading results.
+2025-09-09 00:59:48.666 +05:30 [DBG] Closing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:48.668 +05:30 [DBG] Closed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (1ms).
+2025-09-09 00:59:48.672 +05:30 [DBG] 'AppDbContext' disposed.
+2025-09-09 00:59:48.674 +05:30 [DBG] Disposing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:48.676 +05:30 [DBG] Disposed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (2ms).
+2025-09-09 00:59:48.681 +05:30 [DBG] Hosting starting
+2025-09-09 00:59:48.704 +05:30 [INF] User profile is available. Using 'C:\Users\rupes\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-09-09 00:59:48.715 +05:30 [DBG] Reading data from file 'C:\Users\rupes\AppData\Local\ASP.NET\DataProtection-Keys\key-2331b0d5-c7bb-4b17-a6a4-16be21312e25.xml'.
+2025-09-09 00:59:48.723 +05:30 [DBG] Reading data from file 'C:\Users\rupes\AppData\Local\ASP.NET\DataProtection-Keys\key-b85f5081-1eee-4ce7-963a-3bc488349a89.xml'.
+2025-09-09 00:59:48.727 +05:30 [DBG] Reading data from file 'C:\Users\rupes\AppData\Local\ASP.NET\DataProtection-Keys\key-cd61738b-efe2-446c-a2ab-8a6fc5cdd353.xml'.
+2025-09-09 00:59:48.732 +05:30 [DBG] Found key {2331b0d5-c7bb-4b17-a6a4-16be21312e25}.
+2025-09-09 00:59:48.737 +05:30 [DBG] Found key {b85f5081-1eee-4ce7-963a-3bc488349a89}.
+2025-09-09 00:59:48.739 +05:30 [DBG] Found key {cd61738b-efe2-446c-a2ab-8a6fc5cdd353}.
+2025-09-09 00:59:48.744 +05:30 [DBG] Considering key {2331b0d5-c7bb-4b17-a6a4-16be21312e25} with expiration date 2025-10-10 05:56:38Z as default key.
+2025-09-09 00:59:48.750 +05:30 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Version=9.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.XmlEncryption.DpapiXmlDecryptor, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2025-09-09 00:59:48.752 +05:30 [DBG] Decrypting secret element using Windows DPAPI.
+2025-09-09 00:59:48.755 +05:30 [DBG] Forwarded activator type request from Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Version=9.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60 to Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Culture=neutral, PublicKeyToken=adb9793829ddae60
+2025-09-09 00:59:48.757 +05:30 [DBG] Opening CNG algorithm 'AES' from provider 'null' with chaining mode CBC.
+2025-09-09 00:59:48.760 +05:30 [DBG] Opening CNG algorithm 'SHA256' from provider 'null' with HMAC.
+2025-09-09 00:59:48.763 +05:30 [DBG] Using key {2331b0d5-c7bb-4b17-a6a4-16be21312e25} as the default key.
+2025-09-09 00:59:48.766 +05:30 [DBG] Key ring with default key {2331b0d5-c7bb-4b17-a6a4-16be21312e25} was loaded during application startup.
+2025-09-09 00:59:48.772 +05:30 [DBG] Middleware loaded
+2025-09-09 00:59:48.775 +05:30 [DBG] Middleware loaded. Script /_framework/aspnetcore-browser-refresh.js (16505 B).
+2025-09-09 00:59:48.777 +05:30 [DBG] Middleware loaded. Script /_framework/blazor-hotreload.js (799 B).
+2025-09-09 00:59:48.844 +05:30 [DBG] Middleware configuration started with options: {AllowedHosts = *, AllowEmptyHosts = True, IncludeFailureMessage = True}
+2025-09-09 00:59:48.846 +05:30 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2025-09-09 00:59:48.850 +05:30 [DBG] Middleware loaded: DOTNET_MODIFIABLE_ASSEMBLIES=debug, __ASPNETCORE_BROWSER_TOOLS=true
+2025-09-09 00:59:48.868 +05:30 [INF] Now listening on: http://0.0.0.0:80
+2025-09-09 00:59:48.870 +05:30 [DBG] Loaded hosting startup assembly pqy-server
+2025-09-09 00:59:48.871 +05:30 [DBG] Loaded hosting startup assembly Microsoft.WebTools.ApiEndpointDiscovery
+2025-09-09 00:59:48.872 +05:30 [DBG] Loaded hosting startup assembly Microsoft.AspNetCore.Watch.BrowserRefresh
+2025-09-09 00:59:48.874 +05:30 [DBG] Loaded hosting startup assembly Microsoft.WebTools.BrowserLink.Net
+2025-09-09 00:59:48.878 +05:30 [DBG] Executing API description provider 'EndpointMetadataApiDescriptionProvider' from assembly Microsoft.AspNetCore.Mvc.ApiExplorer v9.0.0.0.
+2025-09-09 00:59:48.885 +05:30 [DBG] Executing API description provider 'DefaultApiDescriptionProvider' from assembly Microsoft.AspNetCore.Mvc.ApiExplorer v9.0.0.0.
+2025-09-09 00:59:48.913 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-09 00:59:48.916 +05:30 [INF] Hosting environment: Development
+2025-09-09 00:59:48.917 +05:30 [INF] Content root path: E:\Aditya\New folder\PYQ APP\pqy-server
+2025-09-09 00:59:48.918 +05:30 [DBG] Hosting started
+2025-09-09 00:59:54.585 +05:30 [DBG] Connection id "0HNFF1OBB4OD4" accepted.
+2025-09-09 00:59:54.589 +05:30 [DBG] Connection id "0HNFF1OBB4OD4" started.
+2025-09-09 00:59:54.621 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost/api/Admin/stats - null null
+2025-09-09 00:59:54.708 +05:30 [DBG] 1 candidate(s) found for the request path '/api/Admin/stats'
+2025-09-09 00:59:54.717 +05:30 [DBG] Endpoint 'pqy_server.Controllers.AdminController.GetAdminStats (pqy-server)' with route pattern 'api/Admin/stats' is valid for the request path '/api/Admin/stats'
+2025-09-09 00:59:54.723 +05:30 [DBG] Request matched endpoint 'pqy_server.Controllers.AdminController.GetAdminStats (pqy-server)'
+2025-09-09 00:59:54.835 +05:30 [DBG] Connection id "0HNFF1OBB4OD5" accepted.
+2025-09-09 00:59:54.841 +05:30 [DBG] Connection id "0HNFF1OBB4OD5" started.
+2025-09-09 00:59:54.910 +05:30 [DBG] Successfully validated the token.
+2025-09-09 00:59:54.919 +05:30 [DBG] AuthenticationScheme: Bearer was successfully authenticated.
+2025-09-09 00:59:54.940 +05:30 [DBG] Authorization was successful.
+2025-09-09 00:59:54.950 +05:30 [INF] Executing endpoint 'pqy_server.Controllers.AdminController.GetAdminStats (pqy-server)'
+2025-09-09 00:59:54.990 +05:30 [INF] Route matched with {action = "GetAdminStats", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAdminStats() on controller pqy_server.Controllers.AdminController (pqy-server).
+2025-09-09 00:59:55.000 +05:30 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2025-09-09 00:59:55.005 +05:30 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2025-09-09 00:59:55.010 +05:30 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2025-09-09 00:59:55.015 +05:30 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2025-09-09 00:59:55.020 +05:30 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2025-09-09 00:59:55.026 +05:30 [DBG] Executing controller factory for controller pqy_server.Controllers.AdminController (pqy-server)
+2025-09-09 00:59:55.034 +05:30 [DBG] Executed controller factory for controller pqy_server.Controllers.AdminController (pqy-server)
+2025-09-09 00:59:55.068 +05:30 [DBG] Entity Framework Core 9.0.4 initialized 'AppDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-09-09 00:59:55.085 +05:30 [DBG] Compiling query expression: 
+'DbSet<User>()
+    .Count()'
+2025-09-09 00:59:55.142 +05:30 [DBG] Generated query execution expression: 
+'queryContext => ShapedQueryCompilingExpressionVisitor.SingleAsync<int>(
+    asyncEnumerable: SingleQueryingEnumerable.Create<int>(
+        relationalQueryContext: (RelationalQueryContext)queryContext, 
+        relationalCommandResolver: parameters => [LIFTABLE Constant: RelationalCommandCache.QueryExpression(
+            Projection Mapping:
+                EmptyProjectionMember -> 0
+            SELECT CAST(count(*) AS integer)
+            FROM Users AS u) | Resolver: c => new RelationalCommandCache(
+            c.Dependencies.MemoryCache, 
+            c.RelationalDependencies.QuerySqlGeneratorFactory, 
+            c.RelationalDependencies.RelationalParameterBasedSqlProcessorFactory, 
+            Projection Mapping:
+                EmptyProjectionMember -> 0
+            SELECT CAST(count(*) AS integer)
+            FROM Users AS u, 
+            False, 
+            new HashSet<string>(
+                new string[]{ }, 
+                StringComparer.Ordinal
+            )
+        )].GetRelationalCommandTemplate(parameters), 
+        readerColumns: null, 
+        shaper: (queryContext, dataReader, resultContext, resultCoordinator) => 
+        {
+            int? value1;
+            value1 = dataReader.IsDBNull(0) ? default(int?) : (int?)dataReader.GetInt32(0);
+            return (int)value1;
+        }, 
+        contextType: pqy_server.Data.AppDbContext, 
+        standAloneStateManager: False, 
+        detailedErrorsEnabled: False, 
+        threadSafetyChecksEnabled: True), 
+    cancellationToken: queryContext.CancellationToken)'
+2025-09-09 00:59:55.168 +05:30 [DBG] Creating DbConnection.
+2025-09-09 00:59:55.171 +05:30 [DBG] Created DbConnection. (3ms).
+2025-09-09 00:59:55.174 +05:30 [DBG] Opening connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:55.179 +05:30 [DBG] Opened connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:55.184 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-09-09 00:59:55.186 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (2ms).
+2025-09-09 00:59:55.188 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (4ms).
+2025-09-09 00:59:55.190 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "Users" AS u
+2025-09-09 00:59:55.211 +05:30 [INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "Users" AS u
+2025-09-09 00:59:55.226 +05:30 [DBG] Closing data reader to 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:55.231 +05:30 [DBG] A data reader for 'PYQ_Dev' on server 'tcp://localhost:5432' is being disposed after spending 12ms reading results.
+2025-09-09 00:59:55.237 +05:30 [DBG] Closing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:55.241 +05:30 [DBG] Closed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (3ms).
+2025-09-09 00:59:55.246 +05:30 [DBG] Compiling query expression: 
+'DbSet<Exam>()
+    .Count()'
+2025-09-09 00:59:55.254 +05:30 [DBG] Generated query execution expression: 
+'queryContext => ShapedQueryCompilingExpressionVisitor.SingleAsync<int>(
+    asyncEnumerable: SingleQueryingEnumerable.Create<int>(
+        relationalQueryContext: (RelationalQueryContext)queryContext, 
+        relationalCommandResolver: parameters => [LIFTABLE Constant: RelationalCommandCache.QueryExpression(
+            Projection Mapping:
+                EmptyProjectionMember -> 0
+            SELECT CAST(count(*) AS integer)
+            FROM Exams AS e) | Resolver: c => new RelationalCommandCache(
+            c.Dependencies.MemoryCache, 
+            c.RelationalDependencies.QuerySqlGeneratorFactory, 
+            c.RelationalDependencies.RelationalParameterBasedSqlProcessorFactory, 
+            Projection Mapping:
+                EmptyProjectionMember -> 0
+            SELECT CAST(count(*) AS integer)
+            FROM Exams AS e, 
+            False, 
+            new HashSet<string>(
+                new string[]{ }, 
+                StringComparer.Ordinal
+            )
+        )].GetRelationalCommandTemplate(parameters), 
+        readerColumns: null, 
+        shaper: (queryContext, dataReader, resultContext, resultCoordinator) => 
+        {
+            int? value1;
+            value1 = dataReader.IsDBNull(0) ? default(int?) : (int?)dataReader.GetInt32(0);
+            return (int)value1;
+        }, 
+        contextType: pqy_server.Data.AppDbContext, 
+        standAloneStateManager: False, 
+        detailedErrorsEnabled: False, 
+        threadSafetyChecksEnabled: True), 
+    cancellationToken: queryContext.CancellationToken)'
+2025-09-09 00:59:55.258 +05:30 [DBG] Opening connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:55.262 +05:30 [DBG] Opened connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:55.264 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-09-09 00:59:55.266 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (2ms).
+2025-09-09 00:59:55.268 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (4ms).
+2025-09-09 00:59:55.270 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "Exams" AS e
+2025-09-09 00:59:55.277 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "Exams" AS e
+2025-09-09 00:59:55.285 +05:30 [DBG] Closing data reader to 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:55.288 +05:30 [DBG] A data reader for 'PYQ_Dev' on server 'tcp://localhost:5432' is being disposed after spending 4ms reading results.
+2025-09-09 00:59:55.292 +05:30 [DBG] Closing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:55.298 +05:30 [DBG] Closed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (6ms).
+2025-09-09 00:59:55.303 +05:30 [DBG] Compiling query expression: 
+'DbSet<Question>()
+    .Count()'
+2025-09-09 00:59:55.336 +05:30 [DBG] Generated query execution expression: 
+'queryContext => ShapedQueryCompilingExpressionVisitor.SingleAsync<int>(
+    asyncEnumerable: SingleQueryingEnumerable.Create<int>(
+        relationalQueryContext: (RelationalQueryContext)queryContext, 
+        relationalCommandResolver: parameters => [LIFTABLE Constant: RelationalCommandCache.QueryExpression(
+            Projection Mapping:
+                EmptyProjectionMember -> 0
+            SELECT CAST(count(*) AS integer)
+            FROM Questions AS q
+            WHERE Not(q.IsDeleted)) | Resolver: c => new RelationalCommandCache(
+            c.Dependencies.MemoryCache, 
+            c.RelationalDependencies.QuerySqlGeneratorFactory, 
+            c.RelationalDependencies.RelationalParameterBasedSqlProcessorFactory, 
+            Projection Mapping:
+                EmptyProjectionMember -> 0
+            SELECT CAST(count(*) AS integer)
+            FROM Questions AS q
+            WHERE Not(q.IsDeleted), 
+            False, 
+            new HashSet<string>(
+                new string[]{ }, 
+                StringComparer.Ordinal
+            )
+        )].GetRelationalCommandTemplate(parameters), 
+        readerColumns: null, 
+        shaper: (queryContext, dataReader, resultContext, resultCoordinator) => 
+        {
+            int? value1;
+            value1 = dataReader.IsDBNull(0) ? default(int?) : (int?)dataReader.GetInt32(0);
+            return (int)value1;
+        }, 
+        contextType: pqy_server.Data.AppDbContext, 
+        standAloneStateManager: False, 
+        detailedErrorsEnabled: False, 
+        threadSafetyChecksEnabled: True), 
+    cancellationToken: queryContext.CancellationToken)'
+2025-09-09 00:59:55.346 +05:30 [DBG] Opening connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:55.352 +05:30 [DBG] Opened connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:55.355 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-09-09 00:59:55.358 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (3ms).
+2025-09-09 00:59:55.362 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (6ms).
+2025-09-09 00:59:55.366 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "Questions" AS q
+WHERE NOT (q."IsDeleted")
+2025-09-09 00:59:55.378 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "Questions" AS q
+WHERE NOT (q."IsDeleted")
+2025-09-09 00:59:55.386 +05:30 [DBG] Closing data reader to 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:55.388 +05:30 [DBG] A data reader for 'PYQ_Dev' on server 'tcp://localhost:5432' is being disposed after spending 2ms reading results.
+2025-09-09 00:59:55.391 +05:30 [DBG] Closing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:55.394 +05:30 [DBG] Closed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (3ms).
+2025-09-09 00:59:55.401 +05:30 [DBG] Compiling query expression: 
+'DbSet<Subject>()
+    .Count()'
+2025-09-09 00:59:55.411 +05:30 [DBG] Generated query execution expression: 
+'queryContext => ShapedQueryCompilingExpressionVisitor.SingleAsync<int>(
+    asyncEnumerable: SingleQueryingEnumerable.Create<int>(
+        relationalQueryContext: (RelationalQueryContext)queryContext, 
+        relationalCommandResolver: parameters => [LIFTABLE Constant: RelationalCommandCache.QueryExpression(
+            Projection Mapping:
+                EmptyProjectionMember -> 0
+            SELECT CAST(count(*) AS integer)
+            FROM Subjects AS s) | Resolver: c => new RelationalCommandCache(
+            c.Dependencies.MemoryCache, 
+            c.RelationalDependencies.QuerySqlGeneratorFactory, 
+            c.RelationalDependencies.RelationalParameterBasedSqlProcessorFactory, 
+            Projection Mapping:
+                EmptyProjectionMember -> 0
+            SELECT CAST(count(*) AS integer)
+            FROM Subjects AS s, 
+            False, 
+            new HashSet<string>(
+                new string[]{ }, 
+                StringComparer.Ordinal
+            )
+        )].GetRelationalCommandTemplate(parameters), 
+        readerColumns: null, 
+        shaper: (queryContext, dataReader, resultContext, resultCoordinator) => 
+        {
+            int? value1;
+            value1 = dataReader.IsDBNull(0) ? default(int?) : (int?)dataReader.GetInt32(0);
+            return (int)value1;
+        }, 
+        contextType: pqy_server.Data.AppDbContext, 
+        standAloneStateManager: False, 
+        detailedErrorsEnabled: False, 
+        threadSafetyChecksEnabled: True), 
+    cancellationToken: queryContext.CancellationToken)'
+2025-09-09 00:59:55.417 +05:30 [DBG] Opening connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:55.421 +05:30 [DBG] Opened connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:55.424 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-09-09 00:59:55.427 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (2ms).
+2025-09-09 00:59:55.431 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (6ms).
+2025-09-09 00:59:55.434 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "Subjects" AS s
+2025-09-09 00:59:55.440 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "Subjects" AS s
+2025-09-09 00:59:55.443 +05:30 [DBG] Closing data reader to 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:55.447 +05:30 [DBG] A data reader for 'PYQ_Dev' on server 'tcp://localhost:5432' is being disposed after spending 4ms reading results.
+2025-09-09 00:59:55.451 +05:30 [DBG] Closing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:55.454 +05:30 [DBG] Closed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (2ms).
+2025-09-09 00:59:55.458 +05:30 [DBG] Compiling query expression: 
+'DbSet<Topic>()
+    .Count()'
+2025-09-09 00:59:55.482 +05:30 [DBG] Generated query execution expression: 
+'queryContext => ShapedQueryCompilingExpressionVisitor.SingleAsync<int>(
+    asyncEnumerable: SingleQueryingEnumerable.Create<int>(
+        relationalQueryContext: (RelationalQueryContext)queryContext, 
+        relationalCommandResolver: parameters => [LIFTABLE Constant: RelationalCommandCache.QueryExpression(
+            Projection Mapping:
+                EmptyProjectionMember -> 0
+            SELECT CAST(count(*) AS integer)
+            FROM Topics AS t) | Resolver: c => new RelationalCommandCache(
+            c.Dependencies.MemoryCache, 
+            c.RelationalDependencies.QuerySqlGeneratorFactory, 
+            c.RelationalDependencies.RelationalParameterBasedSqlProcessorFactory, 
+            Projection Mapping:
+                EmptyProjectionMember -> 0
+            SELECT CAST(count(*) AS integer)
+            FROM Topics AS t, 
+            False, 
+            new HashSet<string>(
+                new string[]{ }, 
+                StringComparer.Ordinal
+            )
+        )].GetRelationalCommandTemplate(parameters), 
+        readerColumns: null, 
+        shaper: (queryContext, dataReader, resultContext, resultCoordinator) => 
+        {
+            int? value1;
+            value1 = dataReader.IsDBNull(0) ? default(int?) : (int?)dataReader.GetInt32(0);
+            return (int)value1;
+        }, 
+        contextType: pqy_server.Data.AppDbContext, 
+        standAloneStateManager: False, 
+        detailedErrorsEnabled: False, 
+        threadSafetyChecksEnabled: True), 
+    cancellationToken: queryContext.CancellationToken)'
+2025-09-09 00:59:55.488 +05:30 [DBG] Opening connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:55.491 +05:30 [DBG] Opened connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:55.494 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-09-09 00:59:55.498 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (3ms).
+2025-09-09 00:59:55.503 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (8ms).
+2025-09-09 00:59:55.508 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "Topics" AS t
+2025-09-09 00:59:55.516 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "Topics" AS t
+2025-09-09 00:59:55.526 +05:30 [DBG] Closing data reader to 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:55.529 +05:30 [DBG] A data reader for 'PYQ_Dev' on server 'tcp://localhost:5432' is being disposed after spending 3ms reading results.
+2025-09-09 00:59:55.536 +05:30 [DBG] Closing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:55.538 +05:30 [DBG] Closed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (2ms).
+2025-09-09 00:59:55.543 +05:30 [DBG] Compiling query expression: 
+'DbSet<Year>()
+    .Count()'
+2025-09-09 00:59:55.552 +05:30 [DBG] Generated query execution expression: 
+'queryContext => ShapedQueryCompilingExpressionVisitor.SingleAsync<int>(
+    asyncEnumerable: SingleQueryingEnumerable.Create<int>(
+        relationalQueryContext: (RelationalQueryContext)queryContext, 
+        relationalCommandResolver: parameters => [LIFTABLE Constant: RelationalCommandCache.QueryExpression(
+            Projection Mapping:
+                EmptyProjectionMember -> 0
+            SELECT CAST(count(*) AS integer)
+            FROM Years AS y) | Resolver: c => new RelationalCommandCache(
+            c.Dependencies.MemoryCache, 
+            c.RelationalDependencies.QuerySqlGeneratorFactory, 
+            c.RelationalDependencies.RelationalParameterBasedSqlProcessorFactory, 
+            Projection Mapping:
+                EmptyProjectionMember -> 0
+            SELECT CAST(count(*) AS integer)
+            FROM Years AS y, 
+            False, 
+            new HashSet<string>(
+                new string[]{ }, 
+                StringComparer.Ordinal
+            )
+        )].GetRelationalCommandTemplate(parameters), 
+        readerColumns: null, 
+        shaper: (queryContext, dataReader, resultContext, resultCoordinator) => 
+        {
+            int? value1;
+            value1 = dataReader.IsDBNull(0) ? default(int?) : (int?)dataReader.GetInt32(0);
+            return (int)value1;
+        }, 
+        contextType: pqy_server.Data.AppDbContext, 
+        standAloneStateManager: False, 
+        detailedErrorsEnabled: False, 
+        threadSafetyChecksEnabled: True), 
+    cancellationToken: queryContext.CancellationToken)'
+2025-09-09 00:59:55.558 +05:30 [DBG] Opening connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:55.561 +05:30 [DBG] Opened connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:55.565 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-09-09 00:59:55.569 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (3ms).
+2025-09-09 00:59:55.572 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (6ms).
+2025-09-09 00:59:55.574 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "Years" AS y
+2025-09-09 00:59:55.586 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM "Years" AS y
+2025-09-09 00:59:55.593 +05:30 [DBG] Closing data reader to 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:55.598 +05:30 [DBG] A data reader for 'PYQ_Dev' on server 'tcp://localhost:5432' is being disposed after spending 5ms reading results.
+2025-09-09 00:59:55.613 +05:30 [DBG] Closing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:55.621 +05:30 [DBG] Closed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (8ms).
+2025-09-09 00:59:55.640 +05:30 [DBG] Compiling query expression: 
+'DbSet<Order>()
+    .Where(o => o.Status == "Paid")
+    .Select(o => o.UserId)
+    .Distinct()
+    .Count()'
+2025-09-09 00:59:55.691 +05:30 [DBG] Generated query execution expression: 
+'queryContext => ShapedQueryCompilingExpressionVisitor.SingleAsync<int>(
+    asyncEnumerable: SingleQueryingEnumerable.Create<int>(
+        relationalQueryContext: (RelationalQueryContext)queryContext, 
+        relationalCommandResolver: parameters => [LIFTABLE Constant: RelationalCommandCache.QueryExpression(
+            Projection Mapping:
+                EmptyProjectionMember -> 0
+            SELECT CAST(count(*) AS integer)
+            FROM 
+            (
+                SELECT DISTINCT o.UserId
+                FROM Orders AS o
+                WHERE o.Status == 'Paid'
+            ) AS o0) | Resolver: c => new RelationalCommandCache(
+            c.Dependencies.MemoryCache, 
+            c.RelationalDependencies.QuerySqlGeneratorFactory, 
+            c.RelationalDependencies.RelationalParameterBasedSqlProcessorFactory, 
+            Projection Mapping:
+                EmptyProjectionMember -> 0
+            SELECT CAST(count(*) AS integer)
+            FROM 
+            (
+                SELECT DISTINCT o.UserId
+                FROM Orders AS o
+                WHERE o.Status == 'Paid'
+            ) AS o0, 
+            False, 
+            new HashSet<string>(
+                new string[]{ }, 
+                StringComparer.Ordinal
+            )
+        )].GetRelationalCommandTemplate(parameters), 
+        readerColumns: null, 
+        shaper: (queryContext, dataReader, resultContext, resultCoordinator) => 
+        {
+            int? value1;
+            value1 = dataReader.IsDBNull(0) ? default(int?) : (int?)dataReader.GetInt32(0);
+            return (int)value1;
+        }, 
+        contextType: pqy_server.Data.AppDbContext, 
+        standAloneStateManager: False, 
+        detailedErrorsEnabled: False, 
+        threadSafetyChecksEnabled: True), 
+    cancellationToken: queryContext.CancellationToken)'
+2025-09-09 00:59:55.707 +05:30 [DBG] Opening connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:55.710 +05:30 [DBG] Opened connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:55.717 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-09-09 00:59:55.721 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (4ms).
+2025-09-09 00:59:55.726 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (9ms).
+2025-09-09 00:59:55.732 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM (
+    SELECT DISTINCT o."UserId"
+    FROM "Orders" AS o
+    WHERE o."Status" = 'Paid'
+) AS o0
+2025-09-09 00:59:55.744 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT count(*)::int
+FROM (
+    SELECT DISTINCT o."UserId"
+    FROM "Orders" AS o
+    WHERE o."Status" = 'Paid'
+) AS o0
+2025-09-09 00:59:55.752 +05:30 [DBG] Closing data reader to 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:55.755 +05:30 [DBG] A data reader for 'PYQ_Dev' on server 'tcp://localhost:5432' is being disposed after spending 3ms reading results.
+2025-09-09 00:59:55.757 +05:30 [DBG] Closing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:55.760 +05:30 [DBG] Closed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (2ms).
+2025-09-09 00:59:55.772 +05:30 [DBG] Compiling query expression: 
+'DbSet<User>()
+    .GroupBy(u => u.RoleId)
+    .Select(g => new { 
+        RoleId = g.Key, 
+        Count = g
+            .Count()
+     })'
+2025-09-09 00:59:55.820 +05:30 [DBG] Generated query execution expression: 
+'queryContext => SingleQueryingEnumerable.Create<<>f__AnonymousType2<int, int>>(
+    relationalQueryContext: (RelationalQueryContext)queryContext, 
+    relationalCommandResolver: parameters => [LIFTABLE Constant: RelationalCommandCache.QueryExpression(
+        Projection Mapping:
+            RoleId -> 0
+            Count -> 1
+        SELECT u.RoleId, CAST(count(*) AS integer) AS Count
+        FROM Users AS u
+        GROUP BY u.RoleId) | Resolver: c => new RelationalCommandCache(
+        c.Dependencies.MemoryCache, 
+        c.RelationalDependencies.QuerySqlGeneratorFactory, 
+        c.RelationalDependencies.RelationalParameterBasedSqlProcessorFactory, 
+        Projection Mapping:
+            RoleId -> 0
+            Count -> 1
+        SELECT u.RoleId, CAST(count(*) AS integer) AS Count
+        FROM Users AS u
+        GROUP BY u.RoleId, 
+        False, 
+        new HashSet<string>(
+            new string[]{ }, 
+            StringComparer.Ordinal
+        )
+    )].GetRelationalCommandTemplate(parameters), 
+    readerColumns: null, 
+    shaper: (queryContext, dataReader, resultContext, resultCoordinator) => 
+    {
+        int? value1;
+        int? value2;
+        value1 = (int?)dataReader.GetInt32(0);
+        value2 = dataReader.IsDBNull(1) ? default(int?) : (int?)dataReader.GetInt32(1);
+        return new { 
+            RoleId = (int)value1, 
+            Count = (int)value2
+         };
+    }, 
+    contextType: pqy_server.Data.AppDbContext, 
+    standAloneStateManager: False, 
+    detailedErrorsEnabled: False, 
+    threadSafetyChecksEnabled: True)'
+2025-09-09 00:59:55.836 +05:30 [DBG] Opening connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:55.841 +05:30 [DBG] Opened connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:55.844 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-09-09 00:59:55.848 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (3ms).
+2025-09-09 00:59:55.851 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (6ms).
+2025-09-09 00:59:55.853 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT u."RoleId", count(*)::int AS "Count"
+FROM "Users" AS u
+GROUP BY u."RoleId"
+2025-09-09 00:59:55.859 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT u."RoleId", count(*)::int AS "Count"
+FROM "Users" AS u
+GROUP BY u."RoleId"
+2025-09-09 00:59:55.870 +05:30 [DBG] Closing data reader to 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:55.875 +05:30 [DBG] A data reader for 'PYQ_Dev' on server 'tcp://localhost:5432' is being disposed after spending 8ms reading results.
+2025-09-09 00:59:55.880 +05:30 [DBG] Closing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:55.883 +05:30 [DBG] Closed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (2ms).
+2025-09-09 00:59:55.888 +05:30 [DBG] Compiling query expression: 
+'DbSet<Role>()'
+2025-09-09 00:59:55.973 +05:30 [DBG] Generated query execution expression: 
+'queryContext => SingleQueryingEnumerable.Create<Role>(
+    relationalQueryContext: (RelationalQueryContext)queryContext, 
+    relationalCommandResolver: parameters => [LIFTABLE Constant: RelationalCommandCache.QueryExpression(
+        Projection Mapping:
+            EmptyProjectionMember -> Dictionary<IProperty, int> { [Property: Role.RoleId (int) Required PK AfterSave:Throw ValueGenerated.OnAdd, 0], [Property: Role.RoleName (string) Index, 1] }
+        SELECT r.RoleId, r.RoleName
+        FROM Roles AS r) | Resolver: c => new RelationalCommandCache(
+        c.Dependencies.MemoryCache, 
+        c.RelationalDependencies.QuerySqlGeneratorFactory, 
+        c.RelationalDependencies.RelationalParameterBasedSqlProcessorFactory, 
+        Projection Mapping:
+            EmptyProjectionMember -> Dictionary<IProperty, int> { [Property: Role.RoleId (int) Required PK AfterSave:Throw ValueGenerated.OnAdd, 0], [Property: Role.RoleName (string) Index, 1] }
+        SELECT r.RoleId, r.RoleName
+        FROM Roles AS r, 
+        False, 
+        new HashSet<string>(
+            new string[]{ }, 
+            StringComparer.Ordinal
+        )
+    )].GetRelationalCommandTemplate(parameters), 
+    readerColumns: null, 
+    shaper: (queryContext, dataReader, resultContext, resultCoordinator) => 
+    {
+        Role entity;
+        entity = 
+        {
+            MaterializationContext materializationContext1;
+            IEntityType entityType1;
+            Role instance1;
+            InternalEntityEntry entry1;
+            bool hasNullKey1;
+            materializationContext1 = new MaterializationContext(
+                [LIFTABLE Constant: ValueBuffer | Resolver: _ => (object)ValueBuffer.Empty], 
+                queryContext.Context
+            );
+            instance1 = default(Role);
+            entry1 = queryContext.TryGetEntry(
+                key: [LIFTABLE Constant: Key: Role.RoleId PK | Resolver: c => c.Dependencies.Model.FindEntityType("pqy_server.Models.Roles.Role").FindPrimaryKey()], 
+                keyValues: new object[]{ (object)dataReader.GetInt32(0) }, 
+                throwOnNullKey: True, 
+                hasNullKey: hasNullKey1);
+            !(hasNullKey1) ? entry1 != default(InternalEntityEntry) ? 
+            {
+                entityType1 = entry1.EntityType;
+                return instance1 = (Role)entry1.Entity;
+            } : 
+            {
+                ISnapshot shadowSnapshot1;
+                shadowSnapshot1 = [LIFTABLE Constant: Snapshot | Resolver: _ => Snapshot.Empty];
+                entityType1 = [LIFTABLE Constant: EntityType: Role | Resolver: namelessParameter{0} => namelessParameter{0}.Dependencies.Model.FindEntityType("pqy_server.Models.Roles.Role")];
+                instance1 = switch (entityType1)
+                {
+                    case [LIFTABLE Constant: EntityType: Role | Resolver: namelessParameter{1} => namelessParameter{1}.Dependencies.Model.FindEntityType("pqy_server.Models.Roles.Role")]: 
+                        {
+                            return 
+                            {
+                                Role instance;
+                                instance = new Role();
+                                instance.<RoleId>k__BackingField = dataReader.GetInt32(0);
+                                instance.<RoleName>k__BackingField = dataReader.IsDBNull(1) ? default(string) : dataReader.GetString(1);
+                                (instance is IInjectableService) ? ((IInjectableService)instance).Injected(
+                                    context: materializationContext1.Context, 
+                                    entity: instance, 
+                                    queryTrackingBehavior: TrackAll, 
+                                    structuralType: [LIFTABLE Constant: EntityType: Role | Resolver: namelessParameter{2} => namelessParameter{2}.Dependencies.Model.FindEntityType("pqy_server.Models.Roles.Role")]) : default(void);
+                                return instance;
+                            }}
+                    default: 
+                        default(Role)
+                }
+                ;
+                entry1 = entityType1 == default(IEntityType) ? default(InternalEntityEntry) : queryContext.StartTracking(
+                    entityType: entityType1, 
+                    entity: instance1, 
+                    snapshot: shadowSnapshot1);
+                return instance1;
+            } : default(void);
+            return instance1;
+        };
+        return entity;
+    }, 
+    contextType: pqy_server.Data.AppDbContext, 
+    standAloneStateManager: False, 
+    detailedErrorsEnabled: False, 
+    threadSafetyChecksEnabled: True)'
+2025-09-09 00:59:55.982 +05:30 [DBG] Opening connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:55.986 +05:30 [DBG] Opened connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:55.989 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-09-09 00:59:55.991 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (2ms).
+2025-09-09 00:59:55.994 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (5ms).
+2025-09-09 00:59:55.998 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT r."RoleId", r."RoleName"
+FROM "Roles" AS r
+2025-09-09 00:59:56.004 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT r."RoleId", r."RoleName"
+FROM "Roles" AS r
+2025-09-09 00:59:56.044 +05:30 [DBG] Context 'AppDbContext' started tracking 'Role' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-09-09 00:59:56.076 +05:30 [DBG] Context 'AppDbContext' started tracking 'Role' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-09-09 00:59:56.082 +05:30 [DBG] Closing data reader to 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:56.084 +05:30 [DBG] A data reader for 'PYQ_Dev' on server 'tcp://localhost:5432' is being disposed after spending 77ms reading results.
+2025-09-09 00:59:56.087 +05:30 [DBG] Closing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:56.090 +05:30 [DBG] Closed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (2ms).
+2025-09-09 00:59:56.103 +05:30 [DBG] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter","Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2025-09-09 00:59:56.109 +05:30 [DBG] No information found on request to perform content negotiation.
+2025-09-09 00:59:56.110 +05:30 [DBG] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2025-09-09 00:59:56.112 +05:30 [DBG] Attempting to select the first formatter in the output formatters list which can write the result.
+2025-09-09 00:59:56.115 +05:30 [DBG] Selected output formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter' and content type 'application/json' to write the response.
+2025-09-09 00:59:56.118 +05:30 [INF] Executing OkObjectResult, writing value of type 'pqy_server.Shared.ApiResponse`1[[pqy_server.Models.Admin.AdminStats, pqy-server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-09-09 00:59:56.185 +05:30 [DBG] The response will be compressed with 'br'.
+2025-09-09 00:59:56.231 +05:30 [INF] Executed action pqy_server.Controllers.AdminController.GetAdminStats (pqy-server) in 1201.496ms
+2025-09-09 00:59:56.241 +05:30 [INF] Executed endpoint 'pqy_server.Controllers.AdminController.GetAdminStats (pqy-server)'
+2025-09-09 00:59:56.252 +05:30 [DBG] Connection id "0HNFF1OBB4OD4" completed keep alive response.
+2025-09-09 00:59:56.258 +05:30 [DBG] 'AppDbContext' disposed.
+2025-09-09 00:59:56.267 +05:30 [DBG] Disposing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 00:59:56.272 +05:30 [DBG] Disposed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (4ms).
+2025-09-09 00:59:56.277 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost/api/Admin/stats - 200 null application/json; charset=utf-8 1660.2479ms
+2025-09-09 12:38:58.807 +05:30 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-09-09 12:38:59.169 +05:30 [DBG] The index {'UserId'} was not created on entity type 'UserActivity' as the properties are already covered by the index {'UserId', 'ActivityTime'}.
+2025-09-09 12:38:59.174 +05:30 [DBG] The index {'UserId'} was not created on entity type 'BookmarkQuestion' as the properties are already covered by the index {'UserId', 'QuestionId'}.
+2025-09-09 12:38:59.236 +05:30 [WRN] Entity 'Question' has a global query filter defined and is the required end of a relationship with the entity 'QuestionReport'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-09-09 12:38:59.240 +05:30 [WRN] Entity 'Question' has a global query filter defined and is the required end of a relationship with the entity 'UserActivity'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-09-09 12:38:59.243 +05:30 [WRN] Entity 'Question' has a global query filter defined and is the required end of a relationship with the entity 'BookmarkQuestion'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-09-09 12:38:59.245 +05:30 [WRN] Entity 'Question' has a global query filter defined and is the required end of a relationship with the entity 'QuestionNote'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-09-09 12:38:59.287 +05:30 [WRN] The property 'User.SelectedExamIds' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-09-09 12:38:59.349 +05:30 [DBG] Entity Framework Core 9.0.4 initialized 'AppDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-09-09 12:39:01.721 +05:30 [DBG] 'AppDbContext' disposed.
+2025-09-09 12:39:11.219 +05:30 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-09-09 12:39:11.938 +05:30 [DBG] The index {'UserId'} was not created on entity type 'UserActivity' as the properties are already covered by the index {'UserId', 'ActivityTime'}.
+2025-09-09 12:39:11.948 +05:30 [DBG] The index {'UserId'} was not created on entity type 'BookmarkQuestion' as the properties are already covered by the index {'UserId', 'QuestionId'}.
+2025-09-09 12:39:12.116 +05:30 [WRN] Entity 'Question' has a global query filter defined and is the required end of a relationship with the entity 'QuestionReport'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-09-09 12:39:12.119 +05:30 [WRN] Entity 'Question' has a global query filter defined and is the required end of a relationship with the entity 'UserActivity'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-09-09 12:39:12.123 +05:30 [WRN] Entity 'Question' has a global query filter defined and is the required end of a relationship with the entity 'BookmarkQuestion'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-09-09 12:39:12.126 +05:30 [WRN] Entity 'Question' has a global query filter defined and is the required end of a relationship with the entity 'QuestionNote'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-09-09 12:39:12.207 +05:30 [WRN] The property 'User.SelectedExamIds' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-09-09 12:39:12.354 +05:30 [DBG] Entity Framework Core 9.0.4 initialized 'AppDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.4+fd2380957bee5cd86f336466af36b08c0163f1a5' with options: None
+2025-09-09 12:39:12.394 +05:30 [DBG] Creating DbConnection.
+2025-09-09 12:39:12.402 +05:30 [DBG] Created DbConnection. (6ms).
+2025-09-09 12:39:12.410 +05:30 [DBG] Opening connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 12:39:12.417 +05:30 [DBG] Opened connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 12:39:12.427 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-09-09 12:39:12.436 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (5ms).
+2025-09-09 12:39:12.442 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (16ms).
+2025-09-09 12:39:12.453 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-09-09 12:39:12.481 +05:30 [INF] Executed DbCommand (23ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-09-09 12:39:12.496 +05:30 [DBG] Closing data reader to 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 12:39:12.509 +05:30 [DBG] A data reader for 'PYQ_Dev' on server 'tcp://localhost:5432' is being disposed after spending 15ms reading results.
+2025-09-09 12:39:12.516 +05:30 [DBG] Closing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 12:39:12.522 +05:30 [DBG] Closed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (4ms).
+2025-09-09 12:39:12.726 +05:30 [DBG] Migrating using database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 12:39:12.736 +05:30 [DBG] Opening connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 12:39:12.742 +05:30 [DBG] Opening connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 12:39:12.815 +05:30 [DBG] Opened connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 12:39:12.818 +05:30 [DBG] Closing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 12:39:12.825 +05:30 [DBG] Closed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (6ms).
+2025-09-09 12:39:12.828 +05:30 [DBG] Opening connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 12:39:12.831 +05:30 [DBG] Opened connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 12:39:12.869 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-09-09 12:39:12.871 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (1ms).
+2025-09-09 12:39:12.874 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (4ms).
+2025-09-09 12:39:12.876 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2025-09-09 12:39:12.883 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2025-09-09 12:39:12.891 +05:30 [DBG] Beginning transaction with isolation level 'Unspecified'.
+2025-09-09 12:39:12.897 +05:30 [DBG] Began transaction with isolation level 'ReadCommitted'.
+2025-09-09 12:39:12.901 +05:30 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2025-09-09 12:39:12.903 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-09-09 12:39:12.905 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (2ms).
+2025-09-09 12:39:12.908 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (5ms).
+2025-09-09 12:39:12.911 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2025-09-09 12:39:12.916 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2025-09-09 12:39:12.920 +05:30 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-09-09 12:39:12.922 +05:30 [DBG] Created DbCommand for 'ExecuteReader' (2ms).
+2025-09-09 12:39:12.924 +05:30 [DBG] Initialized DbCommand for 'ExecuteReader' (4ms).
+2025-09-09 12:39:12.926 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-09-09 12:39:12.931 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-09-09 12:39:12.936 +05:30 [DBG] Closing data reader to 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 12:39:12.938 +05:30 [DBG] A data reader for 'PYQ_Dev' on server 'tcp://localhost:5432' is being disposed after spending 2ms reading results.
+2025-09-09 12:39:12.945 +05:30 [INF] Applying migration '20250909070901_AddAttemptEntity'.
+2025-09-09 12:39:12.962 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-09-09 12:39:12.965 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (2ms).
+2025-09-09 12:39:12.968 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (5ms).
+2025-09-09 12:39:12.970 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Attempts" (
+    "Id" integer GENERATED BY DEFAULT AS IDENTITY,
+    "UserId" text,
+    "Timestamp" timestamp with time zone NOT NULL,
+    "IsCorrect" boolean NOT NULL,
+    "QuestionId" text,
+    "SubjectId" text,
+    "SubjectName" text,
+    "ExamId" text,
+    "ExamName" text,
+    "YearId" text,
+    "YearName" text,
+    CONSTRAINT "PK_Attempts" PRIMARY KEY ("Id")
+);
+2025-09-09 12:39:12.991 +05:30 [INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Attempts" (
+    "Id" integer GENERATED BY DEFAULT AS IDENTITY,
+    "UserId" text,
+    "Timestamp" timestamp with time zone NOT NULL,
+    "IsCorrect" boolean NOT NULL,
+    "QuestionId" text,
+    "SubjectId" text,
+    "SubjectName" text,
+    "ExamId" text,
+    "ExamName" text,
+    "YearId" text,
+    "YearName" text,
+    CONSTRAINT "PK_Attempts" PRIMARY KEY ("Id")
+);
+2025-09-09 12:39:12.996 +05:30 [DBG] Creating DbCommand for 'ExecuteNonQuery'.
+2025-09-09 12:39:12.999 +05:30 [DBG] Created DbCommand for 'ExecuteNonQuery' (3ms).
+2025-09-09 12:39:13.002 +05:30 [DBG] Initialized DbCommand for 'ExecuteNonQuery' (5ms).
+2025-09-09 12:39:13.004 +05:30 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20250909070901_AddAttemptEntity', '9.0.4');
+2025-09-09 12:39:13.010 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20250909070901_AddAttemptEntity', '9.0.4');
+2025-09-09 12:39:13.014 +05:30 [DBG] Committing transaction.
+2025-09-09 12:39:13.019 +05:30 [DBG] Committed transaction.
+2025-09-09 12:39:13.022 +05:30 [DBG] Disposing transaction.
+2025-09-09 12:39:13.023 +05:30 [DBG] Closing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 12:39:13.025 +05:30 [DBG] Closed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (2ms).
+2025-09-09 12:39:13.030 +05:30 [DBG] 'AppDbContext' disposed.
+2025-09-09 12:39:13.035 +05:30 [DBG] Disposing connection to database 'PYQ_Dev' on server 'tcp://localhost:5432'.
+2025-09-09 12:39:13.038 +05:30 [DBG] Disposed connection to database 'PYQ_Dev' on server 'tcp://localhost:5432' (2ms).
