@@ -9,11 +9,12 @@ public static class FirebaseInitializer
     {
         if (FirebaseApp.DefaultInstance == null)
         {
-            var keyPath = Path.Combine(AppContext.BaseDirectory, "Keys", "instapyq-firebase-adminsdk-fbsvc-2b146b9d10.json");
+            var credentialJson = Environment.GetEnvironmentVariable("FIREBASE_ADMINSDK_JSON")
+                ?? throw new InvalidOperationException("FIREBASE_ADMINSDK_JSON environment variable is not set.");
 
             FirebaseApp.Create(new AppOptions()
             {
-                Credential = GoogleCredential.FromFile(keyPath)
+                Credential = GoogleCredential.FromJson(credentialJson)
             });
         }
     }
