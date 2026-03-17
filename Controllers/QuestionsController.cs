@@ -312,7 +312,12 @@ namespace pqy_server.Controllers
                     query = query.Where(q => q.Year != null && q.Year.IsPremium == false);
             }
 
-            if (yearId.HasValue && !subjectId.HasValue)
+            if (yearId.HasValue && examIds != null && !subjectId.HasValue)
+            {
+                // Exam + year filter: return questions in the order they were added (sequential by ID)
+                query = query.OrderBy(q => q.QuestionId);
+            }
+            else if (yearId.HasValue && !subjectId.HasValue)
             {
                 query = query
                     .OrderByDescending(q => q.Year != null ? q.Year.YearOrder : int.MinValue)
