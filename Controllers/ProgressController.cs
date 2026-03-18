@@ -130,7 +130,7 @@ namespace pqy_server.Controllers
 
         // GET: /api/progress/summary
         [HttpGet("summary")]
-        public async Task<IActionResult> GetSummary()
+        public async Task<IActionResult> GetSummary([FromQuery] string? date)
         {
             try
             {
@@ -138,14 +138,28 @@ namespace pqy_server.Controllers
                 if (string.IsNullOrEmpty(userIdStr) || !int.TryParse(userIdStr, out var userId))
                     return Unauthorized(ApiResponse<string>.Failure(ResultCode.Unauthorized, "Invalid or missing User ID."));
 
-                var nowIst = IstHelper.NowIst();
-                var today = DateOnly.FromDateTime(nowIst);
-                var startOfWeek = today.AddDays(-(int)nowIst.DayOfWeek);
-                var startOfMonth = new DateOnly(nowIst.Year, nowIst.Month, 1);
-                var startOfYear = new DateOnly(nowIst.Year, 1, 1);
+                // Use provided date or fall back to IST now
+                var realToday = DateOnly.FromDateTime(IstHelper.NowIst());
+                DateTime refDateTime;
+                if (!string.IsNullOrEmpty(date) && DateOnly.TryParse(date, out var parsedDate))
+                    refDateTime = parsedDate.ToDateTime(TimeOnly.MinValue);
+                else
+                    refDateTime = IstHelper.NowIst();
 
+                var today = DateOnly.FromDateTime(refDateTime);
+                var startOfWeek = today.AddDays(-(int)refDateTime.DayOfWeek);
+                var endOfWeek = startOfWeek.AddDays(6);
+                var startOfMonth = new DateOnly(refDateTime.Year, refDateTime.Month, 1);
+                var endOfMonth = startOfMonth.AddMonths(1).AddDays(-1);
+                var startOfYear = new DateOnly(refDateTime.Year, 1, 1);
+                var endOfYear = new DateOnly(refDateTime.Year, 12, 31);
+
+                // Clamp period ends to real today so we never show future data
+                DateOnly Cap(DateOnly d) => d < realToday ? d : realToday;
+
+                // Fetch all data to support AllTime and historical navigation
                 var allData = await _context.UserDailyProgress
-                    .Where(p => p.UserId == userId && p.Date >= startOfYear)
+                    .Where(p => p.UserId == userId)
                     .AsNoTracking()
                     .ToListAsync();
 
@@ -212,10 +226,11 @@ namespace pqy_server.Controllers
 
                 var response = new ProgressSummaryResponse
                 {
-                    Today = BuildSummary(allData, today, today),
-                    Week = BuildSummary(allData, startOfWeek, today, includeWeek: true),
-                    Month = BuildSummary(allData, startOfMonth, today),
-                    Year = BuildSummary(allData, startOfYear, today, includeYear: true)
+                    Today   = BuildSummary(allData, today,          Cap(today)),
+                    Week    = BuildSummary(allData, startOfWeek,    Cap(endOfWeek),   includeWeek: true),
+                    Month   = BuildSummary(allData, startOfMonth,   Cap(endOfMonth)),
+                    Year    = BuildSummary(allData, startOfYear,    Cap(endOfYear),   includeYear: true),
+                    AllTime = BuildSummary(allData, DateOnly.MinValue, realToday),
                 };
 
                 return Ok(ApiResponse<ProgressSummaryResponse>.Success(response, "All summaries generated successfully."));
