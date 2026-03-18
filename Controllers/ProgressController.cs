@@ -75,10 +75,9 @@ namespace pqy_server.Controllers
                     .ToList();
 
                 // Batch-fetch all existing records in one query instead of one FindAsync per group
-                var groupKeys = groups.Select(g => new { g.Key.Date, g.Key.SubjectId, g.Key.ExamId }).ToList();
-                var dates = groupKeys.Select(k => k.Date).Distinct().ToList();
-                var subjectIds = groupKeys.Select(k => k.SubjectId).Distinct().ToList();
-                var examIds = groupKeys.Select(k => k.ExamId).Distinct().ToList();
+                var dates = groups.Select(g => g.Date).Distinct().ToList();
+                var subjectIds = groups.Select(g => g.SubjectId).Distinct().ToList();
+                var examIds = groups.Select(g => g.ExamId).Distinct().ToList();
 
                 var existingRecords = await _context.UserDailyProgress
                     .Where(p => p.UserId == userId
@@ -92,7 +91,7 @@ namespace pqy_server.Controllers
 
                 foreach (var group in groups)
                 {
-                    if (existingLookup.TryGetValue((group.Key.Date, group.Key.SubjectId, group.Key.ExamId), out var existing))
+                    if (existingLookup.TryGetValue((group.Date, group.SubjectId, group.ExamId), out var existing))
                     {
                         existing.Attempts += group.Attempts;
                         existing.Correct += group.Correct;

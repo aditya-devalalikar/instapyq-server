@@ -59,8 +59,8 @@ namespace pqy_server.Services
                             && o.Status == OrderStatus.Paid
                             && o.ExpiresAt != null
                             && o.ExpiresAt > DateTime.UtcNow))
-                    .Select(u => u.UserId)
                     .AsNoTracking()
+                    .Select(u => u.UserId)
                     .ToListAsync();
                 return ids.ToHashSet();
             }) ?? new HashSet<int>();
