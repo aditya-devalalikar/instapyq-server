@@ -209,6 +209,11 @@ namespace pqy_server.Data
                 .HasForeignKey(qi => qi.ImageId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            // QuestionId is the primary filter in GetQuestionImagesByQuestionIdAsync
+            // which is called on every question list and exam fetch
+            modelBuilder.Entity<QuestionAnswerImage>()
+                .HasIndex(qi => qi.QuestionId);
+
             // ✅ EmailOtp indexes
             modelBuilder.Entity<EmailOtp>().HasIndex(o => o.Email);
             modelBuilder.Entity<EmailOtp>().HasIndex(o => o.ExpiresAt);

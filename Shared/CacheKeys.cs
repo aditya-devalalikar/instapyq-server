@@ -5,6 +5,8 @@ namespace pqy_server.Shared
         public const string QuestionEnumLabels = "question-enum-labels";
         public const string ExamCandidateVersion = "exam-candidate-version";
 
+        public const string LeaderboardEligibleUserIds = "leaderboard:eligible-user-ids";
+
         public static string UserPremiumStatus(int userId)
             => $"user-premium-status:{userId}";
 
