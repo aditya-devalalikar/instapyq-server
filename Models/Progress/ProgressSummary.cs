@@ -30,5 +30,6 @@
         public ProgressSummary Week { get; set; } = new();
         public ProgressSummary Month { get; set; } = new();
         public ProgressSummary Year { get; set; } = new();
+        public ProgressSummary AllTime { get; set; } = new();
     }
 }
