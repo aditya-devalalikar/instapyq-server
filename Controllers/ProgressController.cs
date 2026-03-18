@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using pqy_server.Data;
 using pqy_server.Helpers;
 using pqy_server.Models.Progress;
@@ -16,11 +17,20 @@ namespace pqy_server.Controllers
     public class ProgressController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly IMemoryCache _cache;
 
-        public ProgressController(AppDbContext context)
+        public ProgressController(AppDbContext context, IMemoryCache cache)
         {
             _context = context;
+            _cache = cache;
         }
+
+        private static string ProgressSummaryCacheKey(int userId, string? date) =>
+            $"progress-summary:{userId}:{date ?? ""}";
+
+        private static string ExamSummaryCacheKey(int userId) =>
+            $"exam-summary:{userId}";
+
 
         // POST: /api/progress/sync
         [HttpPost("sync")]
@@ -64,12 +74,24 @@ namespace pqy_server.Controllers
                     })
                     .ToList();
 
+                // Batch-fetch all existing records in one query instead of one FindAsync per group
+                var dates = groups.Select(g => g.Date).Distinct().ToList();
+                var subjectIds = groups.Select(g => g.SubjectId).Distinct().ToList();
+                var examIds = groups.Select(g => g.ExamId).Distinct().ToList();
+
+                var existingRecords = await _context.UserDailyProgress
+                    .Where(p => p.UserId == userId
+                        && dates.Contains(p.Date)
+                        && subjectIds.Contains(p.SubjectId)
+                        && examIds.Contains(p.ExamId))
+                    .ToListAsync();
+
+                var existingLookup = existingRecords
+                    .ToDictionary(p => (p.Date, p.SubjectId, p.ExamId));
+
                 foreach (var group in groups)
                 {
-                    var existing = await _context.UserDailyProgress
-                        .FindAsync(userId, group.Date, group.SubjectId, group.ExamId);
-
-                    if (existing != null)
+                    if (existingLookup.TryGetValue((group.Date, group.SubjectId, group.ExamId), out var existing))
                     {
                         existing.Attempts += group.Attempts;
                         existing.Correct += group.Correct;
@@ -89,6 +111,10 @@ namespace pqy_server.Controllers
                 }
 
                 await _context.SaveChangesAsync();
+
+                // Invalidate the cached summary so the next GetSummary call reads fresh data
+                _cache.Remove(ProgressSummaryCacheKey(userId, null));
+
                 return Ok(ApiResponse<object>.Success(new { Count = groups.Count }, "Attempts synced successfully."));
             }
             catch (DbUpdateException)
@@ -115,6 +141,8 @@ namespace pqy_server.Controllers
                     .Where(p => p.UserId == userId)
                     .ExecuteDeleteAsync();
 
+                _cache.Remove(ProgressSummaryCacheKey(userId, null));
+
                 return Ok(ApiResponse<object>.Success(new { Count = deletedCount }, "All attempts cleared successfully."));
             }
             catch (DbUpdateException)
@@ -137,6 +165,10 @@ namespace pqy_server.Controllers
                 var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
                 if (string.IsNullOrEmpty(userIdStr) || !int.TryParse(userIdStr, out var userId))
                     return Unauthorized(ApiResponse<string>.Failure(ResultCode.Unauthorized, "Invalid or missing User ID."));
+
+                var cacheKey = ProgressSummaryCacheKey(userId, date);
+                if (_cache.TryGetValue(cacheKey, out ProgressSummaryResponse? cached) && cached != null)
+                    return Ok(ApiResponse<ProgressSummaryResponse>.Success(cached, "All summaries generated successfully."));
 
                 // Use provided date or fall back to IST now
                 var realToday = DateOnly.FromDateTime(IstHelper.NowIst());
@@ -233,6 +265,8 @@ namespace pqy_server.Controllers
                     AllTime = BuildSummary(allData, DateOnly.MinValue, realToday),
                 };
 
+                _cache.Set(cacheKey, response, TimeSpan.FromMinutes(5));
+
                 return Ok(ApiResponse<ProgressSummaryResponse>.Success(response, "All summaries generated successfully."));
             }
             catch (Exception ex)
@@ -279,6 +313,8 @@ namespace pqy_server.Controllers
             _context.ExamProgress.Add(progress);
             await _context.SaveChangesAsync();
 
+            _cache.Remove(ExamSummaryCacheKey(userId));
+
             return Ok(ApiResponse<ExamProgress>.Success(progress, "Exam progress saved successfully"));
         }
 
@@ -289,6 +325,10 @@ namespace pqy_server.Controllers
             var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (string.IsNullOrEmpty(userIdStr) || !int.TryParse(userIdStr, out var userId))
                 return Unauthorized(ApiResponse<string>.Failure(ResultCode.Unauthorized, "Invalid or missing User ID."));
+
+            var cacheKey = ExamSummaryCacheKey(userId);
+            if (_cache.TryGetValue(cacheKey, out ExamSummaryResponse? cachedSummary) && cachedSummary != null)
+                return Ok(ApiResponse<ExamSummaryResponse>.Success(cachedSummary, "Exam summary generated successfully."));
 
             var exams = await _context.ExamProgress
                 .Where(e => e.UserId == userId)
@@ -426,7 +466,7 @@ namespace pqy_server.Controllers
                 })
                 .ToList();
 
-            return Ok(ApiResponse<ExamSummaryResponse>.Success(new ExamSummaryResponse
+            var examSummary = new ExamSummaryResponse
             {
                 TotalExams         = exams.Count,
                 CompletedExams     = completed.Count,
@@ -444,7 +484,11 @@ namespace pqy_server.Controllers
                 MonthlyHistory     = monthlyHistory,
                 ScoreDistribution  = scoreDistribution,
                 RecentTrend        = recentTrend,
-            }, "Exam summary generated successfully."));
+            };
+
+            _cache.Set(cacheKey, examSummary, TimeSpan.FromMinutes(5));
+
+            return Ok(ApiResponse<ExamSummaryResponse>.Success(examSummary, "Exam summary generated successfully."));
         }
 
         public class ExamSummaryResponse

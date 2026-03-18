@@ -6,6 +6,7 @@ using pqy_server.Models.Leaderboard;
 using pqy_server.Models.Order;
 using pqy_server.Models.Orders;
 using pqy_server.Models.Users;
+using pqy_server.Shared;
 
 namespace pqy_server.Services
 {
@@ -44,13 +45,26 @@ namespace pqy_server.Services
         private const int MinAttemptsForAccuracy = 10;
         private const int MinExamsForAccuracy    = 3;
 
-        // Only active-premium users who haven't opted out appear on leaderboards
-        private IQueryable<User> EligibleUsers =>
-            _context.Users.Where(u => !u.HideFromLeaderboard && !u.IsDeleted &&
-                _context.Orders.Any(o => o.UserId == u.UserId
-                    && o.Status == OrderStatus.Paid
-                    && o.ExpiresAt != null
-                    && o.ExpiresAt > DateTime.UtcNow));
+        // Pre-fetch and cache eligible user IDs to avoid a correlated subquery
+        // on every ranking computation. Cached for 5 minutes; stale at most one
+        // leaderboard refresh cycle behind the actual premium roster.
+        private async Task<HashSet<int>> GetEligibleUserIdsAsync()
+        {
+            return await _cache.GetOrCreateAsync(CacheKeys.LeaderboardEligibleUserIds, async entry =>
+            {
+                entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5);
+                var ids = await _context.Users
+                    .Where(u => !u.HideFromLeaderboard && !u.IsDeleted
+                        && _context.Orders.Any(o => o.UserId == u.UserId
+                            && o.Status == OrderStatus.Paid
+                            && o.ExpiresAt != null
+                            && o.ExpiresAt > DateTime.UtcNow))
+                    .AsNoTracking()
+                    .Select(u => u.UserId)
+                    .ToListAsync();
+                return ids.ToHashSet();
+            }) ?? new HashSet<int>();
+        }
 
         public LeaderboardService(AppDbContext context, IMemoryCache cache)
         {
@@ -171,11 +185,12 @@ namespace pqy_server.Services
         private async Task<List<RankedScore>> QuestionsRanking(LeaderboardPeriod period, DateOnly? date = null)
         {
             var (start, end) = GetDateRange(period, date);
+            var eligibleIds = await GetEligibleUserIdsAsync();
 
             return await _context.UserDailyProgress
                 .Where(p => (start == null || p.Date >= start) &&
                             (end   == null || p.Date <= end) &&
-                            EligibleUsers.Any(u => u.UserId == p.UserId))
+                            eligibleIds.Contains(p.UserId))
                 .GroupBy(p => p.UserId)
                 .Select(g => new RankedScore
                 {
@@ -195,11 +210,12 @@ namespace pqy_server.Services
         private async Task<List<RankedScore>> AccuracyRanking(LeaderboardPeriod period, DateOnly? date = null)
         {
             var (start, end) = GetDateRange(period, date);
+            var eligibleIds = await GetEligibleUserIdsAsync();
 
             var raw = await _context.UserDailyProgress
                 .Where(p => (start == null || p.Date >= start) &&
                             (end   == null || p.Date <= end) &&
-                            EligibleUsers.Any(u => u.UserId == p.UserId))
+                            eligibleIds.Contains(p.UserId))
                 .GroupBy(p => p.UserId)
                 .Select(g => new
                 {
@@ -232,12 +248,14 @@ namespace pqy_server.Services
             DateTime? end = endDate.HasValue
                 ? endDate.Value.ToDateTime(new TimeOnly(23, 59, 59)) : null;
 
+            var eligibleIds = await GetEligibleUserIdsAsync();
+
             var raw = await _context.ExamProgress
                 .Where(ep => ep.CompletedAt != null
                     && (modeType == null || ep.ModeType == modeType)
                     && (start    == null || ep.CompletedAt >= start)
                     && (end      == null || ep.CompletedAt <= end)
-                    && EligibleUsers.Any(u => u.UserId == ep.UserId))
+                    && eligibleIds.Contains(ep.UserId))
                 .GroupBy(ep => ep.UserId)
                 .Select(g => new { UserId = g.Key, Count = g.Count() })
                 .Where(g => g.Count > 0)
@@ -262,13 +280,15 @@ namespace pqy_server.Services
             DateTime? end = endDate.HasValue
                 ? endDate.Value.ToDateTime(new TimeOnly(23, 59, 59)) : null;
 
+            var eligibleIds = await GetEligibleUserIdsAsync();
+
             var raw = await _context.ExamProgress
                 .Where(ep => ep.CompletedAt != null
                     && ep.AttemptedCount > 0
                     && (modeType == null || ep.ModeType == modeType)
                     && (start    == null || ep.CompletedAt >= start)
                     && (end      == null || ep.CompletedAt <= end)
-                    && EligibleUsers.Any(u => u.UserId == ep.UserId))
+                    && eligibleIds.Contains(ep.UserId))
                 .GroupBy(ep => ep.UserId)
                 .Select(g => new
                 {
@@ -295,8 +315,10 @@ namespace pqy_server.Services
 
         private async Task<List<RankedScore>> StreakRanking()
         {
+            var eligibleIds = await GetEligibleUserIdsAsync();
+
             var pairs = await _context.UserDailyProgress
-                .Where(p => EligibleUsers.Any(u => u.UserId == p.UserId))
+                .Where(p => eligibleIds.Contains(p.UserId))
                 .Select(p => new { p.UserId, p.Date })
                 .Distinct()
                 .OrderBy(p => p.UserId)
@@ -339,9 +361,11 @@ namespace pqy_server.Services
 
             // Fetch distinct (UserId, Date) pairs first — EF Core + PostgreSQL cannot
             // translate Distinct().GroupBy() as a single query reliably.
+            var eligibleIds = await GetEligibleUserIdsAsync();
+
             var pairs = await _context.UserDailyProgress
                 .Where(p => p.Date >= start && p.Date <= end &&
-                            EligibleUsers.Any(u => u.UserId == p.UserId))
+                            eligibleIds.Contains(p.UserId))
                 .Select(p => new { p.UserId, p.Date })
                 .Distinct()
                 .AsNoTracking()

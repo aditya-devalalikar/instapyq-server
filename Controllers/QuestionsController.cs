@@ -15,6 +15,7 @@ using pqy_server.Services;
 using pqy_server.Services.EmailService;
 using pqy_server.Shared;
 using System.Security.Claims;
+using System.Threading;
 using Serilog;
 using static pqy_server.Enums.QuestionEnums;
 
@@ -346,6 +347,12 @@ namespace pqy_server.Controllers
             if (fetchAll && !isAdmin)
                 return Forbid();
 
+            const int MaxFetchAll = 2000;
+            if (fetchAll && await query.CountAsync() > MaxFetchAll)
+                return BadRequest(ApiResponse<string>.Failure(
+                    ResultCode.BadRequest,
+                    $"Query matches more than {MaxFetchAll} questions. Use pagination or narrow the filters."));
+
             if (!fetchAll)
                 query = query.Skip((page - 1) * pageSize).Take(pageSize);
 
@@ -582,7 +589,7 @@ namespace pqy_server.Controllers
                         _cache.Set(
                             candidateIdsCacheKey,
                             cachedCandidateQuestionIds,
-                            TimeSpan.FromSeconds(5));
+                            TimeSpan.FromMinutes(5));
                     }
 
                     var candidateQuestionIds = cachedCandidateQuestionIds.ToList();
@@ -1636,6 +1643,8 @@ namespace pqy_server.Controllers
             await _context.Database.CreateExecutionStrategy()
                 .ExecuteAsync(() => _context.SaveChangesAsync());
 
+            BumpExamCandidateVersion();
+
             return Ok(ApiResponse<object>.Success(new
             {
                 message = $"{updated} updated, {inserted} inserted successfully.",
@@ -1867,7 +1876,7 @@ namespace pqy_server.Controllers
                             && o.ExpiresAt != null
                             && o.ExpiresAt > DateTime.UtcNow);
 
-            _cache.Set(cacheKey, isPremium, TimeSpan.FromSeconds(5));
+            _cache.Set(cacheKey, isPremium, TimeSpan.FromMinutes(30));
 
             return isPremium;
         }
@@ -1889,7 +1898,7 @@ namespace pqy_server.Controllers
                 return null;
 
             var selectedExamIdsCopy = selectedExamIds.ToList();
-            _cache.Set(cacheKey, selectedExamIdsCopy, TimeSpan.FromSeconds(5));
+            _cache.Set(cacheKey, selectedExamIdsCopy, TimeSpan.FromMinutes(15));
 
             return selectedExamIdsCopy;
         }
@@ -2082,11 +2091,15 @@ namespace pqy_server.Controllers
             }) ?? new Dictionary<(string EnumType, string EnumName), string>();
         }
 
+        // Shared counter for cache-key versioning. Interlocked.Increment is
+        // atomic under concurrent requests, avoiding a lost-update race where
+        // two threads both read the old value and write the same incremented value.
+        private static int _examCandidateVersion = 0;
+
         private void BumpExamCandidateVersion()
         {
-            var versionKey = CacheKeys.ExamCandidateVersion;
-            var currentVersion = _cache.Get<int>(versionKey);
-            _cache.Set(versionKey, currentVersion + 1);
+            var newVersion = Interlocked.Increment(ref _examCandidateVersion);
+            _cache.Set(CacheKeys.ExamCandidateVersion, newVersion);
         }
     }
 }

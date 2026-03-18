@@ -236,8 +236,9 @@ namespace pqy_server.Controllers
                     _logger.LogInformation("VerifyOrder: Paid. oid={oid} exp={exp}",
                          order.RazorpayOrderId, order.ExpiresAt);
                          
-                    // Invalidate premium status cache
+                    // Invalidate premium status + leaderboard eligibility cache
                     _cache.Remove(CacheKeys.UserPremiumStatus(order.UserId));
+                    _cache.Remove(CacheKeys.LeaderboardEligibleUserIds);
                 }
                 else
                 {
@@ -406,8 +407,9 @@ namespace pqy_server.Controllers
                 await _context.SaveChangesAsync();
                 Log.Information("Webhook: Order paid. oid={oid}, exp={exp}", order.RazorpayOrderId, order.ExpiresAt);
 
-                // Invalidate premium status cache
+                // Invalidate premium status + leaderboard eligibility cache
                 _cache.Remove(CacheKeys.UserPremiumStatus(order.UserId));
+                _cache.Remove(CacheKeys.LeaderboardEligibleUserIds);
 
                 // 🔥 SEND SUCCESS EMAIL
                 var user = await _context.Users.FindAsync(order.UserId);
@@ -485,8 +487,9 @@ namespace pqy_server.Controllers
             await _context.SaveChangesAsync();
             Log.Information("Webhook: Order refunded. oid={oid}", order.RazorpayOrderId);
 
-            // Invalidate premium status cache
+            // Invalidate premium status + leaderboard eligibility cache
             _cache.Remove(CacheKeys.UserPremiumStatus(order.UserId));
+            _cache.Remove(CacheKeys.LeaderboardEligibleUserIds);
         }
     }
 
