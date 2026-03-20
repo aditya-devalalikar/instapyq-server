@@ -19,6 +19,7 @@ using pqy_server.Models.Users;
 using pqy_server.Models.Years;
 using pqy_server.Models.Mains;
 using pqy_server.Models.Otp;
+using pqy_server.Models.Streak;
 
 namespace pqy_server.Data
 {
@@ -50,6 +51,11 @@ namespace pqy_server.Data
         public DbSet<MainsQuestion> MainsQuestions { get; set; }
         public DbSet<EmailOtp> EmailOtps { get; set; }
         public DbSet<ContentPage> ContentPages { get; set; }
+
+        // 📦 Streak & Study Timer tables
+        public DbSet<pqy_server.Models.Streak.Streak> Streaks { get; set; }
+        public DbSet<pqy_server.Models.Streak.StreakMonthlyProgress> StreakMonthlyProgress { get; set; }
+        public DbSet<pqy_server.Models.Streak.DailyStudySummary> DailyStudySummary { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -255,6 +261,68 @@ namespace pqy_server.Data
             // (ModeType, CompletedAt) — exam-type filtered boards
             modelBuilder.Entity<ExamProgress>()
                 .HasIndex(ep => new { ep.ModeType, ep.CompletedAt });
+
+            // ─── Streaks ──────────────────────────────────────────────────────────────
+
+            // Soft delete filter
+            modelBuilder.Entity<pqy_server.Models.Streak.Streak>()
+                .HasQueryFilter(s => !s.IsDeleted);
+
+            // FK: Streak → User
+            modelBuilder.Entity<pqy_server.Models.Streak.Streak>()
+                .HasOne(s => s.User)
+                .WithMany()
+                .HasForeignKey(s => s.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // ClientId must be unique per user to prevent duplicate syncs
+            modelBuilder.Entity<pqy_server.Models.Streak.Streak>()
+                .HasIndex(s => s.ClientId)
+                .IsUnique();
+
+            modelBuilder.Entity<pqy_server.Models.Streak.Streak>()
+                .HasIndex(s => new { s.UserId, s.IsDeleted });
+
+            modelBuilder.Entity<pqy_server.Models.Streak.Streak>()
+                .Property(s => s.CreatedAt)
+                .HasDefaultValueSql("NOW()");
+
+            modelBuilder.Entity<pqy_server.Models.Streak.Streak>()
+                .Property(s => s.UpdatedAt)
+                .HasDefaultValueSql("NOW()");
+
+            // ─── StreakMonthlyProgress ────────────────────────────────────────────────
+
+            // Composite PK: (StreakId, YearMonth)
+            modelBuilder.Entity<StreakMonthlyProgress>()
+                .HasKey(p => new { p.StreakId, p.YearMonth });
+
+            modelBuilder.Entity<StreakMonthlyProgress>()
+                .HasOne(p => p.Streak)
+                .WithMany()
+                .HasForeignKey(p => p.StreakId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Denormalized UserId index for fast user-scoped date range queries
+            modelBuilder.Entity<StreakMonthlyProgress>()
+                .HasIndex(p => new { p.UserId, p.YearMonth });
+
+            // ─── DailyStudySummary ────────────────────────────────────────────────────
+
+            // Composite PK: (UserId, Date)
+            modelBuilder.Entity<DailyStudySummary>()
+                .HasKey(s => new { s.UserId, s.Date });
+
+            modelBuilder.Entity<DailyStudySummary>()
+                .HasOne(s => s.User)
+                .WithMany()
+                .HasForeignKey(s => s.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<DailyStudySummary>()
+                .HasIndex(s => new { s.UserId, s.Date });
+
+            // ─────────────────────────────────────────────────────────────────────────
 
             modelBuilder.Entity<ContentPage>().HasData(
                 new ContentPage

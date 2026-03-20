@@ -31,6 +31,10 @@ namespace pqy_server.Models.Users
 
         public bool IsDeleted { get; set; } = false; // 👈 Soft delete flag
         public string? FcmToken { get; set; }
+
+        /// <summary>IANA timezone string e.g. "Asia/Kolkata". Set when user registers FCM token.</summary>
+        public string? Timezone { get; set; }
+
         public bool HideFromLeaderboard { get; set; } = false;
     }
 }
