@@ -182,6 +182,8 @@ namespace pqy_server.Controllers
                 return NotFound(ApiResponse<string>.Failure(ResultCode.NotFound, "User not found."));
 
             user.FcmToken = request.FcmToken;
+            if (!string.IsNullOrWhiteSpace(request.Timezone))
+                user.Timezone = request.Timezone;
             user.UpdatedAt = DateTime.UtcNow;
 
             await _context.SaveChangesAsync();

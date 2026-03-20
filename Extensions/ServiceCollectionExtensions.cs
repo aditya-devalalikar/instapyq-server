@@ -21,6 +21,8 @@ namespace pqy_server.Extensions
             services.AddSingleton<MediaUrlBuilder>();
             services.AddHttpClient<IEmailService, EmailService>();
             services.AddScoped<IRazorpayService, RazorpayService>();
+            services.AddScoped<IStreakService, StreakService>();
+            services.AddHostedService<StreakAlertHostedService>();
 
             // AI Services
             services.Configure<pqy_server.Services.AiService.AiConfigurationSettings>(configuration.GetSection("AiConfiguration"));
