@@ -93,40 +93,6 @@ namespace pqy_server.Controllers
             return Ok(ApiResponse<string>.Success("Notification deleted"));
         }
 
-        // 🧪 POST: /api/notifications/test-fcm
-        // Any authenticated user — sends a test FCM push to their own device token.
-        // Use this to verify the full FCM pipeline is working end-to-end.
-        [Authorize]
-        [HttpPost("test-fcm")]
-        public async Task<IActionResult> TestFcm()
-        {
-            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (!int.TryParse(userIdClaim, out var userId))
-                return Unauthorized(ApiResponse<string>.Failure(ResultCode.Unauthorized, "Invalid user ID."));
-
-            var user = await _context.Users.FindAsync(userId);
-            if (user == null)
-                return NotFound(ApiResponse<string>.Failure(ResultCode.NotFound, "User not found."));
-
-            if (string.IsNullOrWhiteSpace(user.FcmToken))
-                return BadRequest(ApiResponse<string>.Failure(ResultCode.ValidationError, "No FCM token on file for this user. Open the app fresh so the token is registered."));
-
-            try
-            {
-                var msgId = await _fcmNotificationService.SendNotificationAsync(
-                    user.FcmToken,
-                    "🔥 FCM Test",
-                    "If you see this, push notifications are working correctly!"
-                );
-                return Ok(ApiResponse<string>.Success($"FCM delivered. Message ID: {msgId}"));
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex, "test-fcm failed for userId={UserId}", userId);
-                return StatusCode(500, ApiResponse<string>.Failure(ResultCode.InternalServerError, $"FCM send failed: {ex.Message}"));
-            }
-        }
-
         // 🔊 POST: /api/notifications/send
         // Admin-only: Sends notification(s) to a specific user or all users
         [Authorize(Roles = RoleConstant.Admin)]
