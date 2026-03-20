@@ -129,6 +129,24 @@ namespace pqy_server.Services
                     .SetProperty(x => x.UpdatedAt, DateTime.UtcNow));
         }
 
+        /// <summary>Checks whether a session with the given clientSessionId exists in the Sessions JSON array.</summary>
+        private static bool SessionExistsInJson(string? sessionsJson, string clientSessionId)
+        {
+            if (string.IsNullOrEmpty(sessionsJson)) return false;
+            try
+            {
+                using var doc = JsonDocument.Parse(sessionsJson);
+                foreach (var element in doc.RootElement.EnumerateArray())
+                {
+                    if (element.TryGetProperty("clientSessionId", out var prop) &&
+                        prop.GetString() == clientSessionId)
+                        return true;
+                }
+                return false;
+            }
+            catch { return false; }
+        }
+
         // ─── Streaks CRUD ─────────────────────────────────────────────────────────
 
         public async Task<List<StreakDto>> GetStreaksAsync(int userId)
@@ -207,11 +225,16 @@ namespace pqy_server.Services
 
         public async Task DeleteStreakAsync(int userId, int streakId)
         {
+            // Delete all monthly progress bitmasks for this streak
+            await _context.StreakMonthlyProgress
+                .Where(p => p.StreakId == streakId && p.UserId == userId)
+                .ExecuteDeleteAsync();
+
+            // Hard-delete the streak itself (ignoring soft-delete filter)
             await _context.Streaks
+                .IgnoreQueryFilters()
                 .Where(s => s.StreakId == streakId && s.UserId == userId)
-                .ExecuteUpdateAsync(s => s
-                    .SetProperty(x => x.IsDeleted, true)
-                    .SetProperty(x => x.UpdatedAt, DateTime.UtcNow));
+                .ExecuteDeleteAsync();
         }
 
         // ─── Progress ─────────────────────────────────────────────────────────────
@@ -342,18 +365,20 @@ namespace pqy_server.Services
                 else
                 {
                     // Dedup: skip if session already saved
-                    if (existing.Sessions != null && existing.Sessions.Contains(session.ClientSessionId))
+                    if (SessionExistsInJson(existing.Sessions, session.ClientSessionId))
                         continue;
 
                     // Append session to Sessions JSON array
                     if (existing.Sessions == null)
                     {
-                        existing.Sessions = $"[{sessionJson}]";
+                        existing.Sessions = JsonSerializer.Serialize(new List<SessionItemDto> { sessionItem });
                     }
                     else
                     {
-                        var trimmed = existing.Sessions.TrimEnd();
-                        existing.Sessions = trimmed.TrimEnd(']') + "," + sessionJson + "]";
+                        var list = JsonSerializer.Deserialize<List<SessionItemDto>>(existing.Sessions)
+                            ?? new List<SessionItemDto>();
+                        list.Add(sessionItem);
+                        existing.Sessions = JsonSerializer.Serialize(list);
                     }
 
                     // Accumulate totals
@@ -453,6 +478,14 @@ namespace pqy_server.Services
 
             // 3. Upsert sessions
             await UpsertSessionsAsync(userId, req.Sessions, clientToServerId);
+
+            // Update user timezone if provided
+            if (!string.IsNullOrWhiteSpace(req.Timezone))
+            {
+                await _context.Users
+                    .Where(u => u.UserId == userId)
+                    .ExecuteUpdateAsync(u => u.SetProperty(x => x.Timezone, req.Timezone));
+            }
 
             return clientToServerId;
         }

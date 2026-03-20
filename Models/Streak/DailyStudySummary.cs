@@ -92,5 +92,6 @@ namespace pqy_server.Models.Streak
         public List<CreateStreakRequest> Streaks { get; set; } = new();
         public List<ProgressSyncItem> Progress { get; set; } = new();
         public List<StudySessionRequest> Sessions { get; set; } = new();
+        public string? Timezone { get; set; }
     }
 }

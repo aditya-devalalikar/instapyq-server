@@ -64,7 +64,7 @@ namespace pqy_server.Controllers
             }
         }
 
-        /// <summary>DELETE /api/streak/{id} — Soft delete a streak.</summary>
+        /// <summary>DELETE /api/streak/{id} — Permanently delete a streak and all its associated data.</summary>
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteStreak(int id)
         {
@@ -132,7 +132,7 @@ namespace pqy_server.Controllers
             // Free users: only save sessions from last 7 days
             if (!IsPremium())
             {
-                var cutoff = DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-7)).ToString("yyyy-MM-dd");
+                var cutoff = DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-8)).ToString("yyyy-MM-dd");
                 sessionsToSave = req.Sessions
                     .Where(s => string.Compare(s.Date, cutoff) >= 0)
                     .ToList();
@@ -159,7 +159,7 @@ namespace pqy_server.Controllers
 
             if (!IsPremium())
             {
-                var cutoff = DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-7));
+                var cutoff = DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-8));
                 if (fromDate < cutoff) fromDate = cutoff;
             }
 
@@ -182,7 +182,7 @@ namespace pqy_server.Controllers
             // Free users: strip sessions older than 7 days
             if (!IsPremium())
             {
-                var cutoff = DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-7)).ToString("yyyy-MM-dd");
+                var cutoff = DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-8)).ToString("yyyy-MM-dd");
                 req.Sessions = req.Sessions
                     .Where(s => string.Compare(s.Date, cutoff) >= 0)
                     .ToList();
