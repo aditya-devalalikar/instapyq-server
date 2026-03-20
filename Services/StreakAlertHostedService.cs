@@ -61,6 +61,8 @@ namespace pqy_server.Services
             using var scope = _scopeFactory.CreateScope();
             var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
+            var utcNow = DateTime.UtcNow;
+
             // Load all active streaks that have alerts, joined with the user's FCM token + timezone.
             // The HasQueryFilter on Streak already excludes IsDeleted = true rows.
             var rows = await db.Streaks
@@ -75,17 +77,25 @@ namespace pqy_server.Services
                 })
                 .ToListAsync(ct);
 
+            _logger.LogInformation(
+                "StreakAlertHostedService: tick at {UtcNow:HH:mm} UTC — {Count} streak(s) with alerts loaded.",
+                utcNow, rows.Count);
+
             if (rows.Count == 0) return;
 
-            var utcNow = DateTime.UtcNow;
             var sent = 0;
 
             foreach (var row in rows)
             {
-                // Resolve user local time
-                var localNow = ToLocalTime(utcNow, row.Timezone);
+                // Resolve user local time. Defaults to Asia/Kolkata when timezone is not stored.
+                var effectiveTz = string.IsNullOrWhiteSpace(row.Timezone) ? DefaultTimezone : row.Timezone;
+                var localNow = ToLocalTime(utcNow, effectiveTz);
                 var currentHour = localNow.Hour;
                 var currentMinute = localNow.Minute;
+
+                _logger.LogDebug(
+                    "StreakAlertHostedService: streak {StreakId} ({Name}) — tz={Tz}, local={Local:HH:mm}, alerts={Alerts}",
+                    row.StreakId, row.Name, effectiveTz, localNow, row.Alerts);
 
                 // Parse alerts JSON  [{hour,minute,label?}]
                 List<AlertEntry>? alertList = null;
@@ -147,21 +157,24 @@ namespace pqy_server.Services
         /// Converts UTC time to the user's local time using an IANA timezone identifier.
         /// Falls back to UTC if the timezone is null, empty, or unrecognised.
         /// </summary>
+        // Default timezone for users who haven't sent one yet — all users are currently in India.
+        private const string DefaultTimezone = "Asia/Kolkata";
+
         private static DateTime ToLocalTime(DateTime utc, string? ianaTimezone)
         {
-            if (string.IsNullOrWhiteSpace(ianaTimezone)) return utc;
+            var tz = string.IsNullOrWhiteSpace(ianaTimezone) ? DefaultTimezone : ianaTimezone;
 
             try
             {
-                // TimeZoneConverter handles IANA → Windows TZI mapping on all platforms.
-                // If TimeZoneConverter is not installed, use TimeZoneInfo.FindSystemTimeZoneById
-                // directly — it supports IANA IDs natively on Linux (Railway runs Linux).
-                var tzi = TimeZoneInfo.FindSystemTimeZoneById(ianaTimezone);
+                // TimeZoneInfo.FindSystemTimeZoneById supports IANA IDs natively on Linux (Railway).
+                var tzi = TimeZoneInfo.FindSystemTimeZoneById(tz);
                 return TimeZoneInfo.ConvertTimeFromUtc(utc, tzi);
             }
             catch
             {
-                return utc;
+                // Unrecognised timezone — fall back to IST rather than UTC
+                var ist = TimeZoneInfo.FindSystemTimeZoneById(DefaultTimezone);
+                return TimeZoneInfo.ConvertTimeFromUtc(utc, ist);
             }
         }
 
