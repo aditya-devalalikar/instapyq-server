@@ -29,6 +29,13 @@ namespace pqy_server.Services
     {
         private readonly AppDbContext _context;
 
+        // App is India-only — all "today" comparisons use IST (UTC+5:30)
+        private static readonly TimeZoneInfo IstZone =
+            TimeZoneInfo.FindSystemTimeZoneById("Asia/Kolkata");
+
+        private static DateOnly TodayIst() =>
+            DateOnly.FromDateTime(TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, IstZone));
+
         public StreakService(AppDbContext context)
         {
             _context = context;
@@ -113,8 +120,8 @@ namespace pqy_server.Services
                 }
             }
 
-            // Current streak: only valid if the last completed date is today or yesterday
-            var today = DateOnly.FromDateTime(DateTime.UtcNow);
+            // Current streak: only valid if the last completed date is today or yesterday (IST)
+            var today = TodayIst();
             var lastDate = dates[^1];
             int currentStreak = (lastDate == today || lastDate == today.AddDays(-1)) ? current : 0;
 
@@ -247,7 +254,10 @@ namespace pqy_server.Services
             }
 
             await _context.SaveChangesAsync();
-            await RecalcStreakCacheAsync(streakId);
+
+            // Recalc is best-effort: progress is already saved; cache self-heals on next toggle
+            try { await RecalcStreakCacheAsync(streakId); }
+            catch { /* log if logger injected in future */ }
 
             return new StreakMonthlyProgressDto
             {

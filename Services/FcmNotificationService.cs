@@ -13,6 +13,22 @@ namespace pqy_server.Services
                 {
                     Title = title,
                     Body = body
+                },
+                // Android: route to the channel that has the custom sound registered
+                Android = new AndroidConfig
+                {
+                    Notification = new AndroidNotification
+                    {
+                        ChannelId = "streak-alerts-v2",
+                    }
+                },
+                // iOS: play the custom sound bundled in the app
+                Apns = new ApnsConfig
+                {
+                    Aps = new Aps
+                    {
+                        Sound = "notification_tone.mp3",
+                    }
                 }
             };
 
