@@ -64,7 +64,7 @@ namespace pqy_server.Controllers
             }
         }
 
-        /// <summary>DELETE /api/streak/{id} — Soft delete a streak.</summary>
+        /// <summary>DELETE /api/streak/{id} — Permanently delete a streak and all its associated data.</summary>
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteStreak(int id)
         {
@@ -116,32 +116,32 @@ namespace pqy_server.Controllers
         // ─── Study Sessions ───────────────────────────────────────────────────────
 
         /// <summary>
-        /// POST /api/streak/sessions/batch — Batch upsert study sessions.
+        /// POST /api/streak/sessions/batch — Batch upsert daily study aggregates.
         /// Free users: only last 7 days are saved.
         /// Premium users: full history saved.
         /// </summary>
         [HttpPost("sessions/batch")]
-        public async Task<IActionResult> BatchSessions([FromBody] BatchSessionsRequest req)
+        public async Task<IActionResult> BatchSessions([FromBody] BatchAggregatesRequest req)
         {
-            if (!ModelState.IsValid || req.Sessions.Count == 0)
-                return BadRequest(ApiResponse<object>.Failure(ResultCode.ValidationError, "Sessions list is empty or invalid."));
+            if (!ModelState.IsValid || req.Aggregates.Count == 0)
+                return BadRequest(ApiResponse<object>.Failure(ResultCode.ValidationError, "Aggregates list is empty or invalid."));
 
             var userId = GetUserId();
-            var sessionsToSave = req.Sessions;
+            var toSave = req.Aggregates;
 
-            // Free users: only save sessions from last 7 days
+            // Free users: only save aggregates from last 7 days
             if (!IsPremium())
             {
-                var cutoff = DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-7)).ToString("yyyy-MM-dd");
-                sessionsToSave = req.Sessions
-                    .Where(s => string.Compare(s.Date, cutoff) >= 0)
+                var cutoff = DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-8)).ToString("yyyy-MM-dd");
+                toSave = req.Aggregates
+                    .Where(a => string.Compare(a.Date, cutoff) >= 0)
                     .ToList();
             }
 
             // Build clientId → serverId map from existing user streaks
             var clientToServerId = await BuildClientIdMapAsync(userId);
 
-            await _streakService.UpsertSessionsAsync(userId, sessionsToSave, clientToServerId);
+            await _streakService.UpsertAggregatesAsync(userId, toSave, clientToServerId);
             return Ok(ApiResponse<object>.Success(null, "Sessions synced."));
         }
 
@@ -159,7 +159,7 @@ namespace pqy_server.Controllers
 
             if (!IsPremium())
             {
-                var cutoff = DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-7));
+                var cutoff = DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-8));
                 if (fromDate < cutoff) fromDate = cutoff;
             }
 
@@ -179,12 +179,12 @@ namespace pqy_server.Controllers
         {
             var userId = GetUserId();
 
-            // Free users: strip sessions older than 7 days
+            // Free users: strip aggregates older than 7 days
             if (!IsPremium())
             {
-                var cutoff = DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-7)).ToString("yyyy-MM-dd");
-                req.Sessions = req.Sessions
-                    .Where(s => string.Compare(s.Date, cutoff) >= 0)
+                var cutoff = DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-8)).ToString("yyyy-MM-dd");
+                req.Aggregates = req.Aggregates
+                    .Where(a => string.Compare(a.Date, cutoff) >= 0)
                     .ToList();
             }
 

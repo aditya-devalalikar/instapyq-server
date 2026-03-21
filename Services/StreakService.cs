@@ -18,19 +18,23 @@ namespace pqy_server.Services
         Task<List<StreakMonthlyProgressDto>> GetProgressAsync(int userId, int streakId, string fromMonth, string toMonth);
 
         // Study sessions
-        Task UpsertSessionsAsync(int userId, List<StudySessionRequest> sessions, Dictionary<string, int> clientToServerIdMap);
+        Task UpsertAggregatesAsync(int userId, List<DailyAggregateRequest> aggregates, Dictionary<string, int> clientToServerIdMap);
         Task<List<DailySummaryDto>> GetSummaryAsync(int userId, DateOnly from, DateOnly to);
 
         // Full first-time sync
         Task<Dictionary<string, int>> FullSyncAsync(int userId, FullSyncRequest req);
-
-        // Maintenance
-        Task NullOldSessionsAsync();
     }
 
     public class StreakService : IStreakService
     {
         private readonly AppDbContext _context;
+
+        // App is India-only — all "today" comparisons use IST (UTC+5:30)
+        private static readonly TimeZoneInfo IstZone =
+            TimeZoneInfo.FindSystemTimeZoneById("Asia/Kolkata");
+
+        private static DateOnly TodayIst() =>
+            DateOnly.FromDateTime(TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, IstZone));
 
         public StreakService(AppDbContext context)
         {
@@ -116,8 +120,8 @@ namespace pqy_server.Services
                 }
             }
 
-            // Current streak: only valid if the last completed date is today or yesterday
-            var today = DateOnly.FromDateTime(DateTime.UtcNow);
+            // Current streak: only valid if the last completed date is today or yesterday (IST)
+            var today = TodayIst();
             var lastDate = dates[^1];
             int currentStreak = (lastDate == today || lastDate == today.AddDays(-1)) ? current : 0;
 
@@ -145,16 +149,10 @@ namespace pqy_server.Services
         {
             // Idempotent: if ClientId already exists for this user, return existing
             var existing = await _context.Streaks
-                .IgnoreQueryFilters()
                 .FirstOrDefaultAsync(s => s.ClientId == req.ClientId && s.UserId == userId);
 
             if (existing != null)
-            {
-                existing.IsDeleted = false;
-                existing.UpdatedAt = DateTime.UtcNow;
-                await _context.SaveChangesAsync();
                 return ToDto(existing);
-            }
 
             var streak = new Models.Streak.Streak
             {
@@ -207,11 +205,14 @@ namespace pqy_server.Services
 
         public async Task DeleteStreakAsync(int userId, int streakId)
         {
+            // Delete all monthly progress bitmasks for this streak
+            await _context.StreakMonthlyProgress
+                .Where(p => p.StreakId == streakId && p.UserId == userId)
+                .ExecuteDeleteAsync();
+
             await _context.Streaks
                 .Where(s => s.StreakId == streakId && s.UserId == userId)
-                .ExecuteUpdateAsync(s => s
-                    .SetProperty(x => x.IsDeleted, true)
-                    .SetProperty(x => x.UpdatedAt, DateTime.UtcNow));
+                .ExecuteDeleteAsync();
         }
 
         // ─── Progress ─────────────────────────────────────────────────────────────
@@ -253,7 +254,10 @@ namespace pqy_server.Services
             }
 
             await _context.SaveChangesAsync();
-            await RecalcStreakCacheAsync(streakId);
+
+            // Recalc is best-effort: progress is already saved; cache self-heals on next toggle
+            try { await RecalcStreakCacheAsync(streakId); }
+            catch { /* log if logger injected in future */ }
 
             return new StreakMonthlyProgressDto
             {
@@ -285,96 +289,65 @@ namespace pqy_server.Services
 
         // ─── Study Sessions ───────────────────────────────────────────────────────
 
-        public async Task UpsertSessionsAsync(
+        /// <summary>
+        /// Upserts daily aggregate records. Each aggregate covers a full day, so
+        /// existing rows are replaced with the client's computed totals.
+        /// PerStreak keys are client streak IDs — mapped to server IDs here.
+        /// </summary>
+        public async Task UpsertAggregatesAsync(
             int userId,
-            List<StudySessionRequest> sessions,
+            List<DailyAggregateRequest> aggregates,
             Dictionary<string, int> clientToServerIdMap)
         {
-            if (sessions.Count == 0) return;
+            if (aggregates.Count == 0) return;
 
-            foreach (var session in sessions)
+            foreach (var agg in aggregates)
             {
-                if (!DateOnly.TryParseExact(session.Date, "yyyy-MM-dd", out var date))
+                if (!DateOnly.TryParseExact(agg.Date, "yyyy-MM-dd", out var date))
                     continue;
 
-                // Resolve client streak ID → server streak ID
-                int? serverStreakId = null;
-                if (!string.IsNullOrEmpty(session.ClientStreakId)
-                    && clientToServerIdMap.TryGetValue(session.ClientStreakId, out var sid))
+                // Remap per-streak keys from client IDs to server IDs
+                string? perStreakJson = null;
+                if (agg.PerStreak != null && agg.PerStreak.Count > 0)
                 {
-                    serverStreakId = sid;
+                    var serverPerStreak = new Dictionary<string, int>();
+                    foreach (var (clientId, secs) in agg.PerStreak)
+                    {
+                        var key = clientToServerIdMap.TryGetValue(clientId, out var serverId)
+                            ? serverId.ToString()
+                            : clientId;
+                        serverPerStreak[key] = serverPerStreak.TryGetValue(key, out var prev)
+                            ? prev + secs
+                            : secs;
+                    }
+                    perStreakJson = JsonSerializer.Serialize(serverPerStreak);
                 }
-
-                var sessionItem = new SessionItemDto
-                {
-                    ClientSessionId = session.ClientSessionId,
-                    StreakId = serverStreakId,
-                    StreakName = session.StreakName,
-                    DurationSeconds = session.DurationSeconds,
-                    Mode = session.Mode,
-                    StartedAt = session.StartedAt,
-                };
-                var sessionJson = JsonSerializer.Serialize(sessionItem);
-
-                var perStreakKey = serverStreakId?.ToString();
 
                 var existing = await _context.DailyStudySummary
                     .FirstOrDefaultAsync(s => s.UserId == userId && s.Date == date);
 
                 if (existing == null)
                 {
-                    // New day row
-                    var perStreak = serverStreakId.HasValue
-                        ? JsonSerializer.Serialize(new Dictionary<string, int>
-                            { [perStreakKey!] = session.DurationSeconds })
-                        : null;
-
                     _context.DailyStudySummary.Add(new DailyStudySummary
                     {
                         UserId = userId,
                         Date = date,
-                        TotalSeconds = session.DurationSeconds,
-                        SessionCount = 1,
-                        PerStreak = perStreak,
-                        Sessions = $"[{sessionJson}]",
+                        TotalSeconds = agg.TotalSeconds,
+                        CdSeconds = agg.CdSeconds,
+                        SwSeconds = agg.SwSeconds,
+                        SessionCount = agg.SessionCount,
+                        PerStreak = perStreakJson,
                     });
                 }
                 else
                 {
-                    // Dedup: skip if session already saved
-                    if (existing.Sessions != null && existing.Sessions.Contains(session.ClientSessionId))
-                        continue;
-
-                    // Append session to Sessions JSON array
-                    if (existing.Sessions == null)
-                    {
-                        existing.Sessions = $"[{sessionJson}]";
-                    }
-                    else
-                    {
-                        var trimmed = existing.Sessions.TrimEnd();
-                        existing.Sessions = trimmed.TrimEnd(']') + "," + sessionJson + "]";
-                    }
-
-                    // Accumulate totals
-                    existing.TotalSeconds += session.DurationSeconds;
-                    existing.SessionCount++;
-
-                    // Update per-streak breakdown
-                    if (serverStreakId.HasValue)
-                    {
-                        var perStreak = existing.PerStreak != null
-                            ? JsonSerializer.Deserialize<Dictionary<string, int>>(existing.PerStreak)
-                              ?? new Dictionary<string, int>()
-                            : new Dictionary<string, int>();
-
-                        var key = serverStreakId.Value.ToString();
-                        perStreak[key] = perStreak.TryGetValue(key, out var prev)
-                            ? prev + session.DurationSeconds
-                            : session.DurationSeconds;
-
-                        existing.PerStreak = JsonSerializer.Serialize(perStreak);
-                    }
+                    // Replace with client's authoritative daily totals
+                    existing.TotalSeconds = agg.TotalSeconds;
+                    existing.CdSeconds = agg.CdSeconds;
+                    existing.SwSeconds = agg.SwSeconds;
+                    existing.SessionCount = agg.SessionCount;
+                    if (perStreakJson != null)
+                        existing.PerStreak = perStreakJson;
                 }
             }
 
@@ -392,12 +365,11 @@ namespace pqy_server.Services
             {
                 Date = r.Date,
                 TotalSeconds = r.TotalSeconds,
+                CdSeconds = r.CdSeconds,
+                SwSeconds = r.SwSeconds,
                 SessionCount = r.SessionCount,
                 PerStreak = r.PerStreak != null
                     ? JsonSerializer.Deserialize<Dictionary<string, int>>(r.PerStreak)
-                    : null,
-                Sessions = r.Sessions != null
-                    ? JsonSerializer.Deserialize<List<SessionItemDto>>(r.Sessions)
                     : null,
             }).ToList();
         }
@@ -451,21 +423,19 @@ namespace pqy_server.Services
             foreach (var serverId in clientToServerId.Values)
                 await RecalcStreakCacheAsync(serverId);
 
-            // 3. Upsert sessions
-            await UpsertSessionsAsync(userId, req.Sessions, clientToServerId);
+            // 3. Upsert daily aggregates
+            await UpsertAggregatesAsync(userId, req.Aggregates, clientToServerId);
+
+            // Update user timezone if provided
+            if (!string.IsNullOrWhiteSpace(req.Timezone))
+            {
+                await _context.Users
+                    .Where(u => u.UserId == userId)
+                    .ExecuteUpdateAsync(u => u.SetProperty(x => x.Timezone, req.Timezone));
+            }
 
             return clientToServerId;
         }
 
-        // ─── Maintenance ──────────────────────────────────────────────────────────
-
-        /// <summary>Nulls the Sessions JSONB column for rows older than 30 days.</summary>
-        public async Task NullOldSessionsAsync()
-        {
-            var cutoff = DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-30));
-            await _context.DailyStudySummary
-                .Where(s => s.Date < cutoff && s.Sessions != null)
-                .ExecuteUpdateAsync(s => s.SetProperty(x => x.Sessions, (string?)null));
-        }
     }
 }

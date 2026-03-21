@@ -63,13 +63,6 @@ ExcelPackage.License.SetNonCommercialPersonal("InstaPYQ");
 
 var app = builder.Build();
 
-// Auto-apply pending EF migrations on startup (safe: idempotent, runs before requests)
-using (var scope = app.Services.CreateScope())
-{
-    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    db.Database.Migrate();
-}
-
 // External initializations
 app.UseFirebase();
 
@@ -82,7 +75,7 @@ if (app.Environment.IsDevelopment())
     app.MapScalarApiReference();
 }
 
-// Apply DB migrations & seed
+// Apply pending EF migrations and seed on startup
 app.ApplyMigrations();
 
 // Port binding (Railway sets PORT automatically)
