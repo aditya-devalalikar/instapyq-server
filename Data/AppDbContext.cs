@@ -264,10 +264,6 @@ namespace pqy_server.Data
 
             // ─── Streaks ──────────────────────────────────────────────────────────────
 
-            // Soft delete filter
-            modelBuilder.Entity<pqy_server.Models.Streak.Streak>()
-                .HasQueryFilter(s => !s.IsDeleted);
-
             // FK: Streak → User
             modelBuilder.Entity<pqy_server.Models.Streak.Streak>()
                 .HasOne(s => s.User)
@@ -281,7 +277,7 @@ namespace pqy_server.Data
                 .IsUnique();
 
             modelBuilder.Entity<pqy_server.Models.Streak.Streak>()
-                .HasIndex(s => new { s.UserId, s.IsDeleted });
+                .HasIndex(s => s.UserId);
 
             modelBuilder.Entity<pqy_server.Models.Streak.Streak>()
                 .Property(s => s.CreatedAt)
