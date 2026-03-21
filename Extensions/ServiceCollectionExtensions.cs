@@ -22,7 +22,8 @@ namespace pqy_server.Extensions
             services.AddHttpClient<IEmailService, EmailService>();
             services.AddScoped<IRazorpayService, RazorpayService>();
             services.AddScoped<IStreakService, StreakService>();
-            services.AddHostedService<StreakAlertHostedService>();
+            if (configuration.GetValue<bool>("AlertService:Enabled", true))
+                services.AddHostedService<StreakAlertHostedService>();
 
             // AI Services
             services.Configure<pqy_server.Services.AiService.AiConfigurationSettings>(configuration.GetSection("AiConfiguration"));
