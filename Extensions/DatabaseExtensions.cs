@@ -23,8 +23,13 @@ namespace pqy_server.Extensions
 
                 bool isLocal = uri.Host.Contains("localhost") || uri.Host.Contains("127.0.0.1");
 
+                // Maximum Pool Size=16 aligns Npgsql's physical connection pool with
+                // the EF DbContextPool size (also 16). Without this Npgsql defaults to
+                // 100 physical connections — far more than EF ever needs, wasting
+                // memory on idle Postgres backend processes.
                 connectionString =
                     $"Host={uri.Host};Port={uri.Port};Username={userInfo[0]};Password={userInfo[1]};Database={uri.AbsolutePath.TrimStart('/')};" +
+                    "Maximum Pool Size=16;Minimum Pool Size=1;Connection Idle Lifetime=60;Connection Pruning Interval=10;" +
                     (isLocal
                         ? "SSL Mode=Disable;"
                         : "SSL Mode=Require;Trust Server Certificate=true;");
@@ -32,8 +37,8 @@ namespace pqy_server.Extensions
             else
             {
                 connectionString = databaseUrl.Contains("localhost")
-                    ? databaseUrl + ";SSL Mode=Disable;"
-                    : databaseUrl + ";SSL Mode=Require;Trust Server Certificate=true;";
+                    ? databaseUrl + ";Maximum Pool Size=16;Minimum Pool Size=1;Connection Idle Lifetime=60;Connection Pruning Interval=10;SSL Mode=Disable;"
+                    : databaseUrl + ";Maximum Pool Size=16;Minimum Pool Size=1;Connection Idle Lifetime=60;Connection Pruning Interval=10;SSL Mode=Require;Trust Server Certificate=true;";
             }
 
             // Pool size of 16: comfortably handles ~50 concurrent requests
