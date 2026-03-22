@@ -589,7 +589,11 @@ namespace pqy_server.Controllers
                         _cache.Set(
                             candidateIdsCacheKey,
                             cachedCandidateQuestionIds,
-                            TimeSpan.FromMinutes(5));
+                            new MemoryCacheEntryOptions
+                            {
+                                AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5),
+                                Size = 1
+                            });
                     }
 
                     var candidateQuestionIds = cachedCandidateQuestionIds.ToList();
@@ -1876,7 +1880,11 @@ namespace pqy_server.Controllers
                             && o.ExpiresAt != null
                             && o.ExpiresAt > DateTime.UtcNow);
 
-            _cache.Set(cacheKey, isPremium, TimeSpan.FromMinutes(30));
+            _cache.Set(cacheKey, isPremium, new MemoryCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(30),
+                Size = 1
+            });
 
             return isPremium;
         }
@@ -1898,7 +1906,11 @@ namespace pqy_server.Controllers
                 return null;
 
             var selectedExamIdsCopy = selectedExamIds.ToList();
-            _cache.Set(cacheKey, selectedExamIdsCopy, TimeSpan.FromMinutes(15));
+            _cache.Set(cacheKey, selectedExamIdsCopy, new MemoryCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(15),
+                Size = 1
+            });
 
             return selectedExamIdsCopy;
         }
@@ -2079,6 +2091,7 @@ namespace pqy_server.Controllers
             return await _cache.GetOrCreateAsync("question-enum-labels", async entry =>
             {
                 entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(10);
+                entry.Size = 1;
 
                 var labels = await _context.EnumLabels
                     .AsNoTracking()
@@ -2099,7 +2112,7 @@ namespace pqy_server.Controllers
         private void BumpExamCandidateVersion()
         {
             var newVersion = Interlocked.Increment(ref _examCandidateVersion);
-            _cache.Set(CacheKeys.ExamCandidateVersion, newVersion);
+            _cache.Set(CacheKeys.ExamCandidateVersion, newVersion, new MemoryCacheEntryOptions { Size = 1 });
         }
     }
 }

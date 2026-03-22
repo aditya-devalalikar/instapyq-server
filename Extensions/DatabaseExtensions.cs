@@ -36,12 +36,17 @@ namespace pqy_server.Extensions
                     : databaseUrl + ";SSL Mode=Require;Trust Server Certificate=true;";
             }
 
+            // Pool size of 16: comfortably handles ~50 concurrent requests
+            // (not all requests hit the DB simultaneously — cached responses,
+            // auth checks, and validation short-circuit before DB access).
+            // Default of 1024 is wasteful; 16 fits well within Railway's
+            // Postgres plan connection limit (~25–100 depending on tier).
             services.AddDbContextPool<AppDbContext>(options =>
                 options.UseNpgsql(connectionString, npgsqlOptions =>
                 {
                     npgsqlOptions.EnableRetryOnFailure(3, TimeSpan.FromSeconds(5), null);
                     npgsqlOptions.CommandTimeout(30);
-                }));
+                }), poolSize: 16);
 
             return services;
         }

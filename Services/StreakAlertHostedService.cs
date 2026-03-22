@@ -103,7 +103,7 @@ namespace pqy_server.Services
                 {
                     alertList = JsonSerializer.Deserialize<List<AlertEntry>>(
                         row.Alerts!,
-                        new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                        _jsonOptions);
                 }
                 catch
                 {
@@ -177,6 +177,11 @@ namespace pqy_server.Services
                 return TimeZoneInfo.ConvertTimeFromUtc(utc, ist);
             }
         }
+
+        // Reused across every tick — JsonSerializerOptions builds an internal reflection
+        // cache on first use, so creating a new instance each minute wastes CPU + memory.
+        private static readonly JsonSerializerOptions _jsonOptions =
+            new() { PropertyNameCaseInsensitive = true };
 
         // ─── Local DTO (not exposed to clients) ──────────────────────────────────
 

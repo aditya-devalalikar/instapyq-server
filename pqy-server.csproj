@@ -7,6 +7,18 @@
 		<RootNamespace>pqy_server</RootNamespace>
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 		<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+		<!-- Use Workstation GC instead of Server GC.
+		     Server GC is tuned for throughput — it retains collected memory in its own
+		     heap rather than returning it to the OS. On a small Railway container this
+		     causes the process RSS to sit high even when idle.
+		     Workstation GC returns memory to the OS after each collection, giving a
+		     visibly lower baseline in Railway's memory graph at the cost of negligible
+		     extra GC frequency on low-traffic servers.
+		     GCConserveMemory=9 (max) tells the GC to trade throughput for memory
+		     frugality — it collects more eagerly and compacts the heap more often. -->
+		<ServerGarbageCollection>false</ServerGarbageCollection>
+		<GarbageCollectionAdaptationMode>0</GarbageCollectionAdaptationMode>
+		<GCConserveMemory>9</GCConserveMemory>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
