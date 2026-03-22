@@ -1,82 +1,82 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace pqy_server.Models.Orders
 {
     // Top-level webhook payload
     public class RazorpayWebhookPayload
     {
-        [JsonProperty("event")]
+        [JsonPropertyName("event")]
         public string Event { get; set; } = string.Empty;
 
-        [JsonProperty("payload")]
+        [JsonPropertyName("payload")]
         public RazorpayWebhookEventPayload Payload { get; set; } = new();
 
-        [JsonProperty("created_at")]
+        [JsonPropertyName("created_at")]
         public long CreatedAt { get; set; }
     }
 
     // Wrapper for payment + refund (Razorpay sends different shapes per event)
     public class RazorpayWebhookEventPayload
     {
-        [JsonProperty("payment")]
+        [JsonPropertyName("payment")]
         public RazorpayPaymentWrapper? Payment { get; set; }
 
-        [JsonProperty("refund")]
+        [JsonPropertyName("refund")]
         public RazorpayRefundWrapper? Refund { get; set; }
     }
 
     // Payment wrapper (because Razorpay nests entity)
     public class RazorpayPaymentWrapper
     {
-        [JsonProperty("entity")]
+        [JsonPropertyName("entity")]
         public RazorpayPaymentEntity Entity { get; set; } = new();
     }
 
     // Refund wrapper (Razorpay nests refund entity under payload.refund.entity)
     public class RazorpayRefundWrapper
     {
-        [JsonProperty("entity")]
+        [JsonPropertyName("entity")]
         public RazorpayRefundEntity Entity { get; set; } = new();
     }
 
     // Actual payment info
     public class RazorpayPaymentEntity
     {
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public string Id { get; set; } = string.Empty;
 
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public string Status { get; set; } = string.Empty;
 
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public int Amount { get; set; } // in paise
 
-        [JsonProperty("currency")]
+        [JsonPropertyName("currency")]
         public string Currency { get; set; } = "INR";
 
-        [JsonProperty("order_id")]
+        [JsonPropertyName("order_id")]
         public string Order_Id { get; set; } = string.Empty;
 
-        [JsonProperty("captured")]
+        [JsonPropertyName("captured")]
         public bool Captured { get; set; }
     }
 
     // Actual refund info
     public class RazorpayRefundEntity
     {
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public string Id { get; set; } = string.Empty;
 
-        [JsonProperty("payment_id")]
+        [JsonPropertyName("payment_id")]
         public string PaymentId { get; set; } = string.Empty;
 
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public int Amount { get; set; } // in paise
 
-        [JsonProperty("currency")]
+        [JsonPropertyName("currency")]
         public string Currency { get; set; } = "INR";
 
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public string Status { get; set; } = string.Empty;
 
         // The order_id is nested inside the payment object within refund webhooks,

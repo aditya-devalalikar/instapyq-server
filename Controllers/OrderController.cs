@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
+using System.Text.Json;
 using pqy_server.Data;
 using pqy_server.Models.Order;
 using pqy_server.Models.Orders;
@@ -332,7 +332,8 @@ namespace pqy_server.Controllers
                     return BadRequest(ApiResponse<string>.Failure(ResultCode.WebhookError, "Invalid Razorpay webhook signature."));
                 }
 
-                var data = JsonConvert.DeserializeObject<RazorpayWebhookPayload>(payload);
+                var data = JsonSerializer.Deserialize<RazorpayWebhookPayload>(payload,
+                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
                 if (data == null)
                 {
                     _logger.LogWarning("Webhook payload invalid.");

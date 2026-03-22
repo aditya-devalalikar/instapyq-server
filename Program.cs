@@ -11,6 +11,14 @@ using System.Text.Json.Serialization;
 // Load environment variables (.env for local, system env for production)
 Env.Load();
 
+// Reduce thread pool minimum threads from the default (= CPU core count) to 2.
+// Each idle thread in the pool holds a ~256 KB stack on the OS.
+// On a 2-vCPU Railway container the default min is 2 anyway, but on larger
+// plans it could be 4–8. Setting it explicitly ensures predictable behaviour.
+// Min of 2 is enough: one thread handles requests, one handles background work
+// (StreakAlertHostedService, GC finalizer). The pool grows beyond min on demand.
+ThreadPool.SetMinThreads(2, 2);
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Kestrel tuning for a low-traffic Railway container.
@@ -76,8 +84,13 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
     options.ForwardLimit = 1;
 });
 
-// Real-time admin push
-builder.Services.AddSignalR();
+// Real-time admin push — reduce buffer sizes since the admin hub only
+// sends small JSON payloads. Default max message size is 32 KB which
+// is 32× what we need; 4 KB comfortably fits any admin broadcast.
+builder.Services.AddSignalR(options =>
+{
+    options.MaximumReceiveMessageSize = 4 * 1024; // 4 KB
+});
 
 // Controllers & JSON settings
 builder.Services

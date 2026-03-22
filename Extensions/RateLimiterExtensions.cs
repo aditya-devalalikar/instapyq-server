@@ -8,6 +8,11 @@ namespace pqy_server.Extensions
 {
     public static class RateLimiterExtensions
     {
+        // Built once — JsonSerializerOptions constructs an internal reflection cache
+        // on first use. Creating a new instance on every rejected request wastes CPU
+        // and adds to GC pressure under a rate-limit attack.
+        private static readonly JsonSerializerOptions _jsonOptions =
+            new() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
         private static string GetClientIp(HttpContext context)
         {
             // RemoteIpAddress is set correctly by UseForwardedHeaders middleware
@@ -40,7 +45,7 @@ namespace pqy_server.Extensions
                     );
 
                     await context.HttpContext.Response.WriteAsync(
-                        JsonSerializer.Serialize(apiResponse, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }),
+                        JsonSerializer.Serialize(apiResponse, _jsonOptions),
                         token);
                 };
 

@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+﻿using System.Text.Json.Serialization;
 using pqy_server.Models.Order;
 using UserEntity = pqy_server.Models.Users.User;
 
@@ -27,8 +26,8 @@ namespace pqy_server.Models.Orders
         // Meta
         public string Currency { get; set; } = "INR";
 
-        // Order lifecycle — stored as string in DB via StringEnumConverter
-        [JsonConverter(typeof(StringEnumConverter))]
+        // Order lifecycle — stored as string in DB via EF HasConversion<string>()
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public OrderStatus Status { get; set; } = OrderStatus.Created;
         // Created | Paid | Failed | Refunded | Cancelled
 
