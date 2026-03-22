@@ -265,7 +265,11 @@ namespace pqy_server.Controllers
                     AllTime = BuildSummary(allData, DateOnly.MinValue, realToday),
                 };
 
-                _cache.Set(cacheKey, response, TimeSpan.FromMinutes(5));
+                _cache.Set(cacheKey, response, new MemoryCacheEntryOptions
+                {
+                    AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5),
+                    Size = 1
+                });
 
                 return Ok(ApiResponse<ProgressSummaryResponse>.Success(response, "All summaries generated successfully."));
             }
@@ -486,7 +490,11 @@ namespace pqy_server.Controllers
                 RecentTrend        = recentTrend,
             };
 
-            _cache.Set(cacheKey, examSummary, TimeSpan.FromMinutes(5));
+            _cache.Set(cacheKey, examSummary, new MemoryCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5),
+                Size = 1
+            });
 
             return Ok(ApiResponse<ExamSummaryResponse>.Success(examSummary, "Exam summary generated successfully."));
         }

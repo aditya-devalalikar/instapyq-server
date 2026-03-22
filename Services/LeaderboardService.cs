@@ -53,6 +53,7 @@ namespace pqy_server.Services
             return await _cache.GetOrCreateAsync(CacheKeys.LeaderboardEligibleUserIds, async entry =>
             {
                 entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5);
+                entry.Size = 1;
                 var ids = await _context.Users
                     .Where(u => !u.HideFromLeaderboard && !u.IsDeleted
                         && _context.Orders.Any(o => o.UserId == u.UserId
@@ -101,6 +102,7 @@ namespace pqy_server.Services
             var allRanked = await _cache.GetOrCreateAsync(cacheKey, async entry =>
             {
                 entry.AbsoluteExpirationRelativeToNow = ttl;
+                entry.Size = 1;
                 return await ComputeRankingAsync(type, effectivePeriod, date);
             }) ?? new List<RankedScore>();
 

@@ -13,6 +13,25 @@ Env.Load();
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Kestrel tuning for a low-traffic Railway container.
+// Defaults are designed for high-throughput servers and keep connections +
+// memory alive far longer than needed here.
+builder.WebHost.ConfigureKestrel(options =>
+{
+    // Close idle keep-alive connections after 2 minutes instead of the
+    // default 130 s with no upper bound — frees sockets + associated buffers.
+    options.Limits.KeepAliveTimeout = TimeSpan.FromMinutes(2);
+    // Abort requests that don't send headers within 30 s (default is 30 s,
+    // explicitly set here for clarity and future-proofing).
+    options.Limits.RequestHeadersTimeout = TimeSpan.FromSeconds(30);
+    // 500 simultaneous open connections — enough headroom for ~50 concurrent
+    // active users (each typically holds 2–4 connections via keep-alive + assets)
+    // while still capping runaway spikes that would exhaust thread-pool + memory.
+    options.Limits.MaxConcurrentConnections = 500;
+    // SignalR is only used for the admin hub — 50 is generous.
+    options.Limits.MaxConcurrentUpgradedConnections = 50;
+});
+
 // Core infrastructure
 builder.Services.AddAppRateLimiting();
 builder.Services.AddAppDatabase();
@@ -21,10 +40,25 @@ builder.Services.AddAppCors(builder.Configuration);
 builder.Services.AddAppCompression();
 builder.Services.AddOutputCache(options =>
 {
-    options.AddPolicy("LookupPolicy", builder => 
+    options.AddPolicy("LookupPolicy", builder =>
         builder.Expire(TimeSpan.FromHours(1)).Tag("lookup"));
+    // Cap each individual cached HTTP response at 512 KB.
+    // Without this a single large response (e.g. a big lookup payload) can
+    // consume tens of MB in the output-cache store.
+    options.MaximumBodySize = 512 * 1024;
+    // Cap total output-cache store at 32 MB.
+    // Default is unbounded — Railway containers would accumulate this silently.
+    options.SizeLimit = 32 * 1024 * 1024;
 });
-builder.Services.AddMemoryCache();
+// SizeLimit caps total cache entries at 1000 units (each entry counts as 1 unit
+// via SetSize(1) at every cache.Set / GetOrCreateAsync call site).
+// 1000 comfortably covers ~400 active users worth of per-user entries
+// (premium status, selected exam IDs, exam candidates) plus shared entries
+// (leaderboard snapshots, enum labels, progress summaries) with room to spare.
+builder.Services.AddMemoryCache(options =>
+{
+    options.SizeLimit = 1000;
+});
 builder.Services.AddApplicationServices(builder.Configuration);
 
 // Critical #1 fix: configure forwarded headers safely so Railway's proxy
