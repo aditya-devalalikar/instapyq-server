@@ -19,7 +19,7 @@ namespace pqy_server.Services
                 {
                     Notification = new AndroidNotification
                     {
-                        ChannelId = "streak-alerts-v2",
+                        ChannelId = "streak-alerts-v3",
                     }
                 },
                 // iOS: play the custom sound bundled in the app
