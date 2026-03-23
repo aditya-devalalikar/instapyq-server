@@ -1395,10 +1395,16 @@ namespace pqy_server.Controllers
             {
                 var results = await provider.DownloadBatchResultsAsync(outputFileUri);
                 int count = 0;
+
+                // Batch-fetch all questions in one query instead of N FindAsync calls
+                var qIds = results.Select(r => r.Item1).ToList();
+                var questionMap = await _context.Questions
+                    .Where(q => qIds.Contains(q.QuestionId))
+                    .ToDictionaryAsync(q => q.QuestionId);
+
                 foreach (var (qId, explanation) in results)
                 {
-                    var q = await _context.Questions.FindAsync(qId);
-                    if (q != null && string.IsNullOrWhiteSpace(q.Explanation))
+                    if (questionMap.TryGetValue(qId, out var q) && string.IsNullOrWhiteSpace(q.Explanation))
                     {
                         q.Explanation = explanation;
                         q.UpdatedAt = DateTime.UtcNow;

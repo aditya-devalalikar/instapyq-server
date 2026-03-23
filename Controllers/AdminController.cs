@@ -256,16 +256,10 @@ namespace pqy_server.Controllers
                 });
             }
 
-            var minUpdateDate = await _context.Questions
-                .Where(q => !q.IsDeleted)
-                .MinAsync(q => (DateTime?)q.UpdatedAt);
+            // Reuse minDate already fetched above — avoid a duplicate MinAsync query
+            var minUpdateDate = minDate ?? DateTime.UtcNow;
 
-            if (minUpdateDate == null)
-            {
-                minUpdateDate = DateTime.UtcNow;
-            }
-
-            var startMonth = new DateTime(minUpdateDate.Value.Year, minUpdateDate.Value.Month, 1);
+            var startMonth = new DateTime(minUpdateDate.Year, minUpdateDate.Month, 1);
             var endMonth = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, 1);
 
             var rawMonthlyCounts = await _context.Questions

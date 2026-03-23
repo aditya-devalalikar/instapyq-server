@@ -37,26 +37,34 @@ namespace pqy_server.Controllers
         {
             var (isAdmin, isPremiumUser, selectedExamIds) = await GetUserContext();
 
-            var topics = await (
-                from t in _context.Topics
-                join s in _context.Subjects on t.SubjectId equals s.SubjectId
-                let count = _context.Questions.Count(q =>
-                    q.TopicId == t.TopicId &&
-                    q.SubjectId == t.SubjectId &&
+            // Pre-aggregate counts in a single GROUP BY query instead of a correlated subquery per topic
+            var questionCounts = await _context.Questions
+                .Where(q =>
                     (isAdmin || (q.ExamId != null && selectedExamIds.Contains(q.ExamId.Value))) &&
                     (isPremiumUser || (q.Year != null && !q.Year.IsPremium)))
-                where isAdmin || count > 0
+                .GroupBy(q => q.TopicId)
+                .Select(g => new { TopicId = g.Key, Count = g.Count() })
+                .ToDictionaryAsync(x => x.TopicId ?? 0, x => x.Count);
+
+            var rawTopics = await (
+                from t in _context.Topics
+                join s in _context.Subjects on t.SubjectId equals s.SubjectId
                 orderby t.TopicOrder
-                select new Topic
-                {
-                    TopicId = t.TopicId,
-                    TopicName = t.TopicName,
-                    SubjectId = t.SubjectId,
-                    TopicOrder = t.TopicOrder,
-                    SubjectName = s.SubjectName,
-                    QuestionCount = count
-                }
+                select new { t.TopicId, t.TopicName, t.SubjectId, t.TopicOrder, s.SubjectName }
             ).ToListAsync();
+
+            var topics = rawTopics
+                .Select(t => new Topic
+                {
+                    TopicId    = t.TopicId,
+                    TopicName  = t.TopicName,
+                    SubjectId  = t.SubjectId,
+                    TopicOrder = t.TopicOrder,
+                    SubjectName = t.SubjectName,
+                    QuestionCount = questionCounts.GetValueOrDefault(t.TopicId, 0)
+                })
+                .Where(t => isAdmin || t.QuestionCount > 0)
+                .ToList();
 
             return Ok(ApiResponse<object>.Success(topics));
         }
@@ -69,25 +77,33 @@ namespace pqy_server.Controllers
         {
             var (isAdmin, isPremiumUser, selectedExamIds) = await GetUserContext();
 
-            var topics = await (
-                from t in _context.Topics
-                where t.SubjectId == subjectId
-                let count = _context.Questions.Count(q =>
-                    q.TopicId == t.TopicId &&
-                    q.SubjectId == t.SubjectId &&
+            // Pre-aggregate counts in a single GROUP BY query instead of a correlated subquery per topic
+            var questionCounts = await _context.Questions
+                .Where(q =>
+                    q.SubjectId == subjectId &&
                     (isAdmin || (q.ExamId != null && selectedExamIds.Contains(q.ExamId.Value))) &&
                     (isPremiumUser || (q.Year != null && !q.Year.IsPremium)))
-                where isAdmin || count > 0
-                orderby t.TopicOrder
-                select new Topic
+                .GroupBy(q => q.TopicId)
+                .Select(g => new { TopicId = g.Key, Count = g.Count() })
+                .ToDictionaryAsync(x => x.TopicId ?? 0, x => x.Count);
+
+            var rawTopics = await _context.Topics
+                .Where(t => t.SubjectId == subjectId)
+                .OrderBy(t => t.TopicOrder)
+                .Select(t => new { t.TopicId, t.TopicName, t.SubjectId, t.TopicOrder })
+                .ToListAsync();
+
+            var topics = rawTopics
+                .Select(t => new Topic
                 {
-                    TopicId = t.TopicId,
-                    TopicName = t.TopicName,
-                    SubjectId = t.SubjectId,
+                    TopicId    = t.TopicId,
+                    TopicName  = t.TopicName,
+                    SubjectId  = t.SubjectId,
                     TopicOrder = t.TopicOrder,
-                    QuestionCount = count
-                }
-            ).ToListAsync();
+                    QuestionCount = questionCounts.GetValueOrDefault(t.TopicId, 0)
+                })
+                .Where(t => isAdmin || t.QuestionCount > 0)
+                .ToList();
 
             return Ok(ApiResponse<object>.Success(topics));
         }

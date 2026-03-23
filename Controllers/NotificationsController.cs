@@ -114,10 +114,14 @@ namespace pqy_server.Controllers
             }
             else
             {
-                var users = await _context.Users.ToListAsync();
-                var notifications = users.Select(u => new LocalNotification
+                // Select only IDs — avoids loading all User columns into memory
+                var userIds = await _context.Users
+                    .AsNoTracking()
+                    .Select(u => u.UserId)
+                    .ToListAsync();
+                var notifications = userIds.Select(uid => new LocalNotification
                 {
-                    UserId = u.UserId,
+                    UserId = uid,
                     Title = request.Title,
                     Message = request.Message
                 }).ToList();
