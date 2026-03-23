@@ -54,15 +54,17 @@ namespace pqy_server.Services
             {
                 entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5);
                 entry.Size = 1;
-                var ids = await _context.Users
-                    .Where(u => !u.HideFromLeaderboard && !u.IsDeleted
-                        && _context.Orders.Any(o => o.UserId == u.UserId
-                            && o.Status == OrderStatus.Paid
-                            && o.ExpiresAt != null
-                            && o.ExpiresAt > DateTime.UtcNow))
-                    .AsNoTracking()
-                    .Select(u => u.UserId)
-                    .ToListAsync();
+                // Use a join instead of a correlated subquery (Any) for better SQL plan
+                var ids = await (
+                    from u in _context.Users
+                    join o in _context.Orders on u.UserId equals o.UserId
+                    where !u.HideFromLeaderboard && !u.IsDeleted
+                        && o.Status == OrderStatus.Paid
+                        && o.ExpiresAt != null
+                        && o.ExpiresAt > DateTime.UtcNow
+                    select u.UserId
+                ).Distinct()
+                 .ToListAsync();
                 return ids.ToHashSet();
             }) ?? new HashSet<int>();
         }

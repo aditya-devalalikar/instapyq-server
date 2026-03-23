@@ -74,11 +74,22 @@ namespace pqy_server.Controllers
             if (user == null)
                 return NotFound(ApiResponse<string>.Failure(ResultCode.NotFound, "User not found."));
 
-            var isPremium = await _context.Orders
-                .AnyAsync(o => o.UserId == user.UserId
-                    && o.Status == OrderStatus.Paid
-                    && o.ExpiresAt != null
-                    && o.ExpiresAt > DateTime.UtcNow);
+            // Use the same 30-min cache as QuestionsController to avoid a per-request Orders query
+            var premiumCacheKey = $"user-premium-status:{user.UserId}";
+            if (!_cache.TryGetValue(premiumCacheKey, out bool isPremium))
+            {
+                isPremium = await _context.Orders
+                    .AsNoTracking()
+                    .AnyAsync(o => o.UserId == user.UserId
+                        && o.Status == OrderStatus.Paid
+                        && o.ExpiresAt != null
+                        && o.ExpiresAt > DateTime.UtcNow);
+                _cache.Set(premiumCacheKey, isPremium, new MemoryCacheEntryOptions
+                {
+                    AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(30),
+                    Size = 1
+                });
+            }
 
             var result = new MyProfileDto
             {
