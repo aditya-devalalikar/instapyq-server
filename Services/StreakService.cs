@@ -149,88 +149,103 @@ namespace pqy_server.Services
 
         public async Task<StreakDto> CreateStreakAsync(int userId, CreateStreakRequest req)
         {
-            // Idempotent: if ClientId already exists for this user, return existing
-            var existing = await _context.Streaks
-                .FirstOrDefaultAsync(s => s.ClientId == req.ClientId && s.UserId == userId);
+            var strategy = _context.Database.CreateExecutionStrategy();
 
-            if (existing != null)
-                return ToDto(existing);
-
-            await using var tx = await _context.Database.BeginTransactionAsync();
-
-            var streak = new Models.Streak.Streak
+            return await strategy.ExecuteAsync(async () =>
             {
-                UserId = userId,
-                ClientId = req.ClientId,
-                Name = req.Name,
-                Description = req.Description,
-                Color = req.Color,
-                Icon = req.Icon,
-                Frequency = req.Frequency,
-                SpecificDays = req.SpecificDays != null
-                    ? JsonSerializer.Serialize(req.SpecificDays)
-                    : null,
-                Category = req.Category,
-                IsTimer = req.IsTimer,
-                TargetMinutes = req.TargetMinutes,
-                Alerts = req.Alerts != null
-                    ? JsonSerializer.Serialize(req.Alerts)
-                    : null,
-            };
+                // Idempotent: if ClientId already exists for this user, return existing
+                var existing = await _context.Streaks
+                    .FirstOrDefaultAsync(s => s.ClientId == req.ClientId && s.UserId == userId);
 
-            _context.Streaks.Add(streak);
-            await _context.SaveChangesAsync();
-            await _alertScheduleService.SyncSchedulesForStreakAsync(streak);
-            await _context.SaveChangesAsync();
-            await tx.CommitAsync();
-            return ToDto(streak);
+                if (existing != null)
+                    return ToDto(existing);
+
+                await using var tx = await _context.Database.BeginTransactionAsync();
+
+                var streak = new Models.Streak.Streak
+                {
+                    UserId = userId,
+                    ClientId = req.ClientId,
+                    Name = req.Name,
+                    Description = req.Description,
+                    Color = req.Color,
+                    Icon = req.Icon,
+                    Frequency = req.Frequency,
+                    SpecificDays = req.SpecificDays != null
+                        ? JsonSerializer.Serialize(req.SpecificDays)
+                        : null,
+                    Category = req.Category,
+                    IsTimer = req.IsTimer,
+                    TargetMinutes = req.TargetMinutes,
+                    Alerts = req.Alerts != null
+                        ? JsonSerializer.Serialize(req.Alerts)
+                        : null,
+                };
+
+                _context.Streaks.Add(streak);
+                await _context.SaveChangesAsync();
+                await _alertScheduleService.SyncSchedulesForStreakAsync(streak);
+                await _context.SaveChangesAsync();
+                await tx.CommitAsync();
+                return ToDto(streak);
+            });
         }
 
         public async Task<StreakDto> UpdateStreakAsync(int userId, int streakId, UpdateStreakRequest req)
         {
-            var streak = await _context.Streaks
-                .FirstOrDefaultAsync(s => s.StreakId == streakId && s.UserId == userId)
-                ?? throw new KeyNotFoundException("Streak not found.");
+            var strategy = _context.Database.CreateExecutionStrategy();
 
-            await using var tx = await _context.Database.BeginTransactionAsync();
+            return await strategy.ExecuteAsync(async () =>
+            {
+                var streak = await _context.Streaks
+                    .FirstOrDefaultAsync(s => s.StreakId == streakId && s.UserId == userId)
+                    ?? throw new KeyNotFoundException("Streak not found.");
 
-            if (req.Name != null) streak.Name = req.Name;
-            if (req.Description != null) streak.Description = req.Description;
-            if (req.Color != null) streak.Color = req.Color;
-            if (req.Icon != null) streak.Icon = req.Icon;
-            if (req.Frequency != null) streak.Frequency = req.Frequency;
-            if (req.SpecificDays != null)
-                streak.SpecificDays = JsonSerializer.Serialize(req.SpecificDays);
-            if (req.Category != null) streak.Category = req.Category;
-            if (req.IsTimer.HasValue) streak.IsTimer = req.IsTimer.Value;
-            if (req.TargetMinutes.HasValue) streak.TargetMinutes = req.TargetMinutes;
-            if (req.Alerts != null)
-                streak.Alerts = JsonSerializer.Serialize(req.Alerts);
+                await using var tx = await _context.Database.BeginTransactionAsync();
 
-            streak.UpdatedAt = DateTime.UtcNow;
-            if (req.Alerts != null)
-                await _alertScheduleService.SyncSchedulesForStreakAsync(streak);
-            await _context.SaveChangesAsync();
-            await tx.CommitAsync();
-            return ToDto(streak);
+                if (req.Name != null) streak.Name = req.Name;
+                if (req.Description != null) streak.Description = req.Description;
+                if (req.Color != null) streak.Color = req.Color;
+                if (req.Icon != null) streak.Icon = req.Icon;
+                if (req.Frequency != null) streak.Frequency = req.Frequency;
+                if (req.SpecificDays != null)
+                    streak.SpecificDays = JsonSerializer.Serialize(req.SpecificDays);
+                if (req.Category != null) streak.Category = req.Category;
+                if (req.IsTimer.HasValue) streak.IsTimer = req.IsTimer.Value;
+                if (req.TargetMinutes.HasValue) streak.TargetMinutes = req.TargetMinutes;
+                if (req.Alerts != null)
+                    streak.Alerts = JsonSerializer.Serialize(req.Alerts);
+
+                streak.UpdatedAt = DateTime.UtcNow;
+                if (req.Alerts != null)
+                    await _alertScheduleService.SyncSchedulesForStreakAsync(streak);
+                await _context.SaveChangesAsync();
+                await tx.CommitAsync();
+                return ToDto(streak);
+            });
         }
 
         public async Task DeleteStreakAsync(int userId, int streakId)
         {
-            await using var tx = await _context.Database.BeginTransactionAsync();
+            var strategy = _context.Database.CreateExecutionStrategy();
 
-            await _alertScheduleService.DeleteSchedulesForStreakAsync(userId, streakId);
+            await strategy.ExecuteAsync(async () =>
+            {
+                await using var tx = await _context.Database.BeginTransactionAsync();
 
-            // Delete all monthly progress bitmasks for this streak
-            await _context.StreakMonthlyProgress
-                .Where(p => p.StreakId == streakId && p.UserId == userId)
-                .ExecuteDeleteAsync();
+                await _alertScheduleService.DeleteSchedulesForStreakAsync(userId, streakId);
 
-            await _context.Streaks
-                .Where(s => s.StreakId == streakId && s.UserId == userId)
-                .ExecuteDeleteAsync();
+                // Delete all monthly progress bitmasks for this streak
+                await _context.StreakMonthlyProgress
+                    .Where(p => p.StreakId == streakId && p.UserId == userId)
+                    .ExecuteDeleteAsync();
 
-            await tx.CommitAsync();
+                await _context.Streaks
+                    .Where(s => s.StreakId == streakId && s.UserId == userId)
+                    .ExecuteDeleteAsync();
+
+                await tx.CommitAsync();
+            });
         }
 
         // ─── Progress ─────────────────────────────────────────────────────────────
