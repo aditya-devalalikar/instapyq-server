@@ -54,6 +54,7 @@ namespace pqy_server.Data
 
         // 📦 Streak & Study Timer tables
         public DbSet<pqy_server.Models.Streak.Streak> Streaks { get; set; }
+        public DbSet<pqy_server.Models.Streak.StreakAlertSchedule> StreakAlertSchedules { get; set; }
         public DbSet<pqy_server.Models.Streak.StreakMonthlyProgress> StreakMonthlyProgress { get; set; }
         public DbSet<pqy_server.Models.Streak.DailyStudySummary> DailyStudySummary { get; set; }
 
@@ -286,6 +287,40 @@ namespace pqy_server.Data
             modelBuilder.Entity<pqy_server.Models.Streak.Streak>()
                 .Property(s => s.UpdatedAt)
                 .HasDefaultValueSql("NOW()");
+
+            modelBuilder.Entity<StreakAlertSchedule>()
+                .HasOne(s => s.Streak)
+                .WithMany()
+                .HasForeignKey(s => s.StreakId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<StreakAlertSchedule>()
+                .HasOne(s => s.User)
+                .WithMany()
+                .HasForeignKey(s => s.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<StreakAlertSchedule>()
+                .Property(s => s.CreatedAt)
+                .HasDefaultValueSql("NOW()");
+
+            modelBuilder.Entity<StreakAlertSchedule>()
+                .Property(s => s.UpdatedAt)
+                .HasDefaultValueSql("NOW()");
+
+            modelBuilder.Entity<StreakAlertSchedule>()
+                .Property(s => s.IsActive)
+                .HasDefaultValue(true);
+
+            modelBuilder.Entity<StreakAlertSchedule>()
+                .HasIndex(s => new { s.IsActive, s.NextFireUtc });
+
+            modelBuilder.Entity<StreakAlertSchedule>()
+                .HasIndex(s => s.LeaseUntilUtc);
+
+            modelBuilder.Entity<StreakAlertSchedule>()
+                .HasIndex(s => new { s.StreakId, s.LocalHour, s.LocalMinute })
+                .IsUnique();
 
             // ─── StreakMonthlyProgress ────────────────────────────────────────────────
 
