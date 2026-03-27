@@ -194,31 +194,38 @@ namespace pqy_server.Controllers
             if (!int.TryParse(userIdStr, out var userId))
                 return Unauthorized(ApiResponse<string>.Failure(ResultCode.Unauthorized, "User ID invalid."));
 
-            var user = await _context.Users.FindAsync(userId);
-            if (user == null)
-                return NotFound(ApiResponse<string>.Failure(ResultCode.NotFound, "User not found."));
+            var strategy = _context.Database.CreateExecutionStrategy();
 
-            var timezoneChanged =
-                !string.IsNullOrWhiteSpace(request.Timezone) &&
-                !string.Equals(user.Timezone, request.Timezone, StringComparison.Ordinal);
-
-            user.FcmToken = request.FcmToken;
-            if (timezoneChanged)
-                user.Timezone = request.Timezone;
-            user.UpdatedAt = DateTime.UtcNow;
-
-            await using var tx = await _context.Database.BeginTransactionAsync();
-            await _context.SaveChangesAsync();
-
-            if (timezoneChanged)
+            IActionResult result = await strategy.ExecuteAsync(async () =>
             {
-                await _alertScheduleService.ResyncSchedulesForUserAsync(userId);
+                var user = await _context.Users.FindAsync(userId);
+                if (user == null)
+                    return (IActionResult)NotFound(ApiResponse<string>.Failure(ResultCode.NotFound, "User not found."));
+
+                var timezoneChanged =
+                    !string.IsNullOrWhiteSpace(request.Timezone) &&
+                    !string.Equals(user.Timezone, request.Timezone, StringComparison.Ordinal);
+
+                user.FcmToken = request.FcmToken;
+                if (timezoneChanged)
+                    user.Timezone = request.Timezone;
+                user.UpdatedAt = DateTime.UtcNow;
+
+                await using var tx = await _context.Database.BeginTransactionAsync();
                 await _context.SaveChangesAsync();
-            }
 
-            await tx.CommitAsync();
+                if (timezoneChanged)
+                {
+                    await _alertScheduleService.ResyncSchedulesForUserAsync(userId);
+                    await _context.SaveChangesAsync();
+                }
 
-            return Ok(ApiResponse<string>.Success("FCM token updated."));
+                await tx.CommitAsync();
+
+                return (IActionResult)Ok(ApiResponse<string>.Success("FCM token updated."));
+            });
+
+            return result;
         }
     }
 }
