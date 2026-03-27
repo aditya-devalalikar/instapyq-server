@@ -7,6 +7,7 @@ using pqy_server.Data;
 using pqy_server.Models.Order;
 using pqy_server.Models.User;
 using pqy_server.Models.Users;
+using pqy_server.Services;
 using pqy_server.Shared;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -22,11 +23,16 @@ namespace pqy_server.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IMemoryCache _cache;
+        private readonly IStreakAlertScheduleService _alertScheduleService;
 
-        public UsersController(AppDbContext context, IMemoryCache cache)
+        public UsersController(
+            AppDbContext context,
+            IMemoryCache cache,
+            IStreakAlertScheduleService alertScheduleService)
         {
             _context = context;
             _cache = cache;
+            _alertScheduleService = alertScheduleService;
         }
 
         // 👤 GET /api/users/{id}
@@ -192,12 +198,25 @@ namespace pqy_server.Controllers
             if (user == null)
                 return NotFound(ApiResponse<string>.Failure(ResultCode.NotFound, "User not found."));
 
+            var timezoneChanged =
+                !string.IsNullOrWhiteSpace(request.Timezone) &&
+                !string.Equals(user.Timezone, request.Timezone, StringComparison.Ordinal);
+
             user.FcmToken = request.FcmToken;
-            if (!string.IsNullOrWhiteSpace(request.Timezone))
+            if (timezoneChanged)
                 user.Timezone = request.Timezone;
             user.UpdatedAt = DateTime.UtcNow;
 
+            await using var tx = await _context.Database.BeginTransactionAsync();
             await _context.SaveChangesAsync();
+
+            if (timezoneChanged)
+            {
+                await _alertScheduleService.ResyncSchedulesForUserAsync(userId);
+                await _context.SaveChangesAsync();
+            }
+
+            await tx.CommitAsync();
 
             return Ok(ApiResponse<string>.Success("FCM token updated."));
         }

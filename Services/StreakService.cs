@@ -28,6 +28,7 @@ namespace pqy_server.Services
     public class StreakService : IStreakService
     {
         private readonly AppDbContext _context;
+        private readonly IStreakAlertScheduleService _alertScheduleService;
 
         // App is India-only — all "today" comparisons use IST (UTC+5:30)
         private static readonly TimeZoneInfo IstZone =
@@ -36,9 +37,10 @@ namespace pqy_server.Services
         private static DateOnly TodayIst() =>
             DateOnly.FromDateTime(TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, IstZone));
 
-        public StreakService(AppDbContext context)
+        public StreakService(AppDbContext context, IStreakAlertScheduleService alertScheduleService)
         {
             _context = context;
+            _alertScheduleService = alertScheduleService;
         }
 
         // ─── Helpers ─────────────────────────────────────────────────────────────
@@ -154,6 +156,8 @@ namespace pqy_server.Services
             if (existing != null)
                 return ToDto(existing);
 
+            await using var tx = await _context.Database.BeginTransactionAsync();
+
             var streak = new Models.Streak.Streak
             {
                 UserId = userId,
@@ -176,6 +180,9 @@ namespace pqy_server.Services
 
             _context.Streaks.Add(streak);
             await _context.SaveChangesAsync();
+            await _alertScheduleService.SyncSchedulesForStreakAsync(streak);
+            await _context.SaveChangesAsync();
+            await tx.CommitAsync();
             return ToDto(streak);
         }
 
@@ -184,6 +191,8 @@ namespace pqy_server.Services
             var streak = await _context.Streaks
                 .FirstOrDefaultAsync(s => s.StreakId == streakId && s.UserId == userId)
                 ?? throw new KeyNotFoundException("Streak not found.");
+
+            await using var tx = await _context.Database.BeginTransactionAsync();
 
             if (req.Name != null) streak.Name = req.Name;
             if (req.Description != null) streak.Description = req.Description;
@@ -199,12 +208,19 @@ namespace pqy_server.Services
                 streak.Alerts = JsonSerializer.Serialize(req.Alerts);
 
             streak.UpdatedAt = DateTime.UtcNow;
+            if (req.Alerts != null)
+                await _alertScheduleService.SyncSchedulesForStreakAsync(streak);
             await _context.SaveChangesAsync();
+            await tx.CommitAsync();
             return ToDto(streak);
         }
 
         public async Task DeleteStreakAsync(int userId, int streakId)
         {
+            await using var tx = await _context.Database.BeginTransactionAsync();
+
+            await _alertScheduleService.DeleteSchedulesForStreakAsync(userId, streakId);
+
             // Delete all monthly progress bitmasks for this streak
             await _context.StreakMonthlyProgress
                 .Where(p => p.StreakId == streakId && p.UserId == userId)
@@ -213,6 +229,8 @@ namespace pqy_server.Services
             await _context.Streaks
                 .Where(s => s.StreakId == streakId && s.UserId == userId)
                 .ExecuteDeleteAsync();
+
+            await tx.CommitAsync();
         }
 
         // ─── Progress ─────────────────────────────────────────────────────────────
@@ -384,6 +402,15 @@ namespace pqy_server.Services
         {
             var clientToServerId = new Dictionary<string, int>();
 
+            if (!string.IsNullOrWhiteSpace(req.Timezone))
+            {
+                await _context.Users
+                    .Where(u => u.UserId == userId)
+                    .ExecuteUpdateAsync(u => u
+                        .SetProperty(x => x.Timezone, req.Timezone)
+                        .SetProperty(x => x.UpdatedAt, DateTime.UtcNow));
+            }
+
             // 1. Upsert streaks
             foreach (var streakReq in req.Streaks)
             {
@@ -426,13 +453,10 @@ namespace pqy_server.Services
             // 3. Upsert daily aggregates
             await UpsertAggregatesAsync(userId, req.Aggregates, clientToServerId);
 
-            // Update user timezone if provided
             if (!string.IsNullOrWhiteSpace(req.Timezone))
-            {
-                await _context.Users
-                    .Where(u => u.UserId == userId)
-                    .ExecuteUpdateAsync(u => u.SetProperty(x => x.Timezone, req.Timezone));
-            }
+                await _alertScheduleService.ResyncSchedulesForUserAsync(userId);
+
+            await _context.SaveChangesAsync();
 
             return clientToServerId;
         }

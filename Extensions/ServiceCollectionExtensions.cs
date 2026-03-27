@@ -10,9 +10,11 @@ namespace pqy_server.Extensions
             this IServiceCollection services,
             IConfiguration configuration)
         {
+            services.Configure<AlertServiceOptions>(configuration.GetSection("AlertService"));
             services.AddSingleton<FcmNotificationService>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<INotificationService, NotificationService>();
+            services.AddScoped<IStreakAlertScheduleService, StreakAlertScheduleService>();
             services.Configure<RazorpaySettings>(configuration.GetSection("Razorpay"));
             services.AddScoped<ILogService, LogService>();
             services.AddScoped<ILeaderboardService, LeaderboardService>();
@@ -23,7 +25,7 @@ namespace pqy_server.Extensions
             services.AddScoped<IRazorpayService, RazorpayService>();
             services.AddScoped<IStreakService, StreakService>();
             if (configuration.GetValue<bool>("AlertService:Enabled", true))
-                services.AddHostedService<StreakAlertHostedService>();
+                services.AddHostedService<StreakAlertDispatcherHostedService>();
 
             // AI Services
             services.Configure<pqy_server.Services.AiService.AiConfigurationSettings>(configuration.GetSection("AiConfiguration"));

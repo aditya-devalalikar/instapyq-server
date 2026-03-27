@@ -42,8 +42,15 @@ namespace pqy_server.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ApiResponse<object>.Failure(ResultCode.ValidationError, "Invalid request."));
 
-            var dto = await _streakService.CreateStreakAsync(GetUserId(), req);
-            return Ok(ApiResponse<StreakDto>.Success(dto, "Streak created."));
+            try
+            {
+                var dto = await _streakService.CreateStreakAsync(GetUserId(), req);
+                return Ok(ApiResponse<StreakDto>.Success(dto, "Streak created."));
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ApiResponse<object>.Failure(ResultCode.ValidationError, ex.Message));
+            }
         }
 
         /// <summary>PUT /api/streak/{id} — Update an existing streak.</summary>
@@ -61,6 +68,10 @@ namespace pqy_server.Controllers
             catch (KeyNotFoundException)
             {
                 return NotFound(ApiResponse<object>.Failure(ResultCode.NotFound, "Streak not found."));
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ApiResponse<object>.Failure(ResultCode.ValidationError, ex.Message));
             }
         }
 
@@ -188,8 +199,15 @@ namespace pqy_server.Controllers
                     .ToList();
             }
 
-            var idMap = await _streakService.FullSyncAsync(userId, req);
-            return Ok(ApiResponse<Dictionary<string, int>>.Success(idMap, "Sync complete."));
+            try
+            {
+                var idMap = await _streakService.FullSyncAsync(userId, req);
+                return Ok(ApiResponse<Dictionary<string, int>>.Success(idMap, "Sync complete."));
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ApiResponse<object>.Failure(ResultCode.ValidationError, ex.Message));
+            }
         }
 
         // ─── Private helpers ──────────────────────────────────────────────────────
